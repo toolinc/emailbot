@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Or>
+            <Package name="~com[.]tool[.]emailbot[.]persistence([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]persistence[.]aa([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]persistence[.]domain([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]persistence[.]history([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]persistence[.]history[.]domain([.].*)?"/>
+        </Or>
+        <Or>
+            <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
+        </Or>
+    </Match>
+</FindBugsFilter>
