@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * This class represents a Worker.
@@ -24,24 +25,30 @@ import javax.validation.constraints.NotNull;
 @Table(name = "Trabajador")
 public class Trabajador extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idTrabajador")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idDependencia", nullable = false)
     private Dependencia dependencia;
 
+    @NotNull
     @Column(name = "numeroTrabajador", nullable = false, length = 50)
     private String numeroTrabajador;
 
+    @NotNull
     @Column(name = "situcionLaboral", nullable = false)
     private boolean situcionLaboral;
 
+    @NotNull
     @Column(name = "director", nullable = false)
     private boolean director;
 
@@ -59,7 +66,7 @@ public class Trabajador extends Entidad {
         return persona;
     }
 
-    public void setPersona(@NotNull Persona persona) {
+    public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
@@ -67,7 +74,7 @@ public class Trabajador extends Entidad {
         return dependencia;
     }
 
-    public void setDependencia(@NotNull Dependencia dependencia) {
+    public void setDependencia(Dependencia dependencia) {
         this.dependencia = dependencia;
     }
 
@@ -75,7 +82,7 @@ public class Trabajador extends Entidad {
         return numeroTrabajador;
     }
 
-    public void setNumeroTrabajador(@NotNull String numeroTrabajador) {
+    public void setNumeroTrabajador(String numeroTrabajador) {
         this.numeroTrabajador = numeroTrabajador.toUpperCase();
     }
 
