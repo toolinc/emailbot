@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc
+
 package com.tool.emailbot.persistence.history;
 
 import com.tool.emailbot.persistence.Entidad;
@@ -23,21 +20,27 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author edgar
+ * This class represents an Auditory.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
+
 @Entity
 @Table(name = "Auditoria")
 public class Auditoria extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idAuditoria")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
 
+    @NotNull
+    @Future 
     @Column(name = "evento", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date evento;
@@ -56,7 +59,7 @@ public class Auditoria extends Entidad {
         return usuario;
     }
 
-    public void setUsuario(@NotNull Usuario usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
@@ -64,7 +67,7 @@ public class Auditoria extends Entidad {
         return newDate(evento);
     }
 
-    public void setEvento(@NotNull @Future Date evento) {
+    public void setEvento(Date evento) {
         this.evento = newDate(evento);
     }
 }

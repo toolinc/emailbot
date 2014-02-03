@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc. 
+
 package com.tool.emailbot.persistence.aa;
 
 import com.tool.emailbot.persistence.Entidad;
@@ -19,33 +16,45 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- *
- * @author edgar
+ * This class represents a User.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Entity
 @Table(name = "Usuario")
 public class Usuario extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idUsuario")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idRol", nullable = false)
     private Rol rol;
 
+    @NotNull
+    @Pattern(regexp = "^[\\\\w_]{3,255}$") 
     @Column(name = "username", nullable = false)
     private String username;
 
+    @NotNull
     @Column(name = "usuarioSistema", nullable = false)
     private boolean usuarioSistema;
 
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
     @Column(name = "apellidoPaterno", nullable = false, length = 45)
     private String apellidoPaterno;
 
+    @NotNull
+    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
     @Column(name = "apellidoMaterno", nullable = false, length = 45)
     private String apellidoMaterno;
 
@@ -72,7 +81,7 @@ public class Usuario extends Entidad {
         return username;
     }
 
-    public void setUsername(@NotNull @Pattern(regexp = "^[\\\\w_]{3,255}$") String username) {
+    public void setUsername(String username) {
         this.username = username.toUpperCase();
     }
 
@@ -88,7 +97,7 @@ public class Usuario extends Entidad {
         return nombre;
     }
 
-    public void setNombre(@NotNull @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre.toUpperCase();
     }
 
@@ -96,8 +105,7 @@ public class Usuario extends Entidad {
         return apellidoPaterno;
     }
 
-    public void setApellidoPaterno(
-            @NotNull @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") String apellidoPaterno) {
+    public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno.toUpperCase();
     }
 
@@ -105,8 +113,7 @@ public class Usuario extends Entidad {
         return apellidoMaterno;
     }
 
-    public void setApellidoMaterno(
-            @NotNull @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") String apellidoMaterno) {
+    public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno.toUpperCase();
     }
 

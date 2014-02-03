@@ -22,13 +22,18 @@ import javax.validation.constraints.Pattern;
 @Table(name = "Dependencia")
 public class Dependencia extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idDependencia")
     private UUID id;
 
+    @NotNull
+    @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 44}$") 
     @Column(name = "abreviacion", nullable = false, length = 45, unique = true)
     private String abreviacion;
 
+    @NotNull
+    @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 254}$")
     @Column(name = "nombre", nullable = false, unique = true)
     private String name;
 
@@ -46,8 +51,7 @@ public class Dependencia extends Entidad {
         return abreviacion;
     }
 
-    public void setAbreviacion(
-            @NotNull @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 44}$") String abreviacion) {
+    public void setAbreviacion(String abreviacion) {
         this.abreviacion = abreviacion.toUpperCase();
     }
 
@@ -55,7 +59,7 @@ public class Dependencia extends Entidad {
         return name;
     }
 
-    public void setName(@NotNull @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 254}$") String name) {
+    public void setName(String name) {
         this.name = name.toUpperCase();
     }
 }

@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc
+
 package com.tool.emailbot.persistence.history.domain;
 
-import com.tool.emailbot.persistence.history.Auditoria;
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.domain.Aprovacion;
 import com.tool.emailbot.persistence.domain.Peticion;
 import com.tool.emailbot.persistence.domain.Trabajador;
 import com.tool.emailbot.persistence.history.Auditoria;
 import com.tool.emailbot.persistence.history.Operacion;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -31,42 +28,53 @@ import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 /**
- *
- * @author edgar
+ * This class represents a History of all the approval for a request.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
+
 @Entity
 @Table(name = "AprovacionHistoria", uniqueConstraints = {
     @UniqueConstraint(name = "aprovacionHistoriaUK",
             columnNames = {"idAuditoria", "idAprovacion", "idTrabajador"})})
 public class AprovacionHistoria extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idAprovacionHistoria")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAuditoria", nullable = false)
     private Auditoria auditoria;
 
+    @NotNull
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoOperacion", nullable = false)
     private Operacion operacion;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idAprovacion", nullable = false)
     private Aprovacion aprovacion;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idTrabajador", nullable = false)
     private Trabajador director;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPeticion", nullable = false)
     private Peticion peticion;
 
+    @NotNull
     @Column(name = "aprovado", nullable = false)
     private boolean aprovado;
 
+    @NotNull
+    @Future 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "aprovadoEn", nullable = false)
     private Date aprovadoEn;
@@ -85,7 +93,7 @@ public class AprovacionHistoria extends Entidad {
         return auditoria;
     }
 
-    public void setAuditoria(@NotNull Auditoria auditoria) {
+    public void setAuditoria(Auditoria auditoria) {
         this.auditoria = auditoria;
     }
 
@@ -93,7 +101,7 @@ public class AprovacionHistoria extends Entidad {
         return operacion;
     }
 
-    public void setOperacion(@NotNull Operacion operacion) {
+    public void setOperacion(Operacion operacion) {
         this.operacion = operacion;
     }
 
@@ -101,7 +109,7 @@ public class AprovacionHistoria extends Entidad {
         return aprovacion;
     }
 
-    public void setAprovacion(@NotNull Aprovacion aprovacion) {
+    public void setAprovacion(Aprovacion aprovacion) {
         this.aprovacion = aprovacion;
     }
 
@@ -109,7 +117,7 @@ public class AprovacionHistoria extends Entidad {
         return newDate(aprovadoEn);
     }
 
-    public void setAprovadoEn(@NotNull @Future Date aprovadoEn) {
+    public void setAprovadoEn(Date aprovadoEn) {
         this.aprovadoEn = newDate(aprovadoEn);
     }
 
@@ -117,7 +125,7 @@ public class AprovacionHistoria extends Entidad {
         return director;
     }
 
-    public void setDirector(@NotNull Trabajador director) {
+    public void setDirector(Trabajador director) {
         this.director = director;
     }
 
@@ -125,7 +133,7 @@ public class AprovacionHistoria extends Entidad {
         return peticion;
     }
 
-    public void setPeticion(@NotNull Peticion peticion) {
+    public void setPeticion(Peticion peticion) {
         this.peticion = peticion;
     }
 

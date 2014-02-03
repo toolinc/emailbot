@@ -1,11 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc. 
+
 package com.tool.emailbot.persistence.aa;
 
 import com.tool.emailbot.persistence.Entidad;
+
 import java.util.Set;
 import java.util.UUID;
 
@@ -18,17 +16,21 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- *
- * @author edgar
+ * This class represents a Rol of a User.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Entity
 @Table(name = "Rol")
 public class Rol extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idRol")
     private UUID id;
 
+    @NotNull
+    @Pattern(regexp = "^[\\\\w ]{5, 255}$")
     @Column(name = "nombre", nullable = false, unique = false)
     private String nombre;
 
@@ -49,7 +51,7 @@ public class Rol extends Entidad {
         return nombre;
     }
 
-    public void setNombre(@NotNull @Pattern(regexp = "^[\\\\w ]{5, 255}$") String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre.toUpperCase();
     }
 

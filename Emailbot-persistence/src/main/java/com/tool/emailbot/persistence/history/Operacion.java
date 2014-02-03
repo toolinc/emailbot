@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc
+
 package com.tool.emailbot.persistence.history;
 
 /**
- *
- * @author edgar
+ * This class represents a kind of operation that a user can do.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public enum Operacion {
 

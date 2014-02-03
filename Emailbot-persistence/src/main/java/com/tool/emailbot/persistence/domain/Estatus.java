@@ -1,13 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc. 
+
 package com.tool.emailbot.persistence.domain;
 
 /**
- *
- * @author edgar
+ * This class represents a Status of the Request Email.
+ * 
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public enum Estatus {
 

@@ -30,22 +30,28 @@ import javax.validation.constraints.NotNull;
     @UniqueConstraint(name = "aprovacionUK", columnNames = {"idTrabajador", "idPeticion"})})
 public class Aprovacion extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idAprovacion")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idTrabajador", nullable = false)
     private Trabajador direcctor;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPeticion", nullable = false)
     private Peticion peticion;
 
+    @NotNull
     @Column(name = "aprovado", nullable = false)
     private boolean aprovado;
 
+    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
+    @Future
     @Column(name = "aprovadoEn", nullable = false)
     private Date aprovadoEn;
 
@@ -63,7 +69,7 @@ public class Aprovacion extends Entidad {
         return direcctor;
     }
 
-    public void setDirecctor(@NotNull Trabajador direcctor) {
+    public void setDirecctor(Trabajador direcctor) {
         this.direcctor = direcctor;
     }
 
@@ -71,7 +77,7 @@ public class Aprovacion extends Entidad {
         return peticion;
     }
 
-    public void setPeticion(@NotNull Peticion peticion) {
+    public void setPeticion(Peticion peticion) {
         this.peticion = peticion;
     }
 
@@ -87,7 +93,7 @@ public class Aprovacion extends Entidad {
         return newDate(aprovadoEn);
     }
 
-    public void setAprovadoEn(@NotNull @Future Date aprovadoEn) {
+    public void setAprovadoEn(Date aprovadoEn) {
         this.aprovadoEn = newDate(aprovadoEn);
     }
 }

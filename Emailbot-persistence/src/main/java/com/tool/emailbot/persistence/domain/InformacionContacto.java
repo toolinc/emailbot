@@ -25,23 +25,31 @@ import javax.validation.constraints.Pattern;
 @Table(name = "InformacionContacto")
 public class InformacionContacto extends Entidad {
 
+    @NotNull
     @Id
     @Column(name = "idInformacionContacto")
     private UUID id;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
+    @NotNull
     @Column(name = "email", nullable = false)
     private String email;
 
+    @NotNull
+    @Pattern(regexp = "^[0-9]{7,15}$") 
     @Column(name = "telefono", length = 15, nullable = false)
     private String telefono;
 
+    @NotNull
+    @Pattern(regexp = "^[0-9]{1,5}$") 
     @Column(name = "extension", length = 5, nullable = false)
     private String extension;
 
+    
     @Override
     public UUID getId() {
         return id;
@@ -56,7 +64,7 @@ public class InformacionContacto extends Entidad {
         return persona;
     }
 
-    public void setPersona(@NotNull Persona persona) {
+    public void setPersona(Persona persona) {
         this.persona = persona;
     }
 
@@ -64,7 +72,7 @@ public class InformacionContacto extends Entidad {
         return email;
     }
 
-    public void setEmail(@NotNull String email) {
+    public void setEmail(String email) {
         this.email = email.toUpperCase();
     }
 
@@ -72,7 +80,7 @@ public class InformacionContacto extends Entidad {
         return telefono;
     }
 
-    public void setTelefono(@NotNull @Pattern(regexp = "^[0-9]{7,15}$") String telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -80,7 +88,7 @@ public class InformacionContacto extends Entidad {
         return extension;
     }
 
-    public void setExtension(@NotNull @Pattern(regexp = "^[0-9]{1,5}$") String extension) {
+    public void setExtension(String extension) {
         this.extension = extension;
     }
 }
