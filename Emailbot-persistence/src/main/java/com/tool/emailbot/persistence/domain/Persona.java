@@ -91,7 +91,8 @@ public class Persona extends Entidad {
 
     private Persona(Builder builder) {
         this.id = builder.id;
-        setInformacionContacto(builder.informacionContacto);
+        builder.builderContacto.setPersona(this);
+        setInformacionContacto(builder.builderContacto.build());
         setNombre(builder.nombre);
         setApellidoPaterno(builder.apellidoPaterno);
         setApellidoMaterno(builder.apellidoMaterno);
@@ -188,7 +189,11 @@ public class Persona extends Entidad {
         this.trabjador = trabjador;
     }
 
-
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.domain.Persona} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
     public static class Builder implements EntityBuilder<Persona> {
 
         private static final java.util.regex.Pattern pattern
@@ -200,10 +205,7 @@ public class Persona extends Entidad {
         private String apellidoMaterno;
         private Date fechaNacimiento;
         private String homoclave;
-        private InformacionContacto informacionContacto;
         private InformacionContacto.Builder builderContacto;
-        private Trabajador trabajador;
-        private Trabajador.Builder builderTrabjador;
 
         public Builder setNombre(String nombre) {
             checkState(!isNullOrEmpty(nombre));
@@ -233,28 +235,9 @@ public class Persona extends Entidad {
             return this;
         }
 
-        public Builder setInformacionContacto(InformacionContacto informacionContacto) {
-            this.informacionContacto = checkNotNull(informacionContacto);
-            return this;
-        }
-
         public Builder setInformacionContacto(InformacionContacto.Builder builder) {
             this.builderContacto = checkNotNull(builder);
             return this;
-        }
-
-        public Builder setTrabajador(Trabajador trabajador) {
-            this.trabajador = checkNotNull(trabajador);
-            return this;
-        }
-
-        public Builder setTrabajador(Trabajador.Builder builder) {
-            this.builderTrabjador = checkNotNull(builder);
-            return this;
-        }
-
-        public static Builder newBuilder() {
-            return new Builder();
         }
 
         private static String validateHomoclave(String homoclave) {
@@ -264,18 +247,29 @@ public class Persona extends Entidad {
             return homoclave;
         }
 
+        /**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.Persona} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Persona.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Persona}.
+         */
         @Override
         public Persona build() {
             id = UUID.randomUUID();
-            if (builderContacto != null) {
-                setInformacionContacto(builderContacto.build());
-            }
-            if (builderTrabjador != null) {
-                setTrabajador(builderTrabjador.build());
-            }
             Persona persona = new Persona(this);
-            informacionContacto.setPersona(persona);
             return persona;
+        }
+
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         *         {@link com.tool.emailbot.persistence.domain.Persona.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
         }
     }
 }
