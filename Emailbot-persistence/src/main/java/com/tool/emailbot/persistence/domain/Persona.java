@@ -1,9 +1,11 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
 
@@ -31,39 +33,42 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "Persona", uniqueConstraints = {
-    @UniqueConstraint(name = "personaUK", columnNames = {"nombre", "apellidoPaterno",
-	"apellidoMaterno", "fechaNacimiento"})})
+        @UniqueConstraint(name = "personaUK", columnNames = {"nombre", "apellidoPaterno",
+                "apellidoMaterno", "fechaNacimiento"})})
 public class Persona extends Entidad {
 
+    private static final String NOMBRE_REGEX = "^[A-Z ]{3,45}$";
+    private static final String HOMOCLAVE_REGEX = "^$|^[\\w]{3}$";
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyMMdd");
+
     @NotNull
     @Id
     @Column(name = "idPersona")
     private UUID id;
 
     @NotNull
-    @Pattern(regexp = "^[A-Z ]{3,45}$")
+    @Pattern(regexp = NOMBRE_REGEX)
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombrePersona;
 
     @NotNull
-    @Pattern(regexp = "^[A-Z ]{3,45}$")
+    @Pattern(regexp = NOMBRE_REGEX)
     @Column(name = "apellidoPaterno", nullable = false, length = 45)
     private String apellidoPaterno;
 
     @NotNull
-    @Pattern(regexp = "^[A-Z ]{3,45}$")
+    @Pattern(regexp = NOMBRE_REGEX)
     @Column(name = "apellidoMaterno", nullable = false, length = 45)
     private String apellidoMaterno;
 
     @NotNull
     @Past
-    @Pattern(regexp = Builder.HOMOCLAVE_REGEX)
+    @Pattern(regexp = HOMOCLAVE_REGEX)
     @Column(name = "fechaNacimiento", nullable = false, length = 45)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
 
-    @Pattern(regexp = "^$|^[\\w]{3}$")
+    @Pattern(regexp = NULL_REGEX + "|" + HOMOCLAVE_REGEX)
     @Column(name = "homoclave", length = 3)
     private String homoclave;
 
@@ -73,11 +78,11 @@ public class Persona extends Entidad {
     private String rfc;
 
     @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY,
-	      cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private InformacionContacto informacionContacto;
 
     @OneToOne(mappedBy = "persona", fetch = FetchType.LAZY,
-	      cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private Trabajador trabjador;
 
     @Deprecated
@@ -86,8 +91,7 @@ public class Persona extends Entidad {
 
     private Persona(Builder builder) {
 	this.id = builder.id;
-	setInformacionContacto(builder.informacionContacto);
-	setTrabjador(builder.trabajador);
+	    setInformacionContacto(builder.informacionContacto);
         setNombre(builder.nombre);
         setApellidoPaterno(builder.apellidoPaterno);
         setApellidoMaterno(builder.apellidoMaterno);
@@ -98,180 +102,180 @@ public class Persona extends Entidad {
 
     @Override
     public UUID getId() {
-	return id;
+        return id;
     }
 
     @Override
     public void setId(UUID id) {
-	this.id = id;
+        this.id = id;
     }
 
     public String getNombre() {
-	return nombrePersona;
+        return nombrePersona;
     }
 
     public void setNombre(String nombrePersona) {
-	this.nombrePersona = nombrePersona.toUpperCase();
+        this.nombrePersona = nombrePersona.toUpperCase();
     }
 
     public String getApellidoPaterno() {
-	return apellidoPaterno;
+        return apellidoPaterno;
     }
-    
-    public void setApellidoPaterno(String apellidoPaterno){
-	this.apellidoPaterno = apellidoPaterno.toUpperCase();
+
+    public void setApellidoPaterno(String apellidoPaterno) {
+        this.apellidoPaterno = apellidoPaterno.toUpperCase();
     }
 
     public String getApellidoMaterno() {
-	return apellidoMaterno;
+        return apellidoMaterno;
     }
-    
-    public void setApellidoMaterno(String apellidoMaterno){
-	this.apellidoMaterno = apellidoMaterno.toUpperCase();
+
+    public void setApellidoMaterno(String apellidoMaterno) {
+        this.apellidoMaterno = apellidoMaterno.toUpperCase();
     }
 
     public Date getFechaNacimiento() {
-	return newDate(fechaNacimiento);
+        return newDate(fechaNacimiento);
     }
-    
+
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = newDate(fechaNacimiento);
     }
 
     public String getHomoclave() {
-	return homoclave;
+        return homoclave;
     }
 
     public void setHomoclave(String homoclave) {
-	this.homoclave = Builder.validateHomoclave(homoclave);
+        this.homoclave = Builder.validateHomoclave(homoclave);
     }
 
     private String validateHomoclave(String homoclave) {
-	return homoclave.toUpperCase();
+        return homoclave.toUpperCase();
     }
 
     public String getRfc() {
-	return rfc;
+        return rfc;
     }
 
     public void setRfc() {
-	checkNotNull(getFechaNacimiento());
-         checkNotNull(getNombre());
-         checkNotNull(getApellidoPaterno());
-         checkNotNull(getApellidoMaterno());
-         Builder.validateHomoclave(getHomoclave());
-         String rfc = getApellidoPaterno().substring(0, 2) + getApellidoMaterno().substring(0, 1)
-                 + getNombre().substring(0, 1) + DATE_FORMAT.format(getFechaNacimiento());
-         if (getHomoclave() != null) {
-             rfc += getHomoclave();
-         }
-          this.rfc = rfc.toUpperCase();
+        checkNotNull(getFechaNacimiento());
+        checkNotNull(getNombre());
+        checkNotNull(getApellidoPaterno());
+        checkNotNull(getApellidoMaterno());
+        Builder.validateHomoclave(getHomoclave());
+        String rfc = getApellidoPaterno().substring(0, 2) + getApellidoMaterno().substring(0, 1)
+                + getNombre().substring(0, 1) + DATE_FORMAT.format(getFechaNacimiento());
+        if (getHomoclave() != null) {
+            rfc += getHomoclave();
+        }
+        this.rfc = rfc.toUpperCase();
     }
 
     public InformacionContacto getInformacionContacto() {
-	return informacionContacto;
+        return informacionContacto;
     }
 
     public void setInformacionContacto(InformacionContacto informacionContacto) {
         this.informacionContacto = checkNotNull(informacionContacto);
     }
-    
+
     public Trabajador getTrabjador() {
-	return trabjador;
+        return trabjador;
     }
 
     public void setTrabjador(Trabajador trabjador) {
-	this.trabjador = trabjador;
+        this.trabjador = trabjador;
     }
 
 
     public static class Builder implements EntityBuilder<Persona> {
 
-	private static final String HOMOCLAVE_REGEX = "^$|^[\\w]{3}$";
-	private static final java.util.regex.Pattern pattern
-		= java.util.regex.Pattern.compile(HOMOCLAVE_REGEX);
+        private static final java.util.regex.Pattern pattern
+                = java.util.regex.Pattern.compile(HOMOCLAVE_REGEX);
 
-	private UUID id;
-	private String nombre;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
-	private Date fechaNacimiento;
-	private String homoclave;
-	private InformacionContacto informacionContacto;
-	private InformacionContacto.Builder builder;
-	private Trabajador trabajador;
-	private Trabajador.Builder builderTrabjador;
+        private UUID id;
+        private String nombre;
+        private String apellidoPaterno;
+        private String apellidoMaterno;
+        private Date fechaNacimiento;
+        private String homoclave;
+        private InformacionContacto informacionContacto;
+        private InformacionContacto.Builder builderContacto;
+        private Trabajador trabajador;
+        private Trabajador.Builder builderTrabjador;
 
-	public Builder setNombre(String nombre) {
-	    checkState(!isNullOrEmpty(nombre));
-	    this.nombre = nombre;
-	    return this;
-	}
+        public Builder setNombre(String nombre) {
+            checkState(!isNullOrEmpty(nombre));
+            this.nombre = nombre;
+            return this;
+        }
 
-	public Builder setApellidoPaterno(String apellidoPaterno) {
-	    checkState(!isNullOrEmpty(apellidoPaterno));
-	    this.apellidoPaterno = apellidoPaterno;
-	    return this;
-	}
+        public Builder setApellidoPaterno(String apellidoPaterno) {
+            checkState(!isNullOrEmpty(apellidoPaterno));
+            this.apellidoPaterno = apellidoPaterno;
+            return this;
+        }
 
-	public Builder setApellidoMaterno(String apellidoMaterno) {
-	    checkState(!isNullOrEmpty(apellidoMaterno));
-	    this.apellidoMaterno = apellidoMaterno;
-	    return this;
-	}
+        public Builder setApellidoMaterno(String apellidoMaterno) {
+            checkState(!isNullOrEmpty(apellidoMaterno));
+            this.apellidoMaterno = apellidoMaterno;
+            return this;
+        }
 
-	public Builder setFechaNacimiento(int year, int month, int dayOfMonth) {
-	    this.fechaNacimiento = newDate(year, month, dayOfMonth);
-	    return this;
-	}
+        public Builder setFechaNacimiento(int year, int month, int dayOfMonth) {
+            this.fechaNacimiento = newDate(year, month, dayOfMonth);
+            return this;
+        }
 
-	public Builder setHomoclave(String homoclave) {
-	    this.homoclave = Builder.validateHomoclave(homoclave);
-	    return this;
-	}
+        public Builder setHomoclave(String homoclave) {
+            this.homoclave = Builder.validateHomoclave(homoclave);
+            return this;
+        }
 
-	public Builder setInformacionContacto(InformacionContacto informacionContacto) {
-	    this.informacionContacto = checkNotNull(informacionContacto);
-	    return this;
-	}
+        public Builder setInformacionContacto(InformacionContacto informacionContacto) {
+            this.informacionContacto = checkNotNull(informacionContacto);
+            return this;
+        }
 
-	public Builder setInformacionContacto(InformacionContacto.Builder builder) {
-	    this.builder = checkNotNull(builder);
-	    return this;
-	}
-	
-	public Builder setTrabajador(Trabajador trabajador) {
-	    this.trabajador = checkNotNull(trabajador);
-	    return this;
-	}
+        public Builder setInformacionContacto(InformacionContacto.Builder builder) {
+            this.builderContacto = checkNotNull(builder);
+            return this;
+        }
 
-	public Builder setTrabajador(Trabajador.Builder builder) {
-	    this.builderTrabjador = checkNotNull(builder);
-	    return this;
-	}
+        public Builder setTrabajador(Trabajador trabajador) {
+            this.trabajador = checkNotNull(trabajador);
+            return this;
+        }
 
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
+        public Builder setTrabajador(Trabajador.Builder builder) {
+            this.builderTrabjador = checkNotNull(builder);
+            return this;
+        }
 
-	private static String validateHomoclave(String homoclave) {
-	    if (homoclave != null) {
-		checkState(pattern.matcher(homoclave).matches(), "Invalid homo clave.");
-	    }
-	    return homoclave;
-	}
+        public static Builder newBuilder() {
+            return new Builder();
+        }
 
-	@Override
-	public Persona build() {
-	    id = UUID.randomUUID();
-	    if (builder != null) {
-		setInformacionContacto(builder.build());
-		setTrabajador(builderTrabjador.build());
-	    }
-	    Persona persona = new Persona(this);
-	    trabajador.setPersona(persona);
-	    informacionContacto.setPersona(persona);
-	    return persona;
-	}
+        private static String validateHomoclave(String homoclave) {
+            if (homoclave != null) {
+                checkState(pattern.matcher(homoclave).matches(), "Invalid homo clave.");
+            }
+            return homoclave;
+        }
+
+        @Override
+        public Persona build() {
+            id = UUID.randomUUID();
+            if (builderContacto != null) {
+                setInformacionContacto(builderContacto.build());
+            }
+            if (builderTrabjador != null) {
+                setTrabajador(builderTrabjador.build());
+            }
+            Persona persona = new Persona(this);
+            informacionContacto.setPersona(persona);
+            return persona;
+        }
     }
 }

@@ -47,12 +47,12 @@ public class Peticion extends Entidad {
     private Estatus estatus;
 
     @NotNull
-    @Pattern(regexp = EMAIL)
+    @Pattern(regexp = EMAIL_REGEX)
     @Column(name = "email", nullable = false)
     private String email;
 
     @NotNull
-    @Pattern(regexp = USER_NAME)
+    @Pattern(regexp = USER_NAME_REGEX)
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 

@@ -16,23 +16,22 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 /**
- * This class represents a persistence entity. Such entity is {@link Serializable} and also 
- * can be activated or deactivated in the persistence storage. In order to guarantee consistency 
+ * This class represents a persistence entity. Such entity is {@link Serializable} and also
+ * can be activated or deactivated in the persistence storage. In order to guarantee consistency
  * a field stores the optimistic locking of the entity.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @MappedSuperclass
 public abstract class Entidad implements Serializable {
-    
-    protected static final String EMAIL = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*@[\\w-]+(\\.[\\w]+)*(\\.[A-Za-z]{2,})$";
-    protected static final String NULL = "^$";
-    protected static final String USER_NAME =  "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*$";
-    
+
+    protected static final String EMAIL_REGEX = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*@[\\w-]+(\\.[\\w]+)*(\\.[A-Za-z]{2,})$";
+    protected static final String NULL_REGEX = "^$";
+    protected static final String USER_NAME_REGEX = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*$";
 
     @Column(name = "activo", nullable = false)
     private boolean activo;
-    
+
     @Version
     @Column(name = "version", nullable = false)
     private int version;
@@ -67,21 +66,21 @@ public abstract class Entidad implements Serializable {
         final Entidad other = (Entidad) obj;
         return Objects.equals(getId(), other.getId());
     }
-    
+
     protected Date newDate(Date time) {
         Preconditions.checkNotNull(time, "Date should not be [null].");
         return newDate(time.getTime());
     }
-    
+
     protected Date newDate(long time) {
         return new Date(time);
     }
-    
-    protected static Date newDate(int year, int month, int dayOfMonth){
-	GregorianCalendar calendar = new GregorianCalendar(year, month-1, dayOfMonth);
-	return calendar.getTime();
+
+    protected static Date newDate(int year, int month, int dayOfMonth) {
+        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, dayOfMonth);
+        return calendar.getTime();
     }
-    
+
     public int getVersion() {
         return version;
     }

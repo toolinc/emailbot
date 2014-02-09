@@ -3,7 +3,6 @@ package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
@@ -39,15 +38,15 @@ public class InformacionContacto extends Entidad {
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
-    @Pattern(regexp = NULL + "|" + EMAIL)
+    @Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
     @Column(name = "email")
     private String email;
 
-    @Pattern(regexp = NULL+"|^[0-9]{7,15}$")
+    @Pattern(regexp = NULL_REGEX +"|^[0-9]{7,15}$")
     @Column(name = "telefono", length = 15)
     private String telefono;
 
-    @Pattern(regexp = NULL+"|^[0-9]{1,5}$")
+    @Pattern(regexp = NULL_REGEX +"|^[0-9]{1,5}$")
     @Column(name = "extension", length = 5)
     private String extension;
 
