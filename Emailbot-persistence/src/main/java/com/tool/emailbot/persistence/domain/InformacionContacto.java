@@ -2,7 +2,6 @@
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
@@ -42,107 +41,107 @@ public class InformacionContacto extends Entidad {
     @Column(name = "email")
     private String email;
 
-    @Pattern(regexp = NULL_REGEX +"|^[0-9]{7,15}$")
+    @Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
     @Column(name = "telefono", length = 15)
     private String telefono;
 
-    @Pattern(regexp = NULL_REGEX +"|^[0-9]{1,5}$")
+    @Pattern(regexp = NULL_REGEX + "|^[0-9]{1,5}$")
     @Column(name = "extension", length = 5)
     private String extension;
 
-    
-     @Deprecated
+
+    @Deprecated
     public InformacionContacto() {
     }
 
     private InformacionContacto(Builder builder) {
-	this.id = builder.id;
-	setPersona(builder.persona);
-	setEmail(builder.email);
-	setTelefono(builder.telefono);
-	setExtension(builder.extension);
+        this.id = builder.id;
+        setPersona(builder.persona);
+        setEmail(builder.email);
+        setTelefono(builder.telefono);
+        setExtension(builder.extension);
     }
-    
+
     @Override
     public UUID getId() {
-	return id;
+        return id;
     }
 
     @Override
     public void setId(UUID id) {
-	this.id = id;
+        this.id = id;
     }
 
     public Persona getPersona() {
-	return persona;
+        return persona;
     }
 
     public void setPersona(Persona persona) {
-	this.persona = checkNotNull(persona);
+        this.persona = checkNotNull(persona);
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
 
     public void setEmail(String email) {
-	this.email = email.toUpperCase();
+        this.email = email.toUpperCase();
     }
 
     public String getTelefono() {
-	return telefono;
+        return telefono;
     }
 
     public void setTelefono(String telefono) {
-	this.telefono = telefono;
+        this.telefono = telefono;
     }
 
     public String getExtension() {
-	return extension;
+        return extension;
     }
 
     public void setExtension(String extension) {
-	this.extension = extension;
+        this.extension = extension;
     }
 
 
     public static class Builder implements EntityBuilder<InformacionContacto> {
 
-	private UUID id;
-	private String email;
-	private String telefono;
-	private String extension;
-	private Persona persona;
+        private UUID id;
+        private String email;
+        private String telefono;
+        private String extension;
+        private Persona persona;
 
-	@Override
-	public InformacionContacto build() {
-	    id = UUID.randomUUID();
-	    InformacionContacto informacionContacto = new InformacionContacto(this);
-	    return informacionContacto;
-	}
-	
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
-	
-	public Builder setPersona(Persona persona){
-	    this.persona = checkNotNull(persona);
-	    return this;
-	}
-	
-	public Builder setTelefono(String telefon){
-	    this.telefono = telefon;
-	    return this;
-	}
-	
-	public Builder setEmail(String email){
-	    this.email = email;
-	    return this;
-	}
-	
-	public Builder setExtension(String extension){
-	    this.extension = extension;
-	    return this;
-	}
+        @Override
+        public InformacionContacto build() {
+            id = UUID.randomUUID();
+            InformacionContacto informacionContacto = new InformacionContacto(this);
+            return informacionContacto;
+        }
+
+        public static Builder newBuilder() {
+            return new Builder();
+        }
+
+        public Builder setPersona(Persona persona) {
+            this.persona = checkNotNull(persona);
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            this.email = email;
+            return this;
+        }
+
+        public Builder setTelefono(String telefono) {
+            this.telefono = telefono;
+            return this;
+        }
+
+        public Builder setExtension(String extension) {
+            this.extension = extension;
+            return this;
+        }
     }
 }

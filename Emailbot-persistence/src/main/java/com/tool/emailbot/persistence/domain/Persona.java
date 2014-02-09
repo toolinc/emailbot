@@ -90,8 +90,8 @@ public class Persona extends Entidad {
     }
 
     private Persona(Builder builder) {
-	this.id = builder.id;
-	    setInformacionContacto(builder.informacionContacto);
+        this.id = builder.id;
+        setInformacionContacto(builder.informacionContacto);
         setNombre(builder.nombre);
         setApellidoPaterno(builder.apellidoPaterno);
         setApellidoMaterno(builder.apellidoMaterno);
