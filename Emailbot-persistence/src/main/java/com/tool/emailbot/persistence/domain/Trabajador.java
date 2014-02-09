@@ -1,4 +1,5 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -10,11 +11,13 @@ import com.tool.emailbot.persistence.EntityBuilder;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -34,12 +37,14 @@ public class Trabajador extends Entidad {
     private UUID id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH},
+            optional = false)
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REFRESH}, optional = false)
     @JoinColumn(name = "idDependencia", nullable = false)
     private Dependencia dependencia;
 
@@ -47,6 +52,7 @@ public class Trabajador extends Entidad {
     @Column(name = "numeroTrabajador", nullable = false, length = 50)
     private String numeroTrabajador;
 
+    //TODO(jovani): This does not properly reflect the employment status of a worker.
     @NotNull
     @Column(name = "situcionLaboral", nullable = false)
     private boolean situcionLaboral;
@@ -64,9 +70,9 @@ public class Trabajador extends Entidad {
 
     private Trabajador(Builder builder) {
         this.id = builder.id;
+        builder.builderPersona.setTrabajador(this);
+        setPersona(builder.builderPersona.build());
         setDependencia(builder.dependecia);
-        setPersona(builder.persona);
-        setPeticion(builder.peticion);
         setDirector(builder.director);
         setNumeroTrabajador(builder.numeroTrabajador);
         setSitucionLaboral(builder.situcionLaboral);
@@ -87,7 +93,7 @@ public class Trabajador extends Entidad {
     }
 
     public void setPersona(Persona persona) {
-        this.persona = persona;
+        this.persona = checkNotNull(persona);
     }
 
     public Dependencia getDependencia() {
@@ -95,7 +101,7 @@ public class Trabajador extends Entidad {
     }
 
     public void setDependencia(Dependencia dependencia) {
-        this.dependencia = dependencia;
+        this.dependencia = checkNotNull(dependencia);
     }
 
     public String getNumeroTrabajador() {
@@ -103,6 +109,7 @@ public class Trabajador extends Entidad {
     }
 
     public void setNumeroTrabajador(String numeroTrabajador) {
+        checkState(!isNullOrEmpty(numeroTrabajador));
         this.numeroTrabajador = numeroTrabajador.toUpperCase();
     }
 
@@ -127,21 +134,25 @@ public class Trabajador extends Entidad {
     }
 
     public void setPeticion(Peticion peticion) {
-        this.peticion = peticion;
+        this.peticion = checkNotNull(peticion);
     }
 
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.domain.Trabajador} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
     public static class Builder implements EntityBuilder<Trabajador> {
 
         private UUID id;
-        private Persona persona;
+        private Persona.Builder builderPersona;
         private Dependencia dependecia;
         private String numeroTrabajador;
         private boolean situcionLaboral;
         private boolean director;
-        private Peticion peticion;
 
-        public Builder setPersona(Persona persona) {
-            this.persona = checkNotNull(persona);
+        public Builder setPersona(Persona.Builder builderPersona) {
+            this.builderPersona = checkNotNull(builderPersona);
             return this;
         }
 
@@ -152,26 +163,43 @@ public class Trabajador extends Entidad {
 
         public Builder setNumeroTrabajador(String numeroTrabajador) {
             checkState(!isNullOrEmpty(numeroTrabajador));
+            this.numeroTrabajador = numeroTrabajador;
             return this;
         }
 
         public Builder setSituacionLaboral(boolean situacionLaboral) {
+            this.situcionLaboral = situacionLaboral;
             return this;
         }
 
         public Builder setDirector(boolean director) {
+            this.director = director;
             return this;
         }
 
-        public Builder setPeticion(Peticion peticion) {
-            return this;
-        }
-
+        /**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.Trabajador} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Trabajador}.
+         */
         @Override
         public Trabajador build() {
             id = UUID.randomUUID();
             Trabajador trabajador = new Trabajador(this);
             return trabajador;
+        }
+
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         *         {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
         }
     }
 }

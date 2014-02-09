@@ -63,8 +63,7 @@ public class Persona extends Entidad {
 
     @NotNull
     @Past
-    @Pattern(regexp = HOMOCLAVE_REGEX)
-    @Column(name = "fechaNacimiento", nullable = false, length = 45)
+    @Column(name = "fechaNacimiento", nullable = false)
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date fechaNacimiento;
 
@@ -93,6 +92,7 @@ public class Persona extends Entidad {
         this.id = builder.id;
         builder.builderContacto.setPersona(this);
         setInformacionContacto(builder.builderContacto.build());
+        setTrabjador(builder.trabajador);
         setNombre(builder.nombre);
         setApellidoPaterno(builder.apellidoPaterno);
         setApellidoMaterno(builder.apellidoMaterno);
@@ -186,7 +186,7 @@ public class Persona extends Entidad {
     }
 
     public void setTrabjador(Trabajador trabjador) {
-        this.trabjador = trabjador;
+        this.trabjador = checkNotNull(trabjador);
     }
 
     /**
@@ -206,6 +206,7 @@ public class Persona extends Entidad {
         private Date fechaNacimiento;
         private String homoclave;
         private InformacionContacto.Builder builderContacto;
+        private Trabajador trabajador;
 
         public Builder setNombre(String nombre) {
             checkState(!isNullOrEmpty(nombre));
@@ -237,6 +238,11 @@ public class Persona extends Entidad {
 
         public Builder setInformacionContacto(InformacionContacto.Builder builder) {
             this.builderContacto = checkNotNull(builder);
+            return this;
+        }
+
+        public Builder setTrabajador(Trabajador trabajador) {
+            this.trabajador = checkNotNull(trabajador);
             return this;
         }
 

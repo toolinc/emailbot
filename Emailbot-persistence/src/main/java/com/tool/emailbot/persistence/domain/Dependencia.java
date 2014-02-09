@@ -11,19 +11,16 @@ import com.tool.emailbot.persistence.EntityBuilder;
 
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
  * This class represents a Branch of an institution.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Entity
@@ -36,31 +33,25 @@ public class Dependencia extends Entidad {
     private UUID id;
 
     @NotNull
-    @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 44}$") 
+    @Pattern(regexp = "^[A-Z][A-Z ]{2,45}$")
     @Column(name = "abreviacion", nullable = false, length = 45, unique = true)
     private String abreviacion;
 
     @NotNull
-    @Pattern(regexp = "^[A-Za-z][A-Za-z ]{1, 254}$")
+    @Pattern(regexp = "^[A-Z][A-Z ]{5,255}$")
     @Column(name = "nombre", nullable = false, unique = true)
-    private String name;
-    
-    @OneToOne(mappedBy = "dependencia", fetch = FetchType.LAZY)
-    private Trabajador trabajador;
-
-   
+    private String nombre;
 
     @Deprecated
-    public Dependencia(){
+    public Dependencia() {
     }
-    
-    private Dependencia(Builder buider){
-	this.id = buider.id;
-	settrabajador(buider.trabajador);
-	setName(buider.nombre);
-	setAbreviacion(buider.abreviacion);
+
+    private Dependencia(Builder buider) {
+        this.id = buider.id;
+        setNombre(buider.nombre);
+        setAbreviacion(buider.abreviacion);
     }
-    
+
     @Override
     public UUID getId() {
         return id;
@@ -68,7 +59,7 @@ public class Dependencia extends Entidad {
 
     @Override
     public void setId(UUID id) {
-        this.id = id;
+        this.id = checkNotNull(id);
     }
 
     public String getAbreviacion() {
@@ -76,69 +67,65 @@ public class Dependencia extends Entidad {
     }
 
     public void setAbreviacion(String abreviacion) {
+        checkState(!isNullOrEmpty(abreviacion));
         this.abreviacion = abreviacion.toUpperCase();
     }
 
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name.toUpperCase();
-    }
-    
-     public Trabajador getTrabajador() {
-	return trabajador;
+    public void setNombre(String nombre) {
+        checkState(!isNullOrEmpty(nombre));
+        this.nombre = nombre.toUpperCase();
     }
 
-    public void settrabajador(Trabajador trabajador) {
-	this.trabajador = trabajador;
-    }
-     
-     
-    public static class Builder implements EntityBuilder<Dependencia>{
-	
-	private UUID id;
-	private String nombre;
-	private String abreviacion;
-	private Trabajador trabajador;
-	private Trabajador.Builder builder;
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.domain.Dependencia} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
+    public static class Builder implements EntityBuilder<Dependencia> {
 
-	@Override
-	public Dependencia build() {
-	    id = UUID.randomUUID();
-	    if (builder != null) {
-		setTrabajador(builder.build());
-	    }
-	    Dependencia dependencia = new Dependencia(this);
-	    trabajador.setDependencia(dependencia);
-	    return dependencia;
-	}
-	
-	public Builder setTrabajador(Trabajador trabajador) {
-	    this.trabajador = checkNotNull(trabajador);
-	    return this;
-	}
+        private UUID id;
+        private String nombre;
+        private String abreviacion;
 
-	public Builder setTrabajador(Trabajador.Builder builder) {
-	    this.builder = checkNotNull(builder);
-	    return this;
-	}
-	
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
-	
-	public Builder setNombre(String nombre){
-	    checkState(!isNullOrEmpty(nombre));
-	    this.nombre = nombre;
-	    return this;
-	}
-	
-	public Builder setAbreviacion(String abreviacion){
-	    checkState(!isNullOrEmpty(abreviacion));
-	    this.abreviacion = abreviacion;
-	    return this;
-	}
+        public Builder setNombre(String nombre) {
+            checkState(!isNullOrEmpty(nombre));
+            this.nombre = nombre.toUpperCase();
+            return this;
+        }
+
+        public Builder setAbreviacion(String abreviacion) {
+            checkState(!isNullOrEmpty(abreviacion));
+            this.abreviacion = abreviacion.toUpperCase();
+            return this;
+        }
+
+        /**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.Dependencia} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Dependencia.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Dependencia}.
+         */
+        @Override
+        public Dependencia build() {
+            id = UUID.randomUUID();
+            Dependencia dependencia = new Dependencia(this);
+            return dependencia;
+        }
+
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         * {@link com.tool.emailbot.persistence.domain.Dependencia.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
+        }
     }
 }

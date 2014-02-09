@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence;
 
 import org.junit.After;
@@ -16,10 +13,11 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 /**
+ * Specifies the behavior of a persistence test.
  *
- * @author edgar
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class PersistenceTest {
+public abstract class PersistenceTest {
 
     private final static String PERSISTENCE_UNIT = "emailbotPUTest";
     protected static EntityManagerFactory emf;
@@ -28,14 +26,16 @@ public class PersistenceTest {
 
     @BeforeClass
     public static void createEMF() {
-	if(emf == null){
-	    emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-	}
+        if (emf == null) {
+            emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        }
     }
 
     @AfterClass
     public static void closeEMF() {
-	if(emf == null) emf.close();
+        if (emf != null) {
+            emf.close();
+        }
     }
 
     @Before
