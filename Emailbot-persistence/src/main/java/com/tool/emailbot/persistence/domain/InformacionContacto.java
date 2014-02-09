@@ -1,7 +1,10 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
@@ -19,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * This class represents the contact information of a {@code Person}.
+ * Represents the contact information of a {@code Person}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
@@ -37,8 +40,8 @@ public class InformacionContacto extends Entidad {
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
-    @Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
-    @Column(name = "email")
+    @Pattern(regexp = EMAIL_REGEX)
+    @Column(name = "email", nullable = false)
     private String email;
 
     @Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
@@ -48,7 +51,6 @@ public class InformacionContacto extends Entidad {
     @Pattern(regexp = NULL_REGEX + "|^[0-9]{1,5}$")
     @Column(name = "extension", length = 5)
     private String extension;
-
 
     @Deprecated
     public InformacionContacto() {
@@ -85,6 +87,7 @@ public class InformacionContacto extends Entidad {
     }
 
     public void setEmail(String email) {
+        checkState(!isNullOrEmpty(email));
         this.email = email.toUpperCase();
     }
 
@@ -104,7 +107,11 @@ public class InformacionContacto extends Entidad {
         this.extension = extension;
     }
 
-
+    /**
+     * Builder of {link InformacionContacto} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
     public static class Builder implements EntityBuilder<InformacionContacto> {
 
         private UUID id;
@@ -113,6 +120,14 @@ public class InformacionContacto extends Entidad {
         private String extension;
         private Persona persona;
 
+        /**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.InformacionContacto} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.InformacionContacto}.
+         */
         @Override
         public InformacionContacto build() {
             id = UUID.randomUUID();
@@ -120,6 +135,12 @@ public class InformacionContacto extends Entidad {
             return informacionContacto;
         }
 
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         *         {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
+         */
         public static Builder newBuilder() {
             return new Builder();
         }
@@ -130,16 +151,19 @@ public class InformacionContacto extends Entidad {
         }
 
         public Builder setEmail(String email) {
+            checkState(!isNullOrEmpty(email));
             this.email = email;
             return this;
         }
 
         public Builder setTelefono(String telefono) {
+            checkState(!isNullOrEmpty(telefono));
             this.telefono = telefono;
             return this;
         }
 
         public Builder setExtension(String extension) {
+            checkState(!isNullOrEmpty(extension));
             this.extension = extension;
             return this;
         }
