@@ -1,7 +1,12 @@
 // Copyright 2014 Tool Inc. 
 package com.tool.emailbot.persistence.domain;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.persistence.EntityBuilder;
 
 import java.util.UUID;
 
@@ -33,8 +38,8 @@ public class Peticion extends Entidad {
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idPersona", nullable = false, unique = true)
-    private Persona persona;
+    @JoinColumn(name = "idTrabajador", nullable = false, unique = true)
+    private Trabajador trabajador;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -42,20 +47,27 @@ public class Peticion extends Entidad {
     private Estatus estatus;
 
     @NotNull
-    @Pattern(
-	    regexp = "^[_\\\\w-\\\\+]+(\\\\.[_\\\\w-]+)*@[\\\\w-]+(\\\\.[\\\\w]+)*(\\\\.[A-Za-z]"
-	    + "{2,})$")
+    @Pattern(regexp = EMAIL)
     @Column(name = "email", nullable = false)
     private String email;
 
     @NotNull
-    @Pattern(regexp = "^[_\\\\w-\\\\+]+(\\\\.[_\\\\w-]+)*$") 
+    @Pattern(regexp = USER_NAME)
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
     @OneToOne(mappedBy = "peticion")
     private Aprovacion aprovacion;
 
+    @Deprecated
+    public Peticion(){
+    }
+    
+    private Peticion(Builder builder){
+	this.id = builder.id;
+	setAprovacion(builder.aprovacion);
+    }
+    
     @Override
     public UUID getId() {
 	return id;
@@ -66,12 +78,12 @@ public class Peticion extends Entidad {
 	this.id = id;
     }
 
-    public Persona getPersona() {
-	return persona;
+    public Trabajador getTrabajador() {
+	return trabajador;
     }
 
-    public void setPersona(Persona persona) {
-	this.persona = persona;
+    public void setTrabajador(Trabajador trabajador) {
+	this.trabajador = trabajador;
     }
 
     public Estatus getEstatus() {
@@ -104,5 +116,52 @@ public class Peticion extends Entidad {
 
     public void setAprovacion(Aprovacion aprovacion) {
 	this.aprovacion = aprovacion;
+    }
+
+    public static class Builder implements EntityBuilder<Peticion>{
+	private UUID id;
+	private Aprovacion aprovacion;
+	private Trabajador trabajador;
+	private Estatus estatus;
+	private String email;
+	private String username;
+
+	@Override
+	public Peticion build() {
+	    Peticion peticion = new Peticion(this);
+	    return peticion;
+	}
+	
+	public static Builder newBuilder() {
+	    return new Builder();
+	}
+	
+	public Builder setAprovacion(Aprovacion aprovacion){
+	    checkNotNull(aprovacion);
+	    this.aprovacion = aprovacion;
+	    return this;
+	}
+	
+	public Builder setTrabajador( Trabajador trabajador){
+	    checkNotNull(trabajador);
+	    this.trabajador = trabajador;
+	    return this;
+	}
+	public Builder setEstatus(Estatus estatus){
+	    checkNotNull(estatus);
+	    this.estatus = estatus;
+	    return this;
+	}
+	public Builder setEmail(String email){
+	    checkState(!isNullOrEmpty(email));
+	    this.email = email;
+	    return this;
+	}
+	public Builder setUsername(String username){
+	    checkState(!isNullOrEmpty(email));
+	    this.email = email;
+	    return this;
+	}
+	
     }
 }

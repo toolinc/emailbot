@@ -2,7 +2,12 @@
 
 package com.tool.emailbot.persistence.aa;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.persistence.EntityBuilder;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -59,6 +64,20 @@ public class Usuario extends Entidad {
     private String apellidoMaterno;
 
 
+     @Deprecated
+    public Usuario(){
+    }
+    
+    private Usuario(Builder builder) {
+	this.id = builder.id;
+	setRol(builder.rol);
+	setUsername(builder.username);
+	setNombre(builder.nombre);
+	setApellidoPaterno(builder.apellidoPaterno);
+	setApellidoMaterno(builder.apellidoMaterno);
+        setUsuarioSistema(builder.usuarioSistema);
+    }
+    
     @Override
     public UUID getId() {
         return id;
@@ -117,4 +136,60 @@ public class Usuario extends Entidad {
         this.apellidoMaterno = apellidoMaterno.toUpperCase();
     }
 
+     public static class Builder implements EntityBuilder<Usuario>{
+        
+        private UUID id;
+        private String username;
+        private String nombre;
+        private String apellidoPaterno;
+        private String apellidoMaterno;
+        private boolean usuarioSistema;
+	private Rol rol;
+
+        @Override
+        public Usuario build() {
+            id = UUID.randomUUID();
+	    Usuario usuario = new Usuario(this);
+	    return usuario;
+        }
+	
+	public static Builder newBuilder() {
+	    return new Builder();
+	}
+        
+        public Builder setUserName(String username){
+	    checkState(!isNullOrEmpty(username));
+	    this.username = username;
+	    return this;
+	}
+	
+	public Builder setNombre(String nombre){
+	    checkState(!isNullOrEmpty(nombre));
+	    this.nombre = nombre;
+	    return this;
+	}
+	
+	public Builder setApellidoPaterno(String apellidoPaterno){
+	    checkState(!isNullOrEmpty(apellidoPaterno));
+	    this.apellidoPaterno = apellidoPaterno;
+	    return this;
+	}
+	
+	public Builder setApellidoMaterno(String apellidoMaterno){
+	    checkState(!isNullOrEmpty(apellidoMaterno));
+	    this.apellidoMaterno = apellidoMaterno;
+	    return this;
+	}
+        
+        public Builder setUsuarioSistema(boolean usuarioSistema){
+	    this.usuarioSistema = usuarioSistema;
+	    return this;
+	}
+	
+	public Builder setRol(Rol rol){
+	    checkNotNull(rol);
+	    this.rol = rol;
+	    return this;
+	}
+    }
 }

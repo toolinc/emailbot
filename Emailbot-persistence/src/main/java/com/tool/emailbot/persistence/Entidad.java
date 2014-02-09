@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -23,6 +24,11 @@ import javax.validation.constraints.NotNull;
  */
 @MappedSuperclass
 public abstract class Entidad implements Serializable {
+    
+    protected static final String EMAIL = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*@[\\w-]+(\\.[\\w]+)*(\\.[A-Za-z]{2,})$";
+    protected static final String NULL = "^$";
+    protected static final String USER_NAME =  "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*$";
+    
 
     @Column(name = "activo", nullable = false)
     private boolean activo;
@@ -69,6 +75,11 @@ public abstract class Entidad implements Serializable {
     
     protected Date newDate(long time) {
         return new Date(time);
+    }
+    
+    protected static Date newDate(int year, int month, int dayOfMonth){
+	GregorianCalendar calendar = new GregorianCalendar(year, month-1, dayOfMonth);
+	return calendar.getTime();
     }
     
     public int getVersion() {
