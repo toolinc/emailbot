@@ -22,7 +22,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * Represents the contact information of a {@code Person}.
+ * Represents the contact information of a {@link com.tool.emailbot.persistence.domain.Persona}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
