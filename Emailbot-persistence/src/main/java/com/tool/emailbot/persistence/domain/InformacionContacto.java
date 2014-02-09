@@ -108,7 +108,7 @@ public class InformacionContacto extends Entidad {
     }
 
     /**
-     * Builder of {link InformacionContacto} instances.
+     * Builder of {@link com.tool.emailbot.persistence.domain.InformacionContacto} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
