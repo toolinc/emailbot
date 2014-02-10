@@ -139,7 +139,6 @@ public class Trabajador extends Entidad {
         private String numeroTrabajador;
         private boolean situcionLaboral;
         private boolean director;
-	private Peticion peticion;
 
         public Builder setPersona(Persona.Builder builderPersona) {
             this.builderPersona = checkNotNull(builderPersona);
@@ -166,11 +165,6 @@ public class Trabajador extends Entidad {
             this.director = director;
             return this;
         }
-	
-	public Builder setPeticion(Peticion peticion){
-	    this.peticion = checkNotNull(peticion);
-	    return this;
-	}
 
         /**
          * Creates a instances of
@@ -191,7 +185,7 @@ public class Trabajador extends Entidad {
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();
