@@ -61,9 +61,6 @@ public class Trabajador extends Entidad {
     @Column(name = "director", nullable = false)
     private boolean director;
 
-    @OneToOne(mappedBy = "trabajador", fetch = FetchType.LAZY)
-    private Peticion peticion;
-
     @Deprecated
     public Trabajador() {
     }
@@ -127,14 +124,6 @@ public class Trabajador extends Entidad {
 
     public void setDirector(boolean director) {
         this.director = director;
-    }
-
-    public Peticion getPeticion() {
-        return peticion;
-    }
-
-    public void setPeticion(Peticion peticion) {
-        this.peticion = checkNotNull(peticion);
     }
 
     /**
