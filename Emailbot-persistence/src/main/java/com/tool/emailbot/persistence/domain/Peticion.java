@@ -1,4 +1,5 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -10,6 +11,7 @@ import com.tool.emailbot.persistence.EntityBuilder;
 
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -23,7 +25,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 /**
- * This class represents an email request of a {@link Person}.
+ * This class represents an email request of a
+ * {@link com.tool.emailbot.persistence.domain.Trabajador}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
@@ -46,9 +49,8 @@ public class Peticion extends Entidad {
     @Column(name = "estatus", nullable = false)
     private Estatus estatus;
 
-    @NotNull
-    @Pattern(regexp = EMAIL_REGEX)
-    @Column(name = "email", nullable = false)
+    @Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
+    @Column(name = "email")
     private String email;
 
     @NotNull
@@ -56,111 +58,108 @@ public class Peticion extends Entidad {
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
-    @OneToOne(mappedBy = "peticion")
+    @OneToOne(mappedBy = "peticion", cascade = {CascadeType.REFRESH})
     private Aprovacion aprovacion;
 
     @Deprecated
-    public Peticion(){
+    public Peticion() {
     }
-    
-    private Peticion(Builder builder){
-	this.id = builder.id;
-	builder.builderTrabajador.setPeticion(this);
-	setTrabajador(builder.builderTrabajador.build());
-	setAprovacion(builder.aprovacion);
-	setEstatus(builder.estatus);
-	setUsername(builder.username);
-	setEmail(builder.email);
+
+    private Peticion(Builder builder) {
+        this.id = builder.id;
+        setTrabajador(builder.trabajador);
+        setEstatus(builder.estatus);
+        setUsername(builder.username);
+        setEmail(builder.email);
     }
-    
+
     @Override
     public UUID getId() {
-	return id;
+        return id;
     }
 
     @Override
     public void setId(UUID id) {
-	this.id = id;
+        this.id = id;
     }
 
     public Trabajador getTrabajador() {
-	return trabajador;
+        return trabajador;
     }
 
     public void setTrabajador(Trabajador trabajador) {
-	this.trabajador = trabajador;
+        this.trabajador = checkNotNull(trabajador);
     }
 
     public Estatus getEstatus() {
-	return estatus;
+        return estatus;
     }
 
     public void setEstatus(Estatus estatus) {
-	this.estatus = estatus;
+        this.estatus = checkNotNull(estatus);
     }
 
     public String getEmail() {
-	return email;
+        return email;
     }
 
     public void setEmail(String email) {
-	this.email = email.toUpperCase();
+        this.email = email.toUpperCase();
     }
 
     public String getUsername() {
-	return username;
+        return username;
     }
 
     public void setUsername(String username) {
-	this.username = username.toUpperCase();
+        this.username = username.toUpperCase();
     }
 
     public Aprovacion getAprovacion() {
-	return aprovacion;
+        return aprovacion;
     }
 
     public void setAprovacion(Aprovacion aprovacion) {
-	this.aprovacion = aprovacion;
+        this.aprovacion = aprovacion;
     }
-    
+
     /**
      * Builder of {@link com.tool.emailbot.persistence.domain.Peticion} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
 
-    public static class Builder implements EntityBuilder<Peticion>{
-	private UUID id;
-	private Aprovacion aprovacion;
-	private Trabajador trabajador;
-	private Trabajador.Builder builderTrabajador;
-	private Estatus estatus = Estatus.SOLICITUD;
-	private String email;
-	private String username;
-	
-	public Builder setAprovacion(Aprovacion aprovacion){
-	    checkNotNull(aprovacion);
-	    this.aprovacion = aprovacion;
-	    return this;
-	}
-	
-	public Builder setTrabajador( Trabajador.Builder builderTrabajador){
-	    this.builderTrabajador = checkNotNull(builderTrabajador);
-	    return this;
-	}
-	
-	public Builder setEmail(String email){
-	    checkState(!isNullOrEmpty(email));
-	    this.email = email;
-	    return this;
-	}
-	public Builder setUsername(String username){
-	    checkState(!isNullOrEmpty(email));
-	    this.email = email;
-	    return this;
-	}
-	
-	/**
+    public static class Builder implements EntityBuilder<Peticion> {
+        private UUID id;
+        private Trabajador trabajador;
+        private Estatus estatus;
+        private String email;
+        private String username;
+
+        public Builder setTrabajador(Trabajador trabajador) {
+            this.trabajador = checkNotNull(trabajador);
+            return this;
+        }
+
+        public Builder setEstatus(Estatus estatus) {
+            checkNotNull(estatus);
+            this.estatus = estatus;
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            checkState(!isNullOrEmpty(email));
+            this.email = email;
+            return this;
+        }
+
+        public Builder setUsername(String username) {
+            checkState(!isNullOrEmpty(email));
+            this.email = email;
+            return this;
+        }
+
+        /**
          * Creates a instances of
          * {@link com.tool.emailbot.persistence.domain.Peticion} given the specified
          * characteristics on the
@@ -168,23 +167,20 @@ public class Peticion extends Entidad {
          *
          * @return a new instance {@link com.tool.emailbot.persistence.domain.Peticion}.
          */
-	
-	@Override
-	public Peticion build() {
-	    Peticion peticion = new Peticion(this);
-	    return peticion;
-	}
-	
-	 /**
+        @Override
+        public Peticion build() {
+            Peticion peticion = new Peticion(this);
+            return peticion;
+        }
+
+        /**
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
          */
-	
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
-	
+        public static Builder newBuilder() {
+            return new Builder();
+        }
     }
 }

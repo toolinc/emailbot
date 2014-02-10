@@ -61,9 +61,6 @@ public class Trabajador extends Entidad {
     @Column(name = "director", nullable = false)
     private boolean director;
 
-    @OneToOne(mappedBy = "trabajador", fetch = FetchType.LAZY)
-    private Peticion peticion;
-
     @Deprecated
     public Trabajador() {
     }
@@ -129,14 +126,6 @@ public class Trabajador extends Entidad {
         this.director = director;
     }
 
-    public Peticion getPeticion() {
-        return peticion;
-    }
-
-    public void setPeticion(Peticion peticion) {
-        this.peticion = checkNotNull(peticion);
-    }
-
     /**
      * Builder of {@link com.tool.emailbot.persistence.domain.Trabajador} instances.
      *
@@ -150,7 +139,6 @@ public class Trabajador extends Entidad {
         private String numeroTrabajador;
         private SituacionLaboral situcionLaboral;
         private boolean director;
-	private Peticion peticion;
 
         public Builder setPersona(Persona.Builder builderPersona) {
             this.builderPersona = checkNotNull(builderPersona);
@@ -177,11 +165,6 @@ public class Trabajador extends Entidad {
             this.director = director;
             return this;
         }
-	
-	public Builder setPeticion(Peticion peticion){
-	    this.peticion = checkNotNull(peticion);
-	    return this;
-	}
 
         /**
          * Creates a instances of
@@ -202,7 +185,7 @@ public class Trabajador extends Entidad {
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();
