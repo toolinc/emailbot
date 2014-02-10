@@ -10,5 +10,6 @@ package com.tool.emailbot.persistence.domain;
  * @author edgar
  */
 public enum Aprovado {
-    APROVADA_DIRECTOR, RECHAZADA_DIRECTOR, APROVADA_SISTEMA,  RECHAZADA_SISTEMA
+
+    APROVADA_DIRECTOR, RECHAZADA_DIRECTOR, APROVADA_SISTEMA, RECHAZADA_SISTEMA
 }

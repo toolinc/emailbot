@@ -1,5 +1,4 @@
 // Copyright 2014 Tool Inc.
-
 package com.tool.emailbot.persistence.domain;
 
 import com.tool.emailbot.persistence.PersistenceTest;
@@ -20,23 +19,23 @@ public class TrabajadorTest extends PersistenceTest {
 
     @Test
     public void shouldCreateWorker() {
-        Dependencia dependencia = dBuilder.setNombre("Direccion General de Todo")
-                .setAbreviacion("DGT")
-                .build();
-        iBuilder.setEmail("pepe.perez.ruiz@gmail.com");
-        pBuidelr.setNombre("Jose")
-                .setApellidoPaterno("Perez")
-                .setApellidoMaterno("Ruiz")
-                .setFechaNacimiento(1988, 9, 15)
-                .setInformacionContacto(iBuilder);
-        Trabajador trabajador = tbuilder.setDependencia(dependencia)
-                .setNumeroTrabajador("12Pepe1988")
-                .setSituacionLaboral(SituacionLaboral.ACTIVO)
-                .setPersona(pBuidelr)
-                .build();
-        tx.begin();
-        em.persist(dependencia);
-        em.persist(trabajador);
-        tx.commit();
+	Dependencia dependencia = dBuilder.setNombre("Direccion General de Todo")
+		.setAbreviacion("DGT")
+		.build();
+	iBuilder.setEmail("pepe.perez.ruiz@gmail.com");
+	pBuidelr.setNombre("Jose")
+		.setApellidoPaterno("Perez")
+		.setApellidoMaterno("Ruiz")
+		.setFechaNacimiento(1988, 9, 15)
+		.setInformacionContacto(iBuilder);
+	Trabajador trabajador = tbuilder.setDependencia(dependencia)
+		.setNumeroTrabajador("12Pepe1988")
+		.setSituacionLaboral(SituacionLaboral.ACTIVO)
+		.setPersona(pBuidelr)
+		.build();
+	tx.begin();
+	em.persist(dependencia);
+	em.persist(trabajador);
+	tx.commit();
     }
 }
