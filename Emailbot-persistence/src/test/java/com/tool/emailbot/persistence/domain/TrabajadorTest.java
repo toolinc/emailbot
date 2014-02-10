@@ -31,7 +31,7 @@ public class TrabajadorTest extends PersistenceTest {
                 .setInformacionContacto(iBuilder);
         Trabajador trabajador = tbuilder.setDependencia(dependencia)
                 .setNumeroTrabajador("12Pepe1988")
-                .setSituacionLaboral(true)
+                .setSituacionLaboral(SituacionLaboral.ACTIVO)
                 .setPersona(pBuidelr)
                 .build();
         tx.begin();

@@ -55,7 +55,7 @@ public class Trabajador extends Entidad {
     //TODO(jovani): This does not properly reflect the employment status of a worker.
     @NotNull
     @Column(name = "situcionLaboral", nullable = false)
-    private boolean situcionLaboral;
+    private SituacionLaboral situcionLaboral;
 
     @NotNull
     @Column(name = "director", nullable = false)
@@ -113,11 +113,11 @@ public class Trabajador extends Entidad {
         this.numeroTrabajador = numeroTrabajador.toUpperCase();
     }
 
-    public boolean isSitucionLaboral() {
+    public SituacionLaboral isSitucionLaboral() {
         return situcionLaboral;
     }
 
-    public void setSitucionLaboral(boolean situcionLaboral) {
+    public void setSitucionLaboral(SituacionLaboral situcionLaboral) {
         this.situcionLaboral = situcionLaboral;
     }
 
@@ -148,7 +148,7 @@ public class Trabajador extends Entidad {
         private Persona.Builder builderPersona;
         private Dependencia dependecia;
         private String numeroTrabajador;
-        private boolean situcionLaboral;
+        private SituacionLaboral situcionLaboral;
         private boolean director;
 	private Peticion peticion;
 
@@ -168,7 +168,7 @@ public class Trabajador extends Entidad {
             return this;
         }
 
-        public Builder setSituacionLaboral(boolean situacionLaboral) {
+        public Builder setSituacionLaboral(SituacionLaboral situacionLaboral) {
             this.situcionLaboral = situacionLaboral;
             return this;
         }

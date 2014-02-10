@@ -84,8 +84,4 @@ public abstract class Entidad implements Serializable {
     public int getVersion() {
         return version;
     }
-
-    public void setVersion(int version) {
-        this.version = version;
-    }
 }

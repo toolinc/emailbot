@@ -47,7 +47,7 @@ public class Aprovacion extends Entidad {
 
     @NotNull
     @Column(name = "aprovado", nullable = false)
-    private boolean aprovado;
+    private Aprovado aprovado;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -81,11 +81,11 @@ public class Aprovacion extends Entidad {
         this.peticion = peticion;
     }
 
-    public boolean isAprovado() {
+    public Aprovado isAprovado() {
         return aprovado;
     }
 
-    public void setAprovado(boolean aprovado) {
+    public void setAprovado(Aprovado aprovado) {
         this.aprovado = aprovado;
     }
 

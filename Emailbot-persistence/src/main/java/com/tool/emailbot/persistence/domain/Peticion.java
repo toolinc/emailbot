@@ -134,7 +134,7 @@ public class Peticion extends Entidad {
 	private Aprovacion aprovacion;
 	private Trabajador trabajador;
 	private Trabajador.Builder builderTrabajador;
-	private Estatus estatus;
+	private Estatus estatus = Estatus.SOLICITUD;
 	private String email;
 	private String username;
 	
@@ -149,11 +149,6 @@ public class Peticion extends Entidad {
 	    return this;
 	}
 	
-	public Builder setEstatus(Estatus estatus){
-	    checkNotNull(estatus);
-	    this.estatus = estatus;
-	    return this;
-	}
 	public Builder setEmail(String email){
 	    checkState(!isNullOrEmpty(email));
 	    this.email = email;
