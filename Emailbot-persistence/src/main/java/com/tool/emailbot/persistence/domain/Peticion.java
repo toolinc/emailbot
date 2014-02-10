@@ -65,7 +65,12 @@ public class Peticion extends Entidad {
     
     private Peticion(Builder builder){
 	this.id = builder.id;
+	builder.builderTrabajador.setPeticion(this);
+	setTrabajador(builder.builderTrabajador.build());
 	setAprovacion(builder.aprovacion);
+	setEstatus(builder.estatus);
+	setUsername(builder.username);
+	setEmail(builder.email);
     }
     
     @Override
@@ -117,24 +122,21 @@ public class Peticion extends Entidad {
     public void setAprovacion(Aprovacion aprovacion) {
 	this.aprovacion = aprovacion;
     }
+    
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.domain.Peticion} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
 
     public static class Builder implements EntityBuilder<Peticion>{
 	private UUID id;
 	private Aprovacion aprovacion;
 	private Trabajador trabajador;
+	private Trabajador.Builder builderTrabajador;
 	private Estatus estatus;
 	private String email;
 	private String username;
-
-	@Override
-	public Peticion build() {
-	    Peticion peticion = new Peticion(this);
-	    return peticion;
-	}
-	
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
 	
 	public Builder setAprovacion(Aprovacion aprovacion){
 	    checkNotNull(aprovacion);
@@ -142,11 +144,11 @@ public class Peticion extends Entidad {
 	    return this;
 	}
 	
-	public Builder setTrabajador( Trabajador trabajador){
-	    checkNotNull(trabajador);
-	    this.trabajador = trabajador;
+	public Builder setTrabajador( Trabajador.Builder builderTrabajador){
+	    this.builderTrabajador = checkNotNull(builderTrabajador);
 	    return this;
 	}
+	
 	public Builder setEstatus(Estatus estatus){
 	    checkNotNull(estatus);
 	    this.estatus = estatus;
@@ -161,6 +163,32 @@ public class Peticion extends Entidad {
 	    checkState(!isNullOrEmpty(email));
 	    this.email = email;
 	    return this;
+	}
+	
+	/**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.Peticion} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Peticion.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Peticion}.
+         */
+	
+	@Override
+	public Peticion build() {
+	    Peticion peticion = new Peticion(this);
+	    return peticion;
+	}
+	
+	 /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         *         {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         */
+	
+	public static Builder newBuilder() {
+	    return new Builder();
 	}
 	
     }

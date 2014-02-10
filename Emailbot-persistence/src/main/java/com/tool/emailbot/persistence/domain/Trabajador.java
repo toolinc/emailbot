@@ -150,6 +150,7 @@ public class Trabajador extends Entidad {
         private String numeroTrabajador;
         private boolean situcionLaboral;
         private boolean director;
+	private Peticion peticion;
 
         public Builder setPersona(Persona.Builder builderPersona) {
             this.builderPersona = checkNotNull(builderPersona);
@@ -176,6 +177,11 @@ public class Trabajador extends Entidad {
             this.director = director;
             return this;
         }
+	
+	public Builder setPeticion(Peticion peticion){
+	    this.peticion = checkNotNull(peticion);
+	    return this;
+	}
 
         /**
          * Creates a instances of
