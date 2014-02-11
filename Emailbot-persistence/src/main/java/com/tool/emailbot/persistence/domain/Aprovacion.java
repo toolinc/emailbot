@@ -2,7 +2,12 @@
 
 package com.tool.emailbot.persistence.domain;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.persistence.EntityBuilder;
 
 import java.util.Date;
 import java.util.UUID;
@@ -47,7 +52,7 @@ public class Aprovacion extends Entidad {
 
     @NotNull
     @Column(name = "aprovado", nullable = false)
-    private Aprovado aprovado;
+    private TipoAprovacion aprovado;
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -55,6 +60,18 @@ public class Aprovacion extends Entidad {
     @Column(name = "aprovadoEn", nullable = false)
     private Date aprovadoEn;
 
+    @Deprecated
+    public Aprovacion (){
+    }
+    
+    private Aprovacion(Builder builder){
+	this.id = builder.id;
+	setDirecctor(builder.director);
+	setPeticion(builder.peticion);
+	setAprovado(builder.tipoAprovacion);
+	setAprovadoEn(builder.aprovadoEn);
+    }
+    
     @Override
     public UUID getId() {
         return id;
@@ -81,11 +98,11 @@ public class Aprovacion extends Entidad {
         this.peticion = peticion;
     }
 
-    public Aprovado isAprovado() {
+    public TipoAprovacion getAprovado() {
         return aprovado;
     }
 
-    public void setAprovado(Aprovado aprovado) {
+    public void setAprovado(TipoAprovacion aprovado) {
         this.aprovado = aprovado;
     }
 
@@ -95,5 +112,61 @@ public class Aprovacion extends Entidad {
 
     public void setAprovadoEn(Date aprovadoEn) {
         this.aprovadoEn = newDate(aprovadoEn);
+    }
+    
+    public static class Builder implements EntityBuilder<Aprovacion>{
+
+	private UUID id;
+	private Trabajador director;
+	private Peticion peticion;
+	private TipoAprovacion tipoAprovacion;
+	private Date aprovadoEn;
+
+	public Builder setDirector(Trabajador director) {
+	    this.director = checkNotNull(director);
+	    return this;
+	}
+	
+	public Builder setPeticion(Peticion peticion) {
+	    this.peticion = checkNotNull(peticion);
+	    return this;
+	}
+
+	public Builder setTipoAprovacion(TipoAprovacion tipoAprovacion) {
+	    this.tipoAprovacion = checkNotNull(tipoAprovacion);
+	    return this;
+	}
+
+	public Builder setAprovadoEn(Date aprovadoEn) {
+	    this.aprovadoEn = checkNotNull(aprovadoEn);
+	    return this;
+	}
+	
+	/**
+         * Creates a instances of
+         * {@link com.tool.emailbot.persistence.domain.Aprovacion} given the specified
+         * characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Aprovacion}.
+         */
+		
+	@Override
+	public Aprovacion build() {
+	    id = UUID.randomUUID();
+	    Aprovacion aprovacion = new Aprovacion(this);
+	    return aprovacion;
+	}
+	
+	/**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
+        }
+	
     }
 }

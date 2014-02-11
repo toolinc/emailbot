@@ -7,7 +7,7 @@ package com.tool.emailbot.persistence.domain;
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public enum Aprovado {
+public enum TipoAprovacion {
     /**
      * A request was approved by a director.
      */

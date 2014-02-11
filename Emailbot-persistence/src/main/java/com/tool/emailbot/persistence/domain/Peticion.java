@@ -132,18 +132,12 @@ public class Peticion extends Entidad {
     public static class Builder implements EntityBuilder<Peticion> {
         private UUID id;
         private Trabajador trabajador;
-        private Estatus estatus;
+        private Estatus estatus = Estatus.SOLICITUD;
         private String email;
         private String username;
 
         public Builder setTrabajador(Trabajador trabajador) {
             this.trabajador = checkNotNull(trabajador);
-            return this;
-        }
-
-        public Builder setEstatus(Estatus estatus) {
-            checkNotNull(estatus);
-            this.estatus = estatus;
             return this;
         }
 
@@ -169,6 +163,7 @@ public class Peticion extends Entidad {
          */
         @Override
         public Peticion build() {
+	    id = UUID.randomUUID();
             Peticion peticion = new Peticion(this);
             return peticion;
         }

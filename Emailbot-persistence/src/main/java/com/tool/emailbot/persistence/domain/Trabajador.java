@@ -71,7 +71,7 @@ public class Trabajador extends Entidad {
         setDependencia(builder.dependecia);
         setDirector(builder.director);
         setNumeroTrabajador(builder.numeroTrabajador);
-	this.situcionLaboral = SituacionLaboral.ACTIVO;
+	setSitucionLaboral(SituacionLaboral.ACTIVO);
     }
 
     @Override
