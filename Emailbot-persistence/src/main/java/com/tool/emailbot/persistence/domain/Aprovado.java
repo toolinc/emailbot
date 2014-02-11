@@ -3,8 +3,7 @@
 package com.tool.emailbot.persistence.domain;
 
 /**
- * This class represents the approval of the a
- * {@link com.tool.emailbot.persistence.domain.Peticion}.
+ * This class represents the approval of a {@link com.tool.emailbot.persistence.domain.Peticion}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
