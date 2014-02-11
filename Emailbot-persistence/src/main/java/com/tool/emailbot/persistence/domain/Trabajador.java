@@ -52,7 +52,6 @@ public class Trabajador extends Entidad {
     @Column(name = "numeroTrabajador", nullable = false, length = 50)
     private String numeroTrabajador;
 
-    //TODO(jovani): This does not properly reflect the employment status of a worker.
     @NotNull
     @Column(name = "situcionLaboral", nullable = false)
     private SituacionLaboral situcionLaboral;
