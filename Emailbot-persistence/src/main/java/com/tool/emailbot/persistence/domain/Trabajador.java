@@ -72,7 +72,7 @@ public class Trabajador extends Entidad {
         setDependencia(builder.dependecia);
         setDirector(builder.director);
         setNumeroTrabajador(builder.numeroTrabajador);
-        setSitucionLaboral(builder.situcionLaboral);
+	this.situcionLaboral = SituacionLaboral.ACTIVO;
     }
 
     @Override
@@ -110,7 +110,7 @@ public class Trabajador extends Entidad {
         this.numeroTrabajador = numeroTrabajador.toUpperCase();
     }
 
-    public SituacionLaboral isSitucionLaboral() {
+    public SituacionLaboral getSitucionLaboral() {
         return situcionLaboral;
     }
 
@@ -137,7 +137,6 @@ public class Trabajador extends Entidad {
         private Persona.Builder builderPersona;
         private Dependencia dependecia;
         private String numeroTrabajador;
-        private SituacionLaboral situcionLaboral;
         private boolean director;
 
         public Builder setPersona(Persona.Builder builderPersona) {
@@ -153,11 +152,6 @@ public class Trabajador extends Entidad {
         public Builder setNumeroTrabajador(String numeroTrabajador) {
             checkState(!isNullOrEmpty(numeroTrabajador));
             this.numeroTrabajador = numeroTrabajador;
-            return this;
-        }
-
-        public Builder setSituacionLaboral(SituacionLaboral situacionLaboral) {
-            this.situcionLaboral = situacionLaboral;
             return this;
         }
 
