@@ -1,4 +1,5 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
