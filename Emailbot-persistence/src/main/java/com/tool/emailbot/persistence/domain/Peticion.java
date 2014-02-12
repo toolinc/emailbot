@@ -128,7 +128,6 @@ public class Peticion extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-
     public static class Builder implements EntityBuilder<Peticion> {
         private UUID id;
         private Trabajador trabajador;
