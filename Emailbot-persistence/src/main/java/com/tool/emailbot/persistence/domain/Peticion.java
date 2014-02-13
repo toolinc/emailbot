@@ -130,7 +130,6 @@ public class Peticion extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-
     public static class Builder implements EntityBuilder<Peticion> {
         private UUID id;
         private Trabajador trabajador;
@@ -165,7 +164,7 @@ public class Peticion extends Entidad {
          */
         @Override
         public Peticion build() {
-	    id = UUID.randomUUID();
+            id = UUID.randomUUID();
             Peticion peticion = new Peticion(this);
             return peticion;
         }

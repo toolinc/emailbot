@@ -1,9 +1,8 @@
-// Copyright 2014 Tool Inc. 
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
@@ -31,7 +30,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "Aprovacion", uniqueConstraints = {
-    @UniqueConstraint(name = "aprovacionUK", columnNames = {"idTrabajador", "idPeticion"})})
+        @UniqueConstraint(name = "aprovacionUK", columnNames = {"idTrabajador", "idPeticion"})})
 public class Aprovacion extends Entidad {
 
     @NotNull
@@ -64,53 +63,53 @@ public class Aprovacion extends Entidad {
     }
 
     private Aprovacion(Builder builder) {
-	this.id = builder.id;
-	setDirecctor(builder.director);
-	setPeticion(builder.peticion);
-	setAprovado(builder.tipoAprovacion);
-	setAprovadoEn(builder.aprovadoEn);
+        this.id = builder.id;
+        setDirecctor(builder.director);
+        setPeticion(builder.peticion);
+        setAprovado(builder.tipoAprovacion);
+        setAprovadoEn(builder.aprovadoEn);
     }
 
     @Override
     public UUID getId() {
-	return id;
+        return id;
     }
 
     @Override
     public void setId(UUID id) {
-	this.id = id;
+        this.id = id;
     }
 
     public Trabajador getDirecctor() {
-	return direcctor;
+        return direcctor;
     }
 
     public void setDirecctor(Trabajador direcctor) {
-	this.direcctor = checkNotNull(direcctor);
+        this.direcctor = checkNotNull(direcctor);
     }
 
     public Peticion getPeticion() {
-	return peticion;
+        return peticion;
     }
 
     public void setPeticion(Peticion peticion) {
-	this.peticion = checkNotNull(peticion);
+        this.peticion = checkNotNull(peticion);
     }
 
     public TipoAprovacion getAprovado() {
-	return aprovado;
+        return aprovado;
     }
 
     public void setAprovado(TipoAprovacion aprovado) {
-	this.aprovado = checkNotNull(aprovado);
+        this.aprovado = checkNotNull(aprovado);
     }
 
     public Date getAprovadoEn() {
-	return newDate(aprovadoEn);
+        return newDate(aprovadoEn);
     }
 
     public void setAprovadoEn(Date aprovadoEn) {
-	this.aprovadoEn = newDate(aprovadoEn);
+        this.aprovadoEn = newDate(aprovadoEn);
     }
 
     /**
@@ -120,54 +119,54 @@ public class Aprovacion extends Entidad {
      */
     public static class Builder implements EntityBuilder<Aprovacion> {
 
-	private UUID id;
-	private Trabajador director;
-	private Peticion peticion;
-	private TipoAprovacion tipoAprovacion;
-	private Date aprovadoEn;
+        private UUID id;
+        private Trabajador director;
+        private Peticion peticion;
+        private TipoAprovacion tipoAprovacion;
+        private Date aprovadoEn;
 
-	public Builder setDirector(Trabajador director) {
-	    this.director = checkNotNull(director);
-	    return this;
-	}
+        public Builder setDirector(Trabajador director) {
+            this.director = checkNotNull(director);
+            return this;
+        }
 
-	public Builder setPeticion(Peticion peticion) {
-	    this.peticion = checkNotNull(peticion);
-	    return this;
-	}
+        public Builder setPeticion(Peticion peticion) {
+            this.peticion = checkNotNull(peticion);
+            return this;
+        }
 
-	public Builder setTipoAprovacion(TipoAprovacion tipoAprovacion) {
-	    this.tipoAprovacion = checkNotNull(tipoAprovacion);
-	    return this;
-	}
+        public Builder setTipoAprovacion(TipoAprovacion tipoAprovacion) {
+            this.tipoAprovacion = checkNotNull(tipoAprovacion);
+            return this;
+        }
 
-	public Builder setAprovadoEn(Date aprovadoEn) {
-	    this.aprovadoEn = checkNotNull(aprovadoEn);
-	    return this;
-	}
+        public Builder setAprovadoEn(Date aprovadoEn) {
+            this.aprovadoEn = checkNotNull(aprovadoEn);
+            return this;
+        }
 
-	/**
-	 * Creates a instances of {@link com.tool.emailbot.persistence.domain.Aprovacion} given the
-	 * specified characteristics on the
-	 * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
-	 *
-	 * @return a new instance {@link com.tool.emailbot.persistence.domain.Aprovacion}.
-	 */
-	@Override
-	public Aprovacion build() {
-	    id = UUID.randomUUID();
-	    Aprovacion aprovacion = new Aprovacion(this);
-	    return aprovacion;
-	}
+        /**
+         * Creates a instances of {@link com.tool.emailbot.persistence.domain.Aprovacion} given the
+         * specified characteristics on the
+         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.domain.Aprovacion}.
+         */
+        @Override
+        public Aprovacion build() {
+            id = UUID.randomUUID();
+            Aprovacion aprovacion = new Aprovacion(this);
+            return aprovacion;
+        }
 
-	/**
-	 * Provides a new builder.
-	 *
-	 * @return a new instance of
-	 * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
-	 */
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
+        }
     }
 }
