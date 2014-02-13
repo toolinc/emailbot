@@ -24,7 +24,7 @@ import javax.validation.constraints.NotNull;
 @MappedSuperclass
 public abstract class Entidad implements Serializable {
 
-    protected static final String EMAIL_REGEX = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*@[\\w-]+(\\.[\\w]+)*(\\.[A-Za-z]{2,})$";
+    //protected static final String EMAIL_REGEX = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*@[\\w-]+(\\.[\\w]+)*(\\.[A-Za-z]{2,})$";
     protected static final String NULL_REGEX = "^$";
     protected static final String USER_NAME_REGEX = "^[a-zA-Z][\\w]+(\\.[_\\w-]+)*$";
 

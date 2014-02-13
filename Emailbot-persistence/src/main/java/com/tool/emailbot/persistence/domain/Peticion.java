@@ -8,6 +8,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.persistence.validation.Email;
 
 import java.util.UUID;
 
@@ -49,7 +50,8 @@ public class Peticion extends Entidad {
     @Column(name = "estatus", nullable = false)
     private Estatus estatus;
 
-    @Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
+    @Email
+    //@Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
     @Column(name = "email")
     private String email;
 

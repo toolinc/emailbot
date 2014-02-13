@@ -8,6 +8,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.persistence.validation.Email;
 
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  * Represents the contact information of a {@link com.tool.emailbot.persistence.domain.Persona}.
@@ -40,11 +42,12 @@ public class InformacionContacto extends Entidad {
     @JoinColumn(name = "idPersona", nullable = false, unique = true)
     private Persona persona;
 
-    @Pattern(regexp = EMAIL_REGEX)
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
 
     @Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
+    @Size(min=8)
     @Column(name = "telefono", length = 15)
     private String telefono;
 

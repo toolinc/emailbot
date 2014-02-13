@@ -94,7 +94,7 @@ public class Aprovacion extends Entidad {
     }
 
     public void setPeticion(Peticion peticion) {
-	this.peticion =checkNotNull(peticion);
+	this.peticion = checkNotNull(peticion);
     }
 
     public TipoAprovacion getAprovado() {
@@ -113,6 +113,11 @@ public class Aprovacion extends Entidad {
 	this.aprovadoEn = newDate(aprovadoEn);
     }
 
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.domain.AprovacionP} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
     public static class Builder implements EntityBuilder<Aprovacion> {
 
 	private UUID id;

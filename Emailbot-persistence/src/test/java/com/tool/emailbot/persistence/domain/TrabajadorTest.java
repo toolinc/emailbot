@@ -22,7 +22,7 @@ public class TrabajadorTest extends PersistenceTest {
 	Dependencia dependencia = dBuilder.setNombre("Direccion General de Todo")
 		.setAbreviacion("DGT")
 		.build();
-	iBuilder.setEmail("pepe.perez.ruiz@gmail.com");
+	iBuilder.setEmail("pepeperezruiz@gmail.com");
 	pBuidelr.setNombre("Jose")
 		.setApellidoPaterno("Perez")
 		.setApellidoMaterno("Ruiz")
