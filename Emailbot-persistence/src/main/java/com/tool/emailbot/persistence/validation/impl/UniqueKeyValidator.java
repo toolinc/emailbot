@@ -2,6 +2,9 @@
 
 package com.tool.emailbot.persistence.validation.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
+
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.validation.UniqueKey;
 
@@ -35,17 +38,18 @@ import javax.validation.ConstraintValidatorContext;
 public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Entidad> {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
     private final EntityManager entityManager;
     private String[] columnNames;
 
     @Inject
     public UniqueKeyValidator(EntityManager entityManager) {
-        this.entityManager = entityManager;
+        this.entityManager = checkNotNull(entityManager);
     }
 
     @Override
     public void initialize(final UniqueKey constraintAnnotation) {
+        checkNotNull(constraintAnnotation);
+        checkState(constraintAnnotation.columnNames().length > 0);
         this.columnNames = constraintAnnotation.columnNames();
     }
 
@@ -55,20 +59,20 @@ public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Entida
         final Class<?> entityClass = target.getClass();
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();
-        final Root<?> root = criteriaQuery.from(entityClass);
+        final Root<?> root = criteriaQuery.from(entityClass); // FROM Dependencia
         List<Predicate> predicates = new ArrayList<Predicate>(columnNames.length);
         try {
             for (int i = 0; i < columnNames.length; i++) {
                 String propertyName = columnNames[i];
                 PropertyDescriptor desc = new PropertyDescriptor(propertyName, entityClass);
-                Method readMethod = desc.getReadMethod();
-                Object propertyValue = readMethod.invoke(target);
-                Predicate predicate = criteriaBuilder.equal(root.get(propertyName), propertyValue);
+                Method readMethod = desc.getReadMethod(); //getAbreviacion()
+                Object propertyValue = readMethod.invoke(target); //p = target.getAbreviacion();
+                Predicate predicate = criteriaBuilder.equal(root.get(propertyName), propertyValue); //FROM Dependencia WHERE abreviacion = ?1
                 predicates.add(predicate);
             }
             UUID id = target.getId();
             if (id != null) {
-                Predicate idNotEqualsPredicate = criteriaBuilder.notEqual(root.get("id"), id);
+                Predicate idNotEqualsPredicate = criteriaBuilder.notEqual(root.get("id"), id); //FROM Dependencia WHERE abraviacion  = ?1 AND id <> ?2
                 predicates.add(idNotEqualsPredicate);
             }
         } catch (IntrospectionException | InvocationTargetException | IllegalAccessException exc) {
