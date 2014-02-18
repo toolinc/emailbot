@@ -30,7 +30,6 @@ import javax.validation.constraints.Pattern;
  * 
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-
 @Entity
 @Table(name = "PeticionHistoria", uniqueConstraints = {
     @UniqueConstraint(name = "peticionHistoriaUK",
