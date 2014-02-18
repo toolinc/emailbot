@@ -1,14 +1,15 @@
-// Copyright 2014 Tool Inc
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.persistence.history.domain;
 
-import com.tool.emailbot.persistence.history.Auditoria;
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.domain.Estatus;
 import com.tool.emailbot.persistence.domain.Persona;
 import com.tool.emailbot.persistence.domain.Peticion;
 import com.tool.emailbot.persistence.history.Auditoria;
 import com.tool.emailbot.persistence.history.Operacion;
+import com.tool.emailbot.persistence.validation.Email;
+
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -67,14 +68,12 @@ public class PeticionHistoria extends Entidad {
     private Estatus estatus;
 
     @NotNull
-    @Pattern(
-            regexp = "^[_\\\\w-\\\\+]+(\\\\.[_\\\\w-]+)*@[\\\\w-]+(\\\\.[\\\\w]+)*(\\\\.[A-Za-z]"
-            + "{2,})$") 
+    @Email
     @Column(name = "email", nullable = false)
     private String email;
 
     @NotNull
-    @Pattern(regexp = "^[_\\\\w-\\\\+]+(\\\\.[_\\\\w-]+)*$") 
+    @Pattern(regexp = "^[_\\w]+(\\.[_\\w-]+)*$")
     @Column(name = "username", nullable = false, length = 50)
     private String username;
 

@@ -8,6 +8,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
+
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -22,7 +23,7 @@ import javax.validation.constraints.Pattern;
 
 /**
  * This class represents a User.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Entity
@@ -40,7 +41,7 @@ public class Usuario extends Entidad {
     private Rol rol;
 
     @NotNull
-    @Pattern(regexp = "^[\\\\w_]{3,255}$") 
+    @Pattern(regexp = "^[\\\\w_]{3,255}$")
     @Column(name = "username", nullable = false)
     private String username;
 
@@ -49,35 +50,34 @@ public class Usuario extends Entidad {
     private boolean usuarioSistema;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
+    @Pattern(regexp = "^[a-zA-Z ]{3,45}$")
     @Column(name = "nombre", nullable = false, length = 45)
     private String nombre;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
+    @Pattern(regexp = "^[a-zA-Z ]{3,45}$")
     @Column(name = "apellidoPaterno", nullable = false, length = 45)
     private String apellidoPaterno;
 
     @NotNull
-    @Pattern(regexp = "^[a-zA-Z ]{3, 45}$") 
+    @Pattern(regexp = "^[a-zA-Z ]{3,45}$")
     @Column(name = "apellidoMaterno", nullable = false, length = 45)
     private String apellidoMaterno;
 
-
-     @Deprecated
-    public Usuario(){
+    @Deprecated
+    public Usuario() {
     }
-    
+
     private Usuario(Builder builder) {
-	this.id = builder.id;
-	setRol(builder.rol);
-	setUsername(builder.username);
-	setNombre(builder.nombre);
-	setApellidoPaterno(builder.apellidoPaterno);
-	setApellidoMaterno(builder.apellidoMaterno);
+        this.id = builder.id;
+        setRol(builder.rol);
+        setUsername(builder.username);
+        setNombre(builder.nombre);
+        setApellidoPaterno(builder.apellidoPaterno);
+        setApellidoMaterno(builder.apellidoMaterno);
         setUsuarioSistema(builder.usuarioSistema);
     }
-    
+
     @Override
     public UUID getId() {
         return id;
@@ -136,60 +136,78 @@ public class Usuario extends Entidad {
         this.apellidoMaterno = apellidoMaterno.toUpperCase();
     }
 
-     public static class Builder implements EntityBuilder<Usuario>{
-        
+    /**
+     * Builder of {@link com.tool.emailbot.persistence.aa.Usuario} instances.
+     *
+     * @author Jovani Rico (jovanimtzrico@gmail.com)
+     */
+    public static class Builder implements EntityBuilder<Usuario> {
+
         private UUID id;
         private String username;
         private String nombre;
         private String apellidoPaterno;
         private String apellidoMaterno;
         private boolean usuarioSistema;
-	private Rol rol;
+        private Rol rol;
 
+        public Builder setUserName(String username) {
+            checkState(!isNullOrEmpty(username));
+            this.username = username;
+            return this;
+        }
+
+        public Builder setNombre(String nombre) {
+            checkState(!isNullOrEmpty(nombre));
+            this.nombre = nombre;
+            return this;
+        }
+
+        public Builder setApellidoPaterno(String apellidoPaterno) {
+            checkState(!isNullOrEmpty(apellidoPaterno));
+            this.apellidoPaterno = apellidoPaterno;
+            return this;
+        }
+
+        public Builder setApellidoMaterno(String apellidoMaterno) {
+            checkState(!isNullOrEmpty(apellidoMaterno));
+            this.apellidoMaterno = apellidoMaterno;
+            return this;
+        }
+
+        public Builder setUsuarioSistema(boolean usuarioSistema) {
+            this.usuarioSistema = usuarioSistema;
+            return this;
+        }
+
+        public Builder setRol(Rol rol) {
+            checkNotNull(rol);
+            this.rol = rol;
+            return this;
+        }
+
+        /**
+         * Creates a instances of {@link com.tool.emailbot.persistence.aa.Usuario} given the
+         * specified characteristics on the
+         * {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
+         *
+         * @return a new instance {@link com.tool.emailbot.persistence.aa.Usuario}.
+         */
         @Override
         public Usuario build() {
             id = UUID.randomUUID();
-	    Usuario usuario = new Usuario(this);
-	    return usuario;
+            Usuario usuario = new Usuario(this);
+            return usuario;
         }
-	
-	public static Builder newBuilder() {
-	    return new Builder();
-	}
-        
-        public Builder setUserName(String username){
-	    checkState(!isNullOrEmpty(username));
-	    this.username = username;
-	    return this;
-	}
-	
-	public Builder setNombre(String nombre){
-	    checkState(!isNullOrEmpty(nombre));
-	    this.nombre = nombre;
-	    return this;
-	}
-	
-	public Builder setApellidoPaterno(String apellidoPaterno){
-	    checkState(!isNullOrEmpty(apellidoPaterno));
-	    this.apellidoPaterno = apellidoPaterno;
-	    return this;
-	}
-	
-	public Builder setApellidoMaterno(String apellidoMaterno){
-	    checkState(!isNullOrEmpty(apellidoMaterno));
-	    this.apellidoMaterno = apellidoMaterno;
-	    return this;
-	}
-        
-        public Builder setUsuarioSistema(boolean usuarioSistema){
-	    this.usuarioSistema = usuarioSistema;
-	    return this;
-	}
-	
-	public Builder setRol(Rol rol){
-	    checkNotNull(rol);
-	    this.rol = rol;
-	    return this;
-	}
+
+        /**
+         * Provides a new builder.
+         *
+         * @return a new instance of
+         * {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
+         */
+        public static Builder newBuilder() {
+            return new Builder();
+        }
     }
 }

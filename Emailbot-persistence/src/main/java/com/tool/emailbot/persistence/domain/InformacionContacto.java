@@ -123,6 +123,29 @@ public class InformacionContacto extends Entidad {
         private String extension;
         private Persona persona;
 
+        public Builder setPersona(Persona persona) {
+            this.persona = checkNotNull(persona);
+            return this;
+        }
+
+        public Builder setEmail(String email) {
+            checkState(!isNullOrEmpty(email));
+            this.email = email;
+            return this;
+        }
+
+        public Builder setTelefono(String telefono) {
+            checkState(!isNullOrEmpty(telefono));
+            this.telefono = telefono;
+            return this;
+        }
+
+        public Builder setExtension(String extension) {
+            checkState(!isNullOrEmpty(extension));
+            this.extension = extension;
+            return this;
+        }
+
         /**
          * Creates a instances of
          * {@link com.tool.emailbot.persistence.domain.InformacionContacto} given the specified
@@ -146,29 +169,6 @@ public class InformacionContacto extends Entidad {
          */
         public static Builder newBuilder() {
             return new Builder();
-        }
-
-        public Builder setPersona(Persona persona) {
-            this.persona = checkNotNull(persona);
-            return this;
-        }
-
-        public Builder setEmail(String email) {
-            checkState(!isNullOrEmpty(email));
-            this.email = email;
-            return this;
-        }
-
-        public Builder setTelefono(String telefono) {
-            checkState(!isNullOrEmpty(telefono));
-            this.telefono = telefono;
-            return this;
-        }
-
-        public Builder setExtension(String extension) {
-            checkState(!isNullOrEmpty(extension));
-            this.extension = extension;
-            return this;
         }
     }
 }

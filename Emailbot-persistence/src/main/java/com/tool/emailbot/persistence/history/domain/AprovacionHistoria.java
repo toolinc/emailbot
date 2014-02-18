@@ -1,4 +1,4 @@
-// Copyright 2014 Tool Inc
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.persistence.history.domain;
 
@@ -29,14 +29,13 @@ import javax.validation.constraints.NotNull;
 
 /**
  * This class represents a History of all the approval for a request.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-
 @Entity
 @Table(name = "AprovacionHistoria", uniqueConstraints = {
-    @UniqueConstraint(name = "aprovacionHistoriaUK",
-            columnNames = {"idAuditoria", "idAprovacion", "idTrabajador"})})
+        @UniqueConstraint(name = "aprovacionHistoriaUK",
+                columnNames = {"idAuditoria", "idAprovacion", "idTrabajador"})})
 public class AprovacionHistoria extends Entidad {
 
     @NotNull
@@ -74,7 +73,7 @@ public class AprovacionHistoria extends Entidad {
     private boolean aprovado;
 
     @NotNull
-    @Future 
+    @Future
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "aprovadoEn", nullable = false)
     private Date aprovadoEn;

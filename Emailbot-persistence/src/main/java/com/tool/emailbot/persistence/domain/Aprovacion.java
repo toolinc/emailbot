@@ -113,7 +113,7 @@ public class Aprovacion extends Entidad {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.AprovacionP} instances.
+     * Builder of {@link com.tool.emailbot.persistence.domain.Aprovacion} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
