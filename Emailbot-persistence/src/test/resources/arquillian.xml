@@ -5,7 +5,7 @@
         http://jboss.org/schema/arquillian/arquillian_1_0.xsd">
     <container qualifier="jbossas-managed" default="true">
         <configuration>
-            <property name="jbossHome">/home/edgar/wildfly-8.0.0.CR1</property>
+            <property name="jbossHome">/home/edgar/wildfly-8.0.0.Final</property>
             <property name="javaVmArguments">-Dlog4j.configuration=log4j.xml -Djava.util.logging.manager=org.jboss.logmanager.LogManager</property>
         </configuration>
     </container>
