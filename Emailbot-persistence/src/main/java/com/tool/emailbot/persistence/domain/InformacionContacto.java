@@ -47,7 +47,7 @@ public class InformacionContacto extends Entidad {
     private String email;
 
     @Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
-    @Size(min=8)
+    @Size(min = 8)
     @Column(name = "telefono", length = 15)
     private String telefono;
 
@@ -142,7 +142,7 @@ public class InformacionContacto extends Entidad {
          * Provides a new builder.
          *
          * @return a new instance of
-         *         {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
+         * {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

@@ -8,6 +8,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.persistence.validation.UniqueKey;
 
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "Dependencia")
+@UniqueKey(columnNames = {"abreviacion"})
 public class Dependencia extends Entidad {
 
     @NotNull

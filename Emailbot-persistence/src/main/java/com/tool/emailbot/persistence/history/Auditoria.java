@@ -1,9 +1,10 @@
-// Copyright 2014 Tool Inc
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.persistence.history;
 
 import com.tool.emailbot.persistence.Entidad;
 import com.tool.emailbot.persistence.aa.Usuario;
+
 import java.util.Date;
 import java.util.UUID;
 
@@ -21,10 +22,9 @@ import javax.validation.constraints.NotNull;
 
 /**
  * This class represents an Auditory.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-
 @Entity
 @Table(name = "Auditoria")
 public class Auditoria extends Entidad {
@@ -40,7 +40,7 @@ public class Auditoria extends Entidad {
     private Usuario usuario;
 
     @NotNull
-    @Future 
+    @Future
     @Column(name = "evento", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date evento;

@@ -51,7 +51,6 @@ public class Peticion extends Entidad {
     private Estatus estatus;
 
     @Email
-    //@Pattern(regexp = NULL_REGEX + "|" + EMAIL_REGEX)
     @Column(name = "email")
     private String email;
 
