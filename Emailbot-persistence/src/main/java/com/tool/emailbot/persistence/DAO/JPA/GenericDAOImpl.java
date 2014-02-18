@@ -22,7 +22,7 @@ public class GenericDAOImpl<T, K extends Serializable> implements GenericDAO<T, 
 
     public GenericDAOImpl() {
 	super();
-	this.classType = (Class<T>) getParameterClass(getClass(), 0);
+	this.classType = (Class<T>) (getParameterClass(getClass(), 0));
     }
 
     @Override
@@ -50,5 +50,4 @@ public class GenericDAOImpl<T, K extends Serializable> implements GenericDAO<T, 
 	return (Class<?>) (((ParameterizedType) clazz.getGenericSuperclass()).
 		getActualTypeArguments()[index]);
     }
-
 }
