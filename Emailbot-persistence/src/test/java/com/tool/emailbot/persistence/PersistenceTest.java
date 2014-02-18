@@ -32,6 +32,8 @@ public abstract class PersistenceTest {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class)
                 .addPackage("com.tool.emailbot.persistence")
                 .addPackage("com.tool.emailbot.persistence.aa")
+                .addPackage("com.tool.emailbot.persistence.dao")
+                .addPackage("com.tool.emailbot.persistence.dao.impl")
                 .addPackage("com.tool.emailbot.persistence.domain")
                 .addPackage("com.tool.emailbot.persistence.validation")
                 .addPackage("com.tool.emailbot.persistence.validation.impl")
