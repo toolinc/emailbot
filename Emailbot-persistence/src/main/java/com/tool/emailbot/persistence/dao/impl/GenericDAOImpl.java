@@ -2,57 +2,56 @@
 
 package com.tool.emailbot.persistence.dao.impl;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.dao.GenericDAO;
+import com.tool.emailbot.persistence.dao.DAO;
 
-import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.UUID;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  * This class represents a Person Data Access Object implementation.
  *
  * @param <T> Specifies the entity of the DAO.
- * @param <K> Specifies the {@link javax.persistence.Id} of the entity.
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class GenericDAOImpl<T extends Entidad, K extends Serializable> implements GenericDAO<T, K> {
+public class GenericDAOImpl<T extends Entidad> implements DAO<T> {
 
-    @PersistenceContext
-    protected EntityManager em;
+    private final EntityManager em;
 
-    protected Class<T> classType;
-
-    public GenericDAOImpl() {
-        super();
-        this.classType = (Class<T>) (getParameterClass(getClass(), 0));
+    @Inject
+    public GenericDAOImpl(EntityManager entityManager) {
+        this.em = checkNotNull(entityManager);
     }
 
     @Override
     public T create(T entity) {
-        this.em.persist(entity);
+        em.persist(entity);
         return entity;
     }
 
     @Override
     public T update(T entity) {
-        return this.em.merge(entity);
+        return em.merge(entity);
     }
 
     @Override
     public void delete(T entity) {
-        this.em.remove(entity);
+        em.remove(entity);
     }
 
     @Override
-    public T findById(K key) {
-        return this.em.find(classType, key);
+    public T findById(UUID key) {
+        return em.find(getEntityClass(), key);
     }
 
-    private static Class<?> getParameterClass(Class<?> clazz, int index) {
-        return (Class<?>) (((ParameterizedType) clazz.getGenericSuperclass()).
-                getActualTypeArguments()[index]);
+    @SuppressWarnings("unchecked")
+    public Class<T> getEntityClass() {
+        return ((Class<T>) ((ParameterizedType) getClass().getGenericSuperclass())
+                .getActualTypeArguments()[0]);
     }
 }

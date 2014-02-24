@@ -1,0 +1,8 @@
+/.idea/*.*
+/.idea/copyright/*.*
+/.idea/libraries/*.*
+/.idea/scopes/*.*
+/Emailbot.iml
+/Emailbot-ear/Emailbot-ear.iml
+/Emailbot-persistence/Emailbot-persistence.iml
+/Emailbot-web/Emailbot-web.iml
