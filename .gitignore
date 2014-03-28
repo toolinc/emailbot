@@ -3,6 +3,7 @@
 /.idea/libraries/*.*
 /.idea/scopes/*.*
 /Emailbot.iml
+/Emailbot-common/Emailbot-common.iml
 /Emailbot-ear/Emailbot-ear.iml
 /Emailbot-persistence/Emailbot-persistence.iml
 /Emailbot-web/Emailbot-web.iml
