@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <Match>
+        <Or>
+            <Package name="~com[.]tool[.]emailbot[.]common[.]adapter[.]jpa[.]event[.][Event_([.].*)]?"/>
+            <Package name="~com[.]tool[.]emailbot[.]common[.]domain([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]common[.]domain[.]model([.].*)?"/>
+        </Or>
+        <Or>
+            <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />
+        </Or>
+    </Match>
+</FindBugsFilter>
