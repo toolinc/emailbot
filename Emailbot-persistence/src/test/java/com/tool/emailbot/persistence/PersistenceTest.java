@@ -40,8 +40,10 @@ public abstract class PersistenceTest {
                 .addClass(PersistentProducerTest.class)
                 .addAsLibraries(
                         DependencyResolvers.use(MavenDependencyResolver.class)
+                                .goOffline()
                                 .artifact("org.jboss.slf4j:slf4j-jboss-logmanager:1.0.3.GA")
                                 .artifact("com.google.guava:guava:13.0.1")
+                                .artifact("com.tool:Emailbot-common:1.0")
                                 .resolveAsFiles())
                 .addAsWebInfResource("ValidationMessages.properties")
                 .addAsWebInfResource("jboss-ds.xml")
