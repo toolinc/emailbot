@@ -2,7 +2,7 @@
 
 package com.tool.emailbot.persistence.history;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.persistence.aa.Usuario;
 
 import java.util.Date;
@@ -27,7 +27,7 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name = "Auditoria")
-public class Auditoria extends Entidad {
+public class Auditoria extends DomainObject {
 
     @NotNull
     @Id

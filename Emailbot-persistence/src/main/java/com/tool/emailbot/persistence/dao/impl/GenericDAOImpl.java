@@ -4,7 +4,7 @@ package com.tool.emailbot.persistence.dao.impl;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.persistence.dao.DAO;
 
 import java.lang.reflect.ParameterizedType;
@@ -19,7 +19,7 @@ import javax.persistence.EntityManager;
  * @param <T> Specifies the entity of the DAO.
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class GenericDAOImpl<T extends Entidad> implements DAO<T> {
+public class GenericDAOImpl<T extends DomainObject> implements DAO<T> {
 
     private final EntityManager em;
 

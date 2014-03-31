@@ -6,8 +6,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.common.domain.model.DomainObject;
+import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.persistence.validation.UniqueKey;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ import javax.validation.constraints.Pattern;
 @Entity
 @Table(name = "Dependencia")
 @UniqueKey(columnNames = {"abreviacion"})
-public class Dependencia extends Entidad {
+public class Dependencia extends DomainObject {
 
     @NotNull
     @Id
@@ -87,7 +87,7 @@ public class Dependencia extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements EntityBuilder<Dependencia> {
+    public static class Builder implements DomainObjectBuilder<Dependencia> {
 
         private UUID id;
         private String nombre;

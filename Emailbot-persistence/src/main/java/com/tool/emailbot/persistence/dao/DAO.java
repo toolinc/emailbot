@@ -2,7 +2,7 @@
 
 package com.tool.emailbot.persistence.dao;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 
 import java.util.UUID;
 
@@ -12,7 +12,7 @@ import java.util.UUID;
  * @param <T> Specifies the entity of the DAO.
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public interface DAO<T extends Entidad> {
+public interface DAO<T extends DomainObject> {
 
     //TODO(jovani): add proper java doc for each method.
     T create(T entity);

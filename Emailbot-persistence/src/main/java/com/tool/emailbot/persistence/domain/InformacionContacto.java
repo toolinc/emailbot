@@ -6,8 +6,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.common.domain.model.DomainObject;
+import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.persistence.validation.Email;
 
 import java.util.UUID;
@@ -30,7 +30,7 @@ import javax.validation.constraints.Size;
  */
 @Entity
 @Table(name = "InformacionContacto")
-public class InformacionContacto extends Entidad {
+public class InformacionContacto extends DomainObject {
 
     @NotNull
     @Id
@@ -46,12 +46,12 @@ public class InformacionContacto extends Entidad {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
+    //@Pattern(regexp = NULL_REGEX + "|^[0-9]{7,15}$")
     @Size(min = 8)
     @Column(name = "telefono", length = 15)
     private String telefono;
 
-    @Pattern(regexp = NULL_REGEX + "|^[0-9]{1,5}$")
+    //@Pattern(regexp = NULL_REGEX + "|^[0-9]{1,5}$")
     @Column(name = "extension", length = 5)
     private String extension;
 
@@ -115,7 +115,7 @@ public class InformacionContacto extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements EntityBuilder<InformacionContacto> {
+    public static class Builder implements DomainObjectBuilder<InformacionContacto> {
 
         private UUID id;
         private String email;

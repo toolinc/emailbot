@@ -1,13 +1,12 @@
 // Copyright 2014 Tool Inc. 
-
 package com.tool.emailbot.persistence.aa;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
+import com.tool.emailbot.common.domain.model.DomainObject;
 
 import java.util.UUID;
 
@@ -28,7 +27,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "Usuario")
-public class Usuario extends Entidad {
+public class Usuario extends DomainObject {
 
     @NotNull
     @Id
@@ -69,71 +68,69 @@ public class Usuario extends Entidad {
     }
 
     private Usuario(Builder builder) {
-        this.id = builder.id;
-        setRol(builder.rol);
-        setUsername(builder.username);
-        setNombre(builder.nombre);
-        setApellidoPaterno(builder.apellidoPaterno);
-        setApellidoMaterno(builder.apellidoMaterno);
-        setUsuarioSistema(builder.usuarioSistema);
+	this.id = builder.id;
+	setRol(builder.rol);
+	setUsername(builder.username);
+	setNombre(builder.nombre);
+	setApellidoPaterno(builder.apellidoPaterno);
+	setApellidoMaterno(builder.apellidoMaterno);
+	setUsuarioSistema(builder.usuarioSistema);
     }
 
-    @Override
     public UUID getId() {
-        return id;
+	return id;
     }
 
-    @Override
     public void setId(UUID id) {
-        this.id = id;
+	this.id = id;
     }
 
     public Rol getRol() {
-        return rol;
+	return rol;
     }
 
     public void setRol(@NotNull Rol rol) {
-        this.rol = rol;
+	this.rol = rol;
     }
 
     public String getUsername() {
-        return username;
+	return username;
     }
 
     public void setUsername(String username) {
-        this.username = username.toUpperCase();
+	this.username = username.toUpperCase();
     }
 
     public boolean isUsuarioSistema() {
-        return usuarioSistema;
+	return usuarioSistema;
     }
 
     public void setUsuarioSistema(boolean usuarioSistema) {
-        this.usuarioSistema = usuarioSistema;
+	this.usuarioSistema = usuarioSistema;
     }
 
     public String getNombre() {
-        return nombre;
+	return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre.toUpperCase();
+	this.nombre = nombre.toUpperCase();
     }
 
     public String getApellidoPaterno() {
-        return apellidoPaterno;
+	return apellidoPaterno;
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
-        this.apellidoPaterno = apellidoPaterno.toUpperCase();
+	this.apellidoPaterno = apellidoPaterno.toUpperCase();
     }
 
     public String getApellidoMaterno() {
-        return apellidoMaterno;
+	return apellidoMaterno;
     }
 
     public void setApellidoMaterno(String apellidoMaterno) {
-        this.apellidoMaterno = apellidoMaterno.toUpperCase();
+	this.apellidoMaterno = apellidoMaterno.toUpperCase();
     }
 
     /**
@@ -141,73 +138,72 @@ public class Usuario extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements EntityBuilder<Usuario> {
+    public static class Builder implements DomainObjectBuilder<Usuario> {
 
-        private UUID id;
-        private String username;
-        private String nombre;
-        private String apellidoPaterno;
-        private String apellidoMaterno;
-        private boolean usuarioSistema;
-        private Rol rol;
+	private UUID id;
+	private String username;
+	private String nombre;
+	private String apellidoPaterno;
+	private String apellidoMaterno;
+	private boolean usuarioSistema;
+	private Rol rol;
 
-        public Builder setUserName(String username) {
-            checkState(!isNullOrEmpty(username));
-            this.username = username;
-            return this;
-        }
+	public Builder setUserName(String username) {
+	    checkState(!isNullOrEmpty(username));
+	    this.username = username;
+	    return this;
+	}
 
-        public Builder setNombre(String nombre) {
-            checkState(!isNullOrEmpty(nombre));
-            this.nombre = nombre;
-            return this;
-        }
+	public Builder setNombre(String nombre) {
+	    checkState(!isNullOrEmpty(nombre));
+	    this.nombre = nombre;
+	    return this;
+	}
 
-        public Builder setApellidoPaterno(String apellidoPaterno) {
-            checkState(!isNullOrEmpty(apellidoPaterno));
-            this.apellidoPaterno = apellidoPaterno;
-            return this;
-        }
+	public Builder setApellidoPaterno(String apellidoPaterno) {
+	    checkState(!isNullOrEmpty(apellidoPaterno));
+	    this.apellidoPaterno = apellidoPaterno;
+	    return this;
+	}
 
-        public Builder setApellidoMaterno(String apellidoMaterno) {
-            checkState(!isNullOrEmpty(apellidoMaterno));
-            this.apellidoMaterno = apellidoMaterno;
-            return this;
-        }
+	public Builder setApellidoMaterno(String apellidoMaterno) {
+	    checkState(!isNullOrEmpty(apellidoMaterno));
+	    this.apellidoMaterno = apellidoMaterno;
+	    return this;
+	}
 
-        public Builder setUsuarioSistema(boolean usuarioSistema) {
-            this.usuarioSistema = usuarioSistema;
-            return this;
-        }
+	public Builder setUsuarioSistema(boolean usuarioSistema) {
+	    this.usuarioSistema = usuarioSistema;
+	    return this;
+	}
 
-        public Builder setRol(Rol rol) {
-            checkNotNull(rol);
-            this.rol = rol;
-            return this;
-        }
+	public Builder setRol(Rol rol) {
+	    checkNotNull(rol);
+	    this.rol = rol;
+	    return this;
+	}
 
-        /**
-         * Creates a instances of {@link com.tool.emailbot.persistence.aa.Usuario} given the
-         * specified characteristics on the
-         * {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
-         *
-         * @return a new instance {@link com.tool.emailbot.persistence.aa.Usuario}.
-         */
-        @Override
-        public Usuario build() {
-            id = UUID.randomUUID();
-            Usuario usuario = new Usuario(this);
-            return usuario;
-        }
+	/**
+	 * Creates a instances of {@link com.tool.emailbot.persistence.aa.Usuario} given the
+	 * specified characteristics on the
+	 * {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
+	 *
+	 * @return a new instance {@link com.tool.emailbot.persistence.aa.Usuario}.
+	 */
+	@Override
+	public Usuario build() {
+	    id = UUID.randomUUID();
+	    Usuario usuario = new Usuario(this);
+	    return usuario;
+	}
 
-        /**
-         * Provides a new builder.
-         *
-         * @return a new instance of
-         * {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
-         */
-        public static Builder newBuilder() {
-            return new Builder();
-        }
+	/**
+	 * Provides a new builder.
+	 *
+	 * @return a new instance of {@link com.tool.emailbot.persistence.aa.Usuario.Builder}.
+	 */
+	public static Builder newBuilder() {
+	    return new Builder();
+	}
     }
 }

@@ -4,8 +4,8 @@ package com.tool.emailbot.persistence.domain;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.common.domain.model.DomainObject;
+import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 
 import java.util.Date;
 import java.util.UUID;
@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Aprovacion", uniqueConstraints = {
         @UniqueConstraint(name = "aprovacionUK", columnNames = {"idTrabajador", "idPeticion"})})
-public class Aprovacion extends Entidad {
+public class Aprovacion extends DomainObject {
 
     @NotNull
     @Id
@@ -117,7 +117,7 @@ public class Aprovacion extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements EntityBuilder<Aprovacion> {
+    public static class Builder implements DomainObjectBuilder<Aprovacion> {
 
         private UUID id;
         private Trabajador director;

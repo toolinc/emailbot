@@ -1,9 +1,9 @@
 // Copyright 2014 Tool Inc. 
-
 package com.tool.emailbot.persistence.aa;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 
+import java.io.Serializable;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,12 +17,12 @@ import javax.validation.constraints.Pattern;
 
 /**
  * This class represents a Rol of a User.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Entity
 @Table(name = "Rol")
-public class Rol extends Entidad {
+public class Rol extends DomainObject implements Serializable {
 
     @NotNull
     @Id
@@ -37,29 +37,27 @@ public class Rol extends Entidad {
     @OneToMany(mappedBy = "rol")
     private Set<Usuario> usuarios;
 
-    @Override
     public UUID getId() {
-        return id;
+	return id;
     }
 
-    @Override
     public void setId(UUID id) {
-        this.id = id;
+	this.id = id;
     }
 
     public String getNombre() {
-        return nombre;
+	return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre.toUpperCase();
+	this.nombre = nombre.toUpperCase();
     }
 
     public Set<Usuario> getUsuarios() {
-        return usuarios;
+	return usuarios;
     }
 
     public void setUsuarios(Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+	this.usuarios = usuarios;
     }
 }

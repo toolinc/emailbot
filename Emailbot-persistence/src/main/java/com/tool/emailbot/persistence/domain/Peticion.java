@@ -6,8 +6,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import com.tool.emailbot.persistence.Entidad;
-import com.tool.emailbot.persistence.EntityBuilder;
+import com.tool.emailbot.common.domain.model.DomainObject;
+import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.persistence.validation.Email;
 
 import java.util.UUID;
@@ -33,7 +33,7 @@ import javax.validation.constraints.Pattern;
  */
 @Entity
 @Table(name = "Peticion")
-public class Peticion extends Entidad {
+public class Peticion extends DomainObject {
 
     @NotNull
     @Id
@@ -55,7 +55,7 @@ public class Peticion extends Entidad {
     private String email;
 
     @NotNull
-    @Pattern(regexp = USER_NAME_REGEX)
+    //@Pattern(regexp = USER_NAME_REGEX)
     @Column(name = "username", nullable = false, length = 50, unique = true)
     private String username;
 
@@ -129,7 +129,7 @@ public class Peticion extends Entidad {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements EntityBuilder<Peticion> {
+    public static class Builder implements DomainObjectBuilder<Peticion> {
         private UUID id;
         private Trabajador trabajador;
         private Estatus estatus = Estatus.SOLICITUD;

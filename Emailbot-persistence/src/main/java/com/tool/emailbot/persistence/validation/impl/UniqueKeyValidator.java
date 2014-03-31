@@ -5,7 +5,7 @@ package com.tool.emailbot.persistence.validation.impl;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.persistence.validation.UniqueKey;
 
 import org.slf4j.Logger;
@@ -35,7 +35,7 @@ import javax.validation.ConstraintValidatorContext;
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Entidad> {
+public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, DomainObject> {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final EntityManager entityManager;
@@ -55,7 +55,7 @@ public class UniqueKeyValidator implements ConstraintValidator<UniqueKey, Entida
 
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     @Override
-    public boolean isValid(Entidad target, ConstraintValidatorContext context) {
+    public boolean isValid(DomainObject target, ConstraintValidatorContext context) {
         final Class<?> entityClass = target.getClass();
         final CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         final CriteriaQuery<Object> criteriaQuery = criteriaBuilder.createQuery();

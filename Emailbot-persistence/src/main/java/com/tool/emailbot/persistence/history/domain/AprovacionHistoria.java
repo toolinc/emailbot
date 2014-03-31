@@ -2,7 +2,7 @@
 
 package com.tool.emailbot.persistence.history.domain;
 
-import com.tool.emailbot.persistence.Entidad;
+import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.persistence.domain.Aprovacion;
 import com.tool.emailbot.persistence.domain.Peticion;
 import com.tool.emailbot.persistence.domain.Trabajador;
@@ -36,7 +36,7 @@ import javax.validation.constraints.NotNull;
 @Table(name = "AprovacionHistoria", uniqueConstraints = {
         @UniqueConstraint(name = "aprovacionHistoriaUK",
                 columnNames = {"idAuditoria", "idAprovacion", "idTrabajador"})})
-public class AprovacionHistoria extends Entidad {
+public class AprovacionHistoria extends DomainObject {
 
     @NotNull
     @Id
