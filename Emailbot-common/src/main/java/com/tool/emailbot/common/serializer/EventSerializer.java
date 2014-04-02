@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.serializer;
 
@@ -7,7 +7,7 @@ import com.tool.emailbot.common.domain.event.DomainEvent;
 /**
  * Defines a {@link com.tool.emailbot.common.domain.event.DomainEvent} serializer.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class EventSerializer extends AbstractJsonSerializer {
 

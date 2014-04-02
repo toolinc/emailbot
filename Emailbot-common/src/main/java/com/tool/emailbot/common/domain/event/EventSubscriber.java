@@ -1,11 +1,11 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.domain.event;
 
 /**
  * Specifies the contract for a {@link com.tool.emailbot.common.domain.event.DomainEvent} subscriber.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  * @param <T> specifies the type of events that the subscriber handles
  */
 public interface EventSubscriber<T extends DomainEvent> {

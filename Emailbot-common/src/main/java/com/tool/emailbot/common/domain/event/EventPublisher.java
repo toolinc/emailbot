@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.domain.event;
 
@@ -7,7 +7,7 @@ import java.util.Collection;
 /**
  * Specifies the contract for a {@link com.tool.emailbot.common.domain.event.DomainEvent} publisher.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public interface EventPublisher {
 

@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.serializer;
 
@@ -7,7 +7,7 @@ import java.lang.reflect.Type;
 /**
  * Specifies a JSON object serializer and serializer.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class ObjectJsonSerializer extends AbstractJsonSerializer {
 

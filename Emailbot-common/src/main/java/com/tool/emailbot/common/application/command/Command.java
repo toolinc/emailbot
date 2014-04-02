@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.application.command;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * Represents a command to implement the CQRS pattern.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public interface Command extends Serializable {
 }

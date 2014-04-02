@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.domain.model;
 
@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Specifies the contract of the builder pattern for an entity.
  *
  * @param <T> The entity which the builder will create a new instance.
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public interface DomainObjectBuilder<T extends DomainObject> extends Serializable {
 

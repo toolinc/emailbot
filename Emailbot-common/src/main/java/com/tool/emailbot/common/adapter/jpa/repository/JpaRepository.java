@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.adapter.jpa.repository;
 
@@ -18,7 +18,7 @@ import javax.persistence.EntityManager;
  * This class represents a Generic Data Access Object implementation.
  *
  * @param <T> Specifies the entity of the Repository.
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public abstract class JpaRepository<T extends DomainObject> implements Repository<T> {
 

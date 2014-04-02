@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.adapter.jpa.event;
 
@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 /**
  * Jpa implementation for the {@link com.tool.emailbot.common.adapter.jpa.event.Event} repository.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ *  @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class JpaEventRepository extends AssertionConcern {
 

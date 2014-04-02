@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.domain.event;
 
@@ -9,7 +9,7 @@ import java.util.Collection;
 /**
  * Decorator of the {@link com.tool.emailbot.common.domain.event.EventPublisher}.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public abstract class DomainEventPublisher extends AssertionConcern {
 

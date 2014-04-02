@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.common.domain.model;
 
@@ -9,7 +9,7 @@ import javax.persistence.Version;
 /**
  * Represents a domain object that guarantees consistency through the use of optimistic locking.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @MappedSuperclass
 public abstract class DomainObjectConcurrencySafe extends DomainObject {
