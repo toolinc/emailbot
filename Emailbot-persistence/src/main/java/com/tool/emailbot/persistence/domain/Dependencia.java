@@ -5,10 +5,9 @@ package com.tool.emailbot.persistence.domain;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
-
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
-import com.tool.emailbot.persistence.validation.UniqueKey;
+import com.tool.emailbot.common.domain.validation.UniqueKey;
 
 import java.util.UUID;
 

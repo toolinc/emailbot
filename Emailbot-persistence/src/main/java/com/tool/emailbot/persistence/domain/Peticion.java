@@ -8,7 +8,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
-import com.tool.emailbot.persistence.validation.Email;
+import com.tool.emailbot.common.domain.validation.Email;
 
 import java.util.UUID;
 
