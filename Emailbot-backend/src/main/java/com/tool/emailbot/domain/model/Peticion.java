@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -23,11 +23,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 /**
  * This class represents an email request of a
- * {@link com.tool.emailbot.persistence.domain.Trabajador}.
+ * {@link Trabajador}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
@@ -125,7 +124,7 @@ public class Peticion extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.Peticion} instances.
+     * Builder of {@link Peticion} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -155,11 +154,11 @@ public class Peticion extends DomainObject {
 
         /**
          * Creates a instances of
-         * {@link com.tool.emailbot.persistence.domain.Peticion} given the specified
+         * {@link Peticion} given the specified
          * characteristics on the
-         * {@link com.tool.emailbot.persistence.domain.Peticion.Builder}.
+         * {@link Peticion.Builder}.
          *
-         * @return a new instance {@link com.tool.emailbot.persistence.domain.Peticion}.
+         * @return a new instance {@link Peticion}.
          */
         @Override
         public Peticion build() {
@@ -172,7 +171,7 @@ public class Peticion extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link com.tool.emailbot.persistence.domain.model.Trabajador.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

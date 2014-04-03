@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -113,7 +113,7 @@ public class Aprovacion extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.Aprovacion} instances.
+     * Builder of {@link Aprovacion} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -146,11 +146,11 @@ public class Aprovacion extends DomainObject {
         }
 
         /**
-         * Creates a instances of {@link com.tool.emailbot.persistence.domain.Aprovacion} given the
+         * Creates a instances of {@link Aprovacion} given the
          * specified characteristics on the
-         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         * {@link Aprovacion.Builder}.
          *
-         * @return a new instance {@link com.tool.emailbot.persistence.domain.Aprovacion}.
+         * @return a new instance {@link Aprovacion}.
          */
         @Override
         public Aprovacion build() {
@@ -163,7 +163,7 @@ public class Aprovacion extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.Aprovacion.Builder}.
+         * {@link Aprovacion.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

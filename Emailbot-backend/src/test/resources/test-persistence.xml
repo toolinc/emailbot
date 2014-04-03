@@ -6,12 +6,12 @@
         <jta-data-source>jdbc/arquillian</jta-data-source>
         <class>com.tool.emailbot.persistence.aa.Rol</class>
         <class>com.tool.emailbot.persistence.aa.Usuario</class>
-        <class>com.tool.emailbot.persistence.domain.Aprovacion</class>
-        <class>com.tool.emailbot.persistence.domain.Dependencia</class>
-        <class>com.tool.emailbot.persistence.domain.InformacionContacto</class>
-        <class>com.tool.emailbot.persistence.domain.Persona</class>
-        <class>com.tool.emailbot.persistence.domain.Peticion</class>
-        <class>com.tool.emailbot.persistence.domain.Trabajador</class>
+        <class>com.tool.emailbot.persistence.domain.model.Aprovacion</class>
+        <class>com.tool.emailbot.persistence.domain.model.Dependencia</class>
+        <class>com.tool.emailbot.persistence.domain.model.InformacionContacto</class>
+        <class>com.tool.emailbot.persistence.domain.model.Persona</class>
+        <class>com.tool.emailbot.persistence.domain.model.Peticion</class>
+        <class>com.tool.emailbot.persistence.domain.model.Trabajador</class>
         <class>com.tool.emailbot.persistence.history.Auditoria</class>
         <class>com.tool.emailbot.persistence.history.domain.AprovacionHistoria</class>
         <class>com.tool.emailbot.persistence.history.domain.PeticionHistoria</class>

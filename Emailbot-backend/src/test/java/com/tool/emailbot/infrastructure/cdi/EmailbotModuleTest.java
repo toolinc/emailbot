@@ -1,6 +1,10 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.inject;
+package com.tool.emailbot.infrastructure.cdi;
+
+import com.tool.emailbot.common.adapter.jpa.repository.JpaRepository;
+import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.model.Dependencia;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
@@ -14,7 +18,7 @@ import javax.persistence.PersistenceContext;
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @ApplicationScoped
-public class PersistentProducerTest {
+public class EmailbotModuleTest {
 
     private static final String PERSISTENCE_UNIT = "emailbotPUTest";
 
@@ -30,5 +34,11 @@ public class PersistentProducerTest {
         if (entityManager.isOpen()) {
             entityManager.close();
         }
+    }
+    
+    @Produces
+    public Repository<Dependencia> produceEventRepository(EntityManager entityManager) {
+        return new JpaRepository<Dependencia>(entityManager) {
+        };
     }
 }

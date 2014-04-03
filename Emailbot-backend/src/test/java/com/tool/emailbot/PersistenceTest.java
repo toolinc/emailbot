@@ -1,8 +1,8 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence;
+package com.tool.emailbot;
 
-import com.tool.emailbot.persistence.inject.PersistentProducerTest;
+import com.tool.emailbot.infrastructure.cdi.EmailbotModuleTest;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -30,14 +30,10 @@ public abstract class PersistenceTest {
     @Deployment
     public static WebArchive createDeployment() {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class)
-                .addPackage("com.tool.emailbot.persistence")
-                .addPackage("com.tool.emailbot.persistence.aa")
-                .addPackage("com.tool.emailbot.persistence.dao")
-                .addPackage("com.tool.emailbot.persistence.dao.impl")
-                .addPackage("com.tool.emailbot.persistence.domain")
-                .addPackage("com.tool.emailbot.persistence.validation")
-                .addPackage("com.tool.emailbot.persistence.validation.impl")
-                .addClass(PersistentProducerTest.class)
+                .addPackage("com.tool.emailbot")
+                .addPackage("com.tool.emailbot.domain")
+                .addPackage("com.tool.emailbot.domain.model")
+                .addClass(EmailbotModuleTest.class)
                 .addAsLibraries(
                         DependencyResolvers.use(MavenDependencyResolver.class)
                                 .goOffline()

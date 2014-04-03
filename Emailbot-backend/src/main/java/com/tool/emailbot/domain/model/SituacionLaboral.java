@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 /**
  * This class represents a Status of the Worker.

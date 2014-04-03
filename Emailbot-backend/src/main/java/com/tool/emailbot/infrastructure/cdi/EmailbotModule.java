@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.inject;
+package com.tool.emailbot.infrastructure.cdi;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
@@ -14,7 +14,7 @@ import javax.persistence.PersistenceContext;
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @ApplicationScoped
-public class PersistentProducer {
+public class EmailbotModule {
 
     private static final String PERSISTENCE_UNIT = "emailbotPU";
 

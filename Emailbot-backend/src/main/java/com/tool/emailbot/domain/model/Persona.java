@@ -1,5 +1,5 @@
 // Copyright 2014 Tool Inc.
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -7,6 +7,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -186,7 +187,7 @@ public class Persona extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.Persona} instances.
+     * Builder of {@link Persona} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -250,11 +251,11 @@ public class Persona extends DomainObject {
 	}
 
 	/**
-	 * Creates a instances of {@link com.tool.emailbot.persistence.domain.Persona} given the
+	 * Creates a instances of {@link Persona} given the
 	 * specified characteristics on the
-	 * {@link com.tool.emailbot.persistence.domain.Persona.Builder}.
+	 * {@link Persona.Builder}.
 	 *
-	 * @return a new instance {@link com.tool.emailbot.persistence.domain.Persona}.
+	 * @return a new instance {@link Persona}.
 	 */
 	@Override
 	public Persona build() {
@@ -266,7 +267,7 @@ public class Persona extends DomainObject {
 	/**
 	 * Provides a new builder.
 	 *
-	 * @return a new instance of {@link com.tool.emailbot.persistence.domain.Persona.Builder}.
+	 * @return a new instance of {@link Persona.Builder}.
 	 */
 	public static Builder newBuilder() {
 	    return new Builder();

@@ -1,10 +1,11 @@
 // Copyright 2014 Tool Inc. 
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.common.domain.validation.UniqueKey;
@@ -82,7 +83,7 @@ public class Dependencia extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.Dependencia} instances.
+     * Builder of {@link Dependencia} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -106,11 +107,11 @@ public class Dependencia extends DomainObject {
 
         /**
          * Creates a instances of
-         * {@link com.tool.emailbot.persistence.domain.Dependencia} given the specified
+         * {@link Dependencia} given the specified
          * characteristics on the
-         * {@link com.tool.emailbot.persistence.domain.Dependencia.Builder}.
+         * {@link Dependencia.Builder}.
          *
-         * @return a new instance {@link com.tool.emailbot.persistence.domain.Dependencia}.
+         * @return a new instance {@link Dependencia}.
          */
         @Override
         public Dependencia build() {
@@ -123,7 +124,7 @@ public class Dependencia extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.Dependencia.Builder}.
+         * {@link Dependencia.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

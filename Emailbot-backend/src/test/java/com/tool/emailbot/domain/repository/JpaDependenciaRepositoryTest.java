@@ -1,10 +1,10 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.dao.impl;
+package com.tool.emailbot.domain.repository;
 
-import com.tool.emailbot.persistence.PersistenceTest;
-import com.tool.emailbot.persistence.dao.DAO;
-import com.tool.emailbot.persistence.domain.Dependencia;
+import com.tool.emailbot.PersistenceTest;
+import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.model.Dependencia;
 
 import org.junit.Test;
 
@@ -13,15 +13,15 @@ import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
 /**
- * Test for the class {@link com.tool.emailbot.persistence.dao.impl.GenericDAOImpl}.
+ * Test for the class {@link com.tool.emailbot.common.domain.repository.Repository}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class GenericDAOImplTest extends PersistenceTest {
+public class JpaDependenciaRepositoryTest extends PersistenceTest {
 
     @Inject private EntityManager entityManager;
     @Inject private UserTransaction tx;
-    @Inject private DAO<Dependencia> daoDependencia;
+    @Inject private Repository<Dependencia> daoDependencia;
     private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
 
     @Test

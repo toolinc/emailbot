@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -126,7 +126,7 @@ public class Trabajador extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.Trabajador} instances.
+     * Builder of {@link Trabajador} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -161,11 +161,11 @@ public class Trabajador extends DomainObject {
 
         /**
          * Creates a instances of
-         * {@link com.tool.emailbot.persistence.domain.Trabajador} given the specified
+         * {@link Trabajador} given the specified
          * characteristics on the
-         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link Trabajador.Builder}.
          *
-         * @return a new instance {@link com.tool.emailbot.persistence.domain.Trabajador}.
+         * @return a new instance {@link Trabajador}.
          */
         @Override
         public Trabajador build() {
@@ -178,7 +178,7 @@ public class Trabajador extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.Trabajador.Builder}.
+         * {@link Trabajador.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -20,11 +20,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * Represents the contact information of a {@link com.tool.emailbot.persistence.domain.Persona}.
+ * Represents the contact information of a {@link Persona}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
@@ -111,7 +110,7 @@ public class InformacionContacto extends DomainObject {
     }
 
     /**
-     * Builder of {@link com.tool.emailbot.persistence.domain.InformacionContacto} instances.
+     * Builder of {@link InformacionContacto} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
@@ -148,11 +147,11 @@ public class InformacionContacto extends DomainObject {
 
         /**
          * Creates a instances of
-         * {@link com.tool.emailbot.persistence.domain.InformacionContacto} given the specified
+         * {@link InformacionContacto} given the specified
          * characteristics on the
-         * {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
+         * {@link InformacionContacto.Builder}.
          *
-         * @return a new instance {@link com.tool.emailbot.persistence.domain.InformacionContacto}.
+         * @return a new instance {@link InformacionContacto}.
          */
         @Override
         public InformacionContacto build() {
@@ -165,7 +164,7 @@ public class InformacionContacto extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.InformacionContacto.Builder}.
+         * {@link InformacionContacto.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();

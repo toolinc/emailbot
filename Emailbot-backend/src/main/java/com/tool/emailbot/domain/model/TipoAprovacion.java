@@ -1,9 +1,9 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
 /**
- * This class represents the approval of a {@link com.tool.emailbot.persistence.domain.Peticion}.
+ * This class represents the approval of a {@link Peticion}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */

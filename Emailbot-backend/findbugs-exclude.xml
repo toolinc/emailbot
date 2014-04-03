@@ -2,11 +2,9 @@
 <FindBugsFilter>
     <Match>
         <Or>
-            <Package name="~com[.]tool[.]emailbot[.]persistence([.].*)?"/>
-            <Package name="~com[.]tool[.]emailbot[.]persistence[.]aa([.].*)?"/>
-            <Package name="~com[.]tool[.]emailbot[.]persistence[.]domain([.].*)?"/>
-            <Package name="~com[.]tool[.]emailbot[.]persistence[.]history([.].*)?"/>
-            <Package name="~com[.]tool[.]emailbot[.]persistence[.]history[.]domain([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]domain([.].*)?"/>
+            <Package name="~com[.]tool[.]emailbot[.]domain[.]model([.].*)?"/>
         </Or>
         <Or>
             <Bug pattern="UUF_UNUSED_PUBLIC_OR_PROTECTED_FIELD" />

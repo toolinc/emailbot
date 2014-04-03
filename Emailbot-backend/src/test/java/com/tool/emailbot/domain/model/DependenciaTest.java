@@ -1,8 +1,8 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.persistence.domain;
+package com.tool.emailbot.domain.model;
 
-import com.tool.emailbot.persistence.PersistenceTest;
+import com.tool.emailbot.PersistenceTest;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -13,7 +13,7 @@ import javax.transaction.RollbackException;
 import javax.transaction.UserTransaction;
 
 /**
- * Test for the class {@link com.tool.emailbot.persistence.domain.Trabajador}.
+ * Test for the class {@link com.tool.emailbot.persistence.domain.model.Trabajador}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
