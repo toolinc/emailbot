@@ -25,7 +25,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface UniqueKey {
 
-    String message() default "{com.tool.persistence.validation.UniqueKey.message}";
+    String message() default "{com.tool.emailbot.common.domain.validation.UniqueKey.message}";
 
     Class<?>[] groups() default {};
 
