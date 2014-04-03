@@ -1,4 +1,5 @@
 // Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.domain.model;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -100,10 +101,12 @@ public class Persona extends DomainObject {
 	setRfc();
     }
 
+    @Override
     public UUID getId() {
 	return id;
     }
 
+    @Override
     public void setId(UUID id) {
 	this.id = id;
     }
