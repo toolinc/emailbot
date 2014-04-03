@@ -4,17 +4,12 @@
              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="emailbotPUTest" transaction-type="JTA">
         <jta-data-source>jdbc/arquillian</jta-data-source>
-        <class>com.tool.emailbot.persistence.aa.Rol</class>
-        <class>com.tool.emailbot.persistence.aa.Usuario</class>
-        <class>com.tool.emailbot.persistence.domain.model.Aprovacion</class>
-        <class>com.tool.emailbot.persistence.domain.model.Dependencia</class>
-        <class>com.tool.emailbot.persistence.domain.model.InformacionContacto</class>
-        <class>com.tool.emailbot.persistence.domain.model.Persona</class>
-        <class>com.tool.emailbot.persistence.domain.model.Peticion</class>
-        <class>com.tool.emailbot.persistence.domain.model.Trabajador</class>
-        <class>com.tool.emailbot.persistence.history.Auditoria</class>
-        <class>com.tool.emailbot.persistence.history.domain.AprovacionHistoria</class>
-        <class>com.tool.emailbot.persistence.history.domain.PeticionHistoria</class>
+        <class>com.tool.emailbot.domain.model.Aprovacion</class>
+        <class>com.tool.emailbot.domain.model.Dependencia</class>
+        <class>com.tool.emailbot.domain.model.InformacionContacto</class>
+        <class>com.tool.emailbot.domain.model.Persona</class>
+        <class>com.tool.emailbot.domain.model.Peticion</class>
+        <class>com.tool.emailbot.domain.model.Trabajador</class>
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
             <property name="javax.persistence.validation.mode" value="callback, ddl"/>
