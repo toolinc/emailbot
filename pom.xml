@@ -9,8 +9,8 @@
     <modules>
         <module>Emailbot-ear</module>
         <module>Emailbot-common</module>
+        <module>Emailbot-backend</module>
         <module>Emailbot-web</module>
-        <module>Emailbot-persistence</module>
   </modules>
 
     <properties>

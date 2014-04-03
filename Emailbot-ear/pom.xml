@@ -39,7 +39,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tool</groupId>
-            <artifactId>Emailbot-persistence</artifactId>
+            <artifactId>Emailbot-backend</artifactId>
             <version>1.0</version>
             <type>ejb</type>
         </dependency>
