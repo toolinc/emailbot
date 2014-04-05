@@ -46,9 +46,9 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
     public Trabajador findBy(String numeroTrabajador) {
         Trabajador t = null;
         QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
+        qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(numeroTrabajador),
+                numeroTrabajador));
         try {
-            qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(numeroTrabajador),
-                    numeroTrabajador));
             t = qh.getSingleResult();
         } catch (NoResultException | NonUniqueResultException exc) {
             logger.warn(exc.getMessage());
