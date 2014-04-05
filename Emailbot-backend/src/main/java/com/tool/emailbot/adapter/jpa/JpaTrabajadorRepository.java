@@ -1,6 +1,8 @@
 package com.tool.emailbot.adapter.jpa;
 
+import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
 
@@ -20,6 +22,10 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
 
     @Override
     public Trabajador findBy(String numeroTrabajador) {
-        return null;
+	Trabajador t;
+	QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
+	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(numeroTrabajador), numeroTrabajador));
+	t=qh.getSingleResult();
+        return t;
     }
 }
