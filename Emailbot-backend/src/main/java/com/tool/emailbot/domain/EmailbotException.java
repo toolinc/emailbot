@@ -2,6 +2,7 @@
 package com.tool.emailbot.domain;
 
 import com.tool.emailbot.common.AssertionConcern;
+
 import java.util.ResourceBundle;
 
 /**
@@ -12,7 +13,7 @@ import java.util.ResourceBundle;
 public class EmailbotException extends Exception {
     
     /**
-     * Constructs a new IdentityManagementException exception with the specified detail message.
+     * Constructs a new EmailbotException exception with the specified detail message.
      *
      * @param message the detail message
      */
@@ -21,7 +22,7 @@ public class EmailbotException extends Exception {
     }
 
     /**
-     * Builder of {@link IdentityManagementException}
+     * Builder of {@link EmailbotException}
      * instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
@@ -49,10 +50,10 @@ public class EmailbotException extends Exception {
     }
 
     /**
-     * Creates a instances of {@link IdentityManagementException} given the specified
-     * characteristics on the {@link IdentityManagementException.Builder}.
+     * Creates a instances of {@link EmailbotException} given the specified
+     * characteristics on the {@link EmailbotException.Builder}.
      *
-     * @return a new instance {@link IdentityManagementException}
+     * @return a new instance {@link EmailbotException}
      */
     public EmailbotException build() {
 	return new EmailbotException(message);
@@ -61,7 +62,7 @@ public class EmailbotException extends Exception {
     /**
      * Provides a new builder.
      *
-     * @return a new instance of {@link IdentityManagementException.Builder}
+     * @return a new instance of {@link EmailbotException.Builder}
      */
     public static Builder newBuilder() {
 	return new Builder();

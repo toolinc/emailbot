@@ -1,13 +1,13 @@
 // Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.domain.service;
 
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Peticion;
-import com.tool.emailbot.domain.model.Trabajador;
+import com.tool.emailbot.domain.repository.TrabajadorRepository;
 
-import java.util.UUID;
 import javax.inject.Inject;
 
 /**
@@ -17,7 +17,7 @@ import javax.inject.Inject;
  */
 public class RegisterEmailService extends AssertionConcern {
 
-    private final Repository<Trabajador> trabajadorRepository;
+    private final TrabajadorRepository trabajadorRepository;
     private final Repository<Peticion> peticionRepository;
 
     private static final String USER_NAME_EXIST
@@ -26,7 +26,7 @@ public class RegisterEmailService extends AssertionConcern {
 	    = "com.tool.emailbot.domain.service.RegisterEmailService.notExist";
 
     @Inject
-    public RegisterEmailService(Repository<Trabajador> trabajadorRepository,
+    public RegisterEmailService(TrabajadorRepository trabajadorRepository,
 	    Repository<Peticion> peticionRepository) {
 	assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
 	assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
@@ -41,8 +41,7 @@ public class RegisterEmailService extends AssertionConcern {
      * @throws EmailbotException if a request cannot be created
      */
     public void registerEmailRequest(Peticion peticion) throws EmailbotException {
-	if (trabajadorRepository.findById(UUID.fromString(peticion.getTrabajador().
-		getNumeroTrabajador())) == null) {
+	if (trabajadorRepository.findBy(peticion.getTrabajador().getNumeroTrabajador()) == null) {
 	    trabajadorRepository.create(peticion.getTrabajador());
 	} else {
 	    throw EmailbotException.Builder.newBuilder()

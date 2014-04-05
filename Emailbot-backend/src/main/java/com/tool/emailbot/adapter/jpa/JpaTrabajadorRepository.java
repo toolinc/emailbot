@@ -1,15 +1,17 @@
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.adapter.jpa;
 
 import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
-import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
 
 import javax.inject.Inject;
 
 /**
- * Created by edgar on 4/5/14.
+ *
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class JpaTrabajadorRepository implements TrabajadorRepository {
 
@@ -21,11 +23,26 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
     }
 
     @Override
+    public void create(Trabajador trabajador) {
+        repository.create(trabajador);
+    }
+
+    @Override
+    public Trabajador update(Trabajador trabajador) {
+        return repository.update(trabajador);
+    }
+
+    @Override
+    public void delete(Trabajador trabajador) {
+        repository.delete(trabajador);
+    }
+
+    @Override
     public Trabajador findBy(String numeroTrabajador) {
-	Trabajador t;
-	QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
-	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(numeroTrabajador), numeroTrabajador));
-	t=qh.getSingleResult();
+        Trabajador t;
+        QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
+        qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(numeroTrabajador), numeroTrabajador));
+        t = qh.getSingleResult();
         return t;
     }
 }

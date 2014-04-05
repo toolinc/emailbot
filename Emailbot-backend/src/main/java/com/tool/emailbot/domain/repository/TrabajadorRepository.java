@@ -1,11 +1,20 @@
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.domain.model.Trabajador;
 
 /**
- * Created by edgar on 4/5/14.
+ *
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public interface TrabajadorRepository {
+
+    void create(Trabajador trabajador);
+
+    Trabajador update(Trabajador trabajador);
+
+    void delete(Trabajador trabajador);
 
     public Trabajador findBy(String numeroTrabajador);
 }

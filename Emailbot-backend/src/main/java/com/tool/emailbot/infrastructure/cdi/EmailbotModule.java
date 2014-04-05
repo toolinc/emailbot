@@ -5,6 +5,7 @@ package com.tool.emailbot.infrastructure.cdi;
 import com.tool.emailbot.common.adapter.jpa.repository.JpaRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -40,5 +41,4 @@ public class EmailbotModule {
             entityManager.close();
         }
     }
-    
 }
