@@ -21,17 +21,17 @@ public class RegisterEmailService extends AssertionConcern {
     private final Repository<Peticion> peticionRepository;
 
     private static final String USER_NAME_EXIST
-	    = "com.tool.emailbot.domain.service.RegisterEmailService.exist";
+            = "com.tool.emailbot.domain.service.RegisterEmailService.exist";
     private static final String USER_NAME_NOT_EXIST
-	    = "com.tool.emailbot.domain.service.RegisterEmailService.notExist";
+            = "com.tool.emailbot.domain.service.RegisterEmailService.notExist";
 
     @Inject
     public RegisterEmailService(TrabajadorRepository trabajadorRepository,
-	    Repository<Peticion> peticionRepository) {
-	assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
-	assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
-	this.trabajadorRepository = trabajadorRepository;
-	this.peticionRepository = peticionRepository;
+                                Repository<Peticion> peticionRepository) {
+        assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
+        assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
+        this.trabajadorRepository = trabajadorRepository;
+        this.peticionRepository = peticionRepository;
     }
 
     /**
@@ -41,13 +41,13 @@ public class RegisterEmailService extends AssertionConcern {
      * @throws EmailbotException if a request cannot be created
      */
     public void registerEmailRequest(Peticion peticion) throws EmailbotException {
-	if (trabajadorRepository.findBy(peticion.getTrabajador().getNumeroTrabajador()) == null) {
-	    trabajadorRepository.create(peticion.getTrabajador());
-	} else {
-	    throw EmailbotException.Builder.newBuilder()
-		    .setMessage(USER_NAME_EXIST, peticion.getTrabajador().getNumeroTrabajador())
-		    .build();
-	}
+        if (trabajadorRepository.findBy(peticion.getTrabajador().getNumeroTrabajador()) == null) {
+            trabajadorRepository.create(peticion.getTrabajador());
+        } else {
+            throw EmailbotException.Builder.newBuilder()
+                    .setMessage(USER_NAME_EXIST, peticion.getTrabajador().getNumeroTrabajador())
+                    .build();
+        }
     }
 }
 
