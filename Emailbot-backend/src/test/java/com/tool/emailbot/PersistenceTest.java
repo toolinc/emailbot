@@ -33,6 +33,7 @@ public abstract class PersistenceTest {
                 .addPackage("com.tool.emailbot")
                 .addPackage("com.tool.emailbot.domain")
                 .addPackage("com.tool.emailbot.domain.model")
+                .addPackage("com.tool.emailbot.domain.repository")
 		.addPackage("com.tool.emailbot.domain.model")
                 .addClass(EmailbotModuleTest.class)
                 .addAsLibraries(

@@ -1,4 +1,5 @@
 // Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.infrastructure.cdi;
 
 import com.tool.emailbot.common.adapter.jpa.repository.JpaRepository;
@@ -27,24 +28,24 @@ public class EmailbotModule {
 
     @Produces
     public EntityManager produceEntityManager() {
-	return entityManager;
+        return entityManager;
+    }
+
+    public void closeEntityManager(@Disposes EntityManager entityManager) {
+        if (entityManager.isOpen()) {
+            entityManager.close();
+        }
     }
 
     @Produces
-    public Repository<Dependencia> produceEventRepository(EntityManager entityManager) {
-	return new JpaRepository<Dependencia>(entityManager) {
-	};
+    public Repository<Dependencia> produceDependenciaRepository(EntityManager entityManager) {
+        return new JpaRepository<Dependencia>(entityManager) {
+        };
     }
 
     @Produces
     public Repository<Trabajador> produceTrabajadorRepository(EntityManager entityManager) {
-	return new JpaRepository<Trabajador>(entityManager) {
-	};
-    }
-
-    public void closeEntityManager(@Disposes EntityManager entityManager) {
-	if (entityManager.isOpen()) {
-	    entityManager.close();
-	}
+        return new JpaRepository<Trabajador>(entityManager) {
+        };
     }
 }
