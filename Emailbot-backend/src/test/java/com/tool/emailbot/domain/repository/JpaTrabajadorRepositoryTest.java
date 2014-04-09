@@ -15,7 +15,6 @@ import com.tool.emailbot.domain.model.Trabajador;
 import org.junit.Test;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.transaction.UserTransaction;
 
 /**
@@ -25,11 +24,10 @@ import javax.transaction.UserTransaction;
 public class JpaTrabajadorRepositoryTest extends PersistenceTest {
 
     @Inject
-    private EntityManager entityManager;
-    @Inject
     private UserTransaction tx;
     @Inject
     private Repository<Dependencia> daoDependencia;
+    @Inject
     private Repository<Trabajador> daoTrabajador;
     private final Dependencia.Builder buiderDependencia = Dependencia.Builder.newBuilder();
     private final InformacionContacto.Builder iBuider = InformacionContacto.Builder.newBuilder();
