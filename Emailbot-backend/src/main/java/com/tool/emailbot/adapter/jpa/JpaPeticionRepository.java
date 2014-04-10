@@ -9,6 +9,8 @@ import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Peticion;
 import static com.tool.emailbot.domain.model.Peticion_.trabajador;
+
+import com.tool.emailbot.domain.model.Peticion_;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.model.Trabajador_;
 import com.tool.emailbot.domain.repository.PeticionRepository;
@@ -55,7 +57,8 @@ public class JpaPeticionRepository implements PeticionRepository{
         Trabajador t = null;
         QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
         qh.getRoot().fetch(trabajador);
-	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(trabajador), numeroTrabajador));
+	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
+            .get(Trabajador_.numeroTrabajador), numeroTrabajador));
 	return peticion;
     }
 }
