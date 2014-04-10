@@ -5,6 +5,7 @@ package com.tool.emailbot.infrastructure.cdi;
 import com.tool.emailbot.common.adapter.jpa.repository.JpaRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
+import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.model.Trabajador;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -46,6 +47,12 @@ public class EmailbotModule {
     @Produces
     public Repository<Trabajador> produceTrabajadorRepository(EntityManager entityManager) {
         return new JpaRepository<Trabajador>(entityManager) {
+        };
+    }
+    
+    @Produces
+    public Repository<Peticion> producePeticionRepository(EntityManager entityManager) {
+        return new JpaRepository<Peticion>(entityManager) {
         };
     }
 }

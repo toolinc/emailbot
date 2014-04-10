@@ -4,6 +4,7 @@ package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;
 import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.InformacionContacto;
 import com.tool.emailbot.domain.model.Persona;
