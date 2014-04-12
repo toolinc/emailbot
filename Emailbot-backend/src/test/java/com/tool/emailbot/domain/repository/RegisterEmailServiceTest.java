@@ -2,6 +2,8 @@
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;
+import com.tool.emailbot.adapter.jpa.JpaPeticionRepository;
+import com.tool.emailbot.adapter.jpa.JpaTrabajadorRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.InformacionContacto;
@@ -25,14 +27,14 @@ public class RegisterEmailServiceTest extends PersistenceTest {
     @Inject
     private UserTransaction tx;
     @Inject
-    private TrabajadorRepository dTrabajador;
-    @Inject
-    private Repository<Trabajador> daoTrabajador;
+    private JpaTrabajadorRepository daoTrabajador;
+//    @Inject
+//    private RegisterEmailService registerEmailService;
     @Inject
     private Repository<Dependencia> daoDependencia;
     @Inject
-    private Repository<Peticion> daoPeticion;
-    
+    private JpaPeticionRepository daoPeticion;
+
     private final Peticion.Builder builderPeticion = Peticion.Builder.newBuilder();
     private final Dependencia.Builder buiderDependencia = Dependencia.Builder.newBuilder();
     private final InformacionContacto.Builder iBuider = InformacionContacto.Builder.newBuilder();
@@ -49,15 +51,15 @@ public class RegisterEmailServiceTest extends PersistenceTest {
 		setInformacionContacto(iBuider);
 	Trabajador trabajador = builderTrabajador.setDependencia(dependencia).setDirector(true).
 		setNumeroTrabajador("303204614").setPersona(buiderPersona).build();
-	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").setTrabajador(trabajador).build();
-	RegisterEmailService res = new RegisterEmailService( dTrabajador, daoPeticion);
-	res.registerEmailRequest(peticion);
-	
+//	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").
+//		setTrabajador(trabajador).build();
+//	registerEmailService.registerEmailRequest(peticion);
+
 	tx.begin();
 	em.joinTransaction();
 	daoDependencia.create(dependencia);
 	daoTrabajador.create(trabajador);
-	daoPeticion.create(peticion);
+	//daoPeticion.create(peticion);
 	tx.commit();
     }
 }

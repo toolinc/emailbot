@@ -3,6 +3,7 @@
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;
+import com.tool.emailbot.adapter.jpa.JpaTrabajadorRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Dependencia;
@@ -27,7 +28,8 @@ public class JpaTrabajadorRepositoryTest extends PersistenceTest {
     @Inject
     private Repository<Dependencia> daoDependencia;
     @Inject
-    private Repository<Trabajador> daoTrabajador;
+    private JpaTrabajadorRepository daoTrabajador;
+    
     private final Dependencia.Builder buiderDependencia = Dependencia.Builder.newBuilder();
     private final InformacionContacto.Builder iBuider = InformacionContacto.Builder.newBuilder();
     private final Persona.Builder buiderPersona = Persona.Builder.newBuilder();
