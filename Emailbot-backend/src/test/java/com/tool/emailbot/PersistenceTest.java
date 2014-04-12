@@ -31,6 +31,8 @@ public abstract class PersistenceTest {
     public static WebArchive createDeployment() {
         WebArchive webArchive = ShrinkWrap.create(WebArchive.class)
                 .addPackage("com.tool.emailbot")
+                .addPackage("com.tool.emailbot.adapter")
+                .addPackage("com.tool.emailbot.adapter.jpa")
                 .addPackage("com.tool.emailbot.domain")
                 .addPackage("com.tool.emailbot.domain.model")
                 .addPackage("com.tool.emailbot.domain.repository")
