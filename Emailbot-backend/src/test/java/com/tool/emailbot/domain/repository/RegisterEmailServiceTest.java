@@ -53,7 +53,6 @@ public class RegisterEmailServiceTest extends PersistenceTest {
 	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").
 		setTrabajador(trabajador).build();
 
-
 	tx.begin();
 	em.joinTransaction();
 	registerEmailService.registerEmailRequest(peticion);
