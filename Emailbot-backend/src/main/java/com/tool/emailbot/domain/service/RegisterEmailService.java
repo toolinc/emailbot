@@ -32,7 +32,8 @@ public class RegisterEmailService extends AssertionConcern {
 
     @Inject
     public RegisterEmailService(TrabajadorRepository trabajadorRepository,
-                                PeticionRepository peticionRepository, DependenciaRepository dependenciaRepository) {
+                                PeticionRepository peticionRepository,
+                                DependenciaRepository dependenciaRepository) {
         assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
         assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
         this.trabajadorRepository = trabajadorRepository;
@@ -46,16 +47,17 @@ public class RegisterEmailService extends AssertionConcern {
      * @param peticion the request that will be stored.
      * @throws EmailbotException if a request cannot be created
      */
-    public void registerEmailRequest(Peticion peticion, String dependenciaAbreviacion) throws EmailbotException {
-	Trabajador trabajador = trabajadorRepository.findBy(peticion.getTrabajador().getNumeroTrabajador());
-        if ( trabajador == null) {
-	    Dependencia d = dependenciaRepository.findBy(dependenciaAbreviacion);
-	    if(d == null){
-		d.setNombre(dependenciaAbreviacion);
-		d.setAbreviacion(dependenciaAbreviacion);
-	    }else{
-		peticion.getTrabajador().setDependencia(d);
-	    }
+    public void registerEmailRequest(Peticion peticion)
+            throws EmailbotException {
+        Trabajador trabajador = trabajadorRepository.findBy(peticion.getTrabajador()
+                .getNumeroTrabajador());
+        if (trabajador == null) {
+            String dependenciaAbreviacion = peticion.getTrabajador()
+                    .getDependencia().getAbreviacion();
+            Dependencia d = dependenciaRepository.findBy(dependenciaAbreviacion);
+            if (d != null) {
+                peticion.getTrabajador().setDependencia(d);
+            }
             peticionRepository.create(peticion);
         } else {
             throw EmailbotException.Builder.newBuilder()
@@ -64,5 +66,3 @@ public class RegisterEmailService extends AssertionConcern {
         }
     }
 }
-
-//Checar la dependencia antes de crear la peticion
