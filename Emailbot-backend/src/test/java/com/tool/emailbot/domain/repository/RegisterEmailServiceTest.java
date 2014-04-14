@@ -28,12 +28,11 @@ public class RegisterEmailServiceTest extends PersistenceTest {
     private UserTransaction tx;
     @Inject
     private JpaTrabajadorRepository daoTrabajador;
-//    @Inject
-//    private RegisterEmailService registerEmailService;
+    @Inject
+    private RegisterEmailService registerEmailService;
     @Inject
     private Repository<Dependencia> daoDependencia;
-    @Inject
-    private JpaPeticionRepository daoPeticion;
+    
 
     private final Peticion.Builder builderPeticion = Peticion.Builder.newBuilder();
     private final Dependencia.Builder buiderDependencia = Dependencia.Builder.newBuilder();
@@ -51,15 +50,13 @@ public class RegisterEmailServiceTest extends PersistenceTest {
 		setInformacionContacto(iBuider);
 	Trabajador trabajador = builderTrabajador.setDependencia(dependencia).setDirector(true).
 		setNumeroTrabajador("303204614").setPersona(buiderPersona).build();
-//	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").
-//		setTrabajador(trabajador).build();
-//	registerEmailService.registerEmailRequest(peticion);
+	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").
+		setTrabajador(trabajador).build();
+
 
 	tx.begin();
 	em.joinTransaction();
-	daoDependencia.create(dependencia);
-	daoTrabajador.create(trabajador);
-	//daoPeticion.create(peticion);
+	registerEmailService.registerEmailRequest(peticion);
 	tx.commit();
     }
 }
