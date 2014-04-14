@@ -40,7 +40,7 @@ public class Peticion extends DomainObject {
     private UUID id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "idTrabajador", nullable = false, unique = true)
     private Trabajador trabajador;
 

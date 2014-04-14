@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.adapter.jpa;
 
 import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
@@ -24,8 +21,7 @@ import javax.persistence.NonUniqueResultException;
 import javax.persistence.criteria.JoinType;
 
 /**
- *
- * @author edgar
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class JpaPeticionRepository implements PeticionRepository{
     private final Logger logger = LoggerFactory.getLogger(getClass());
