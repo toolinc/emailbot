@@ -1,4 +1,5 @@
 // Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;

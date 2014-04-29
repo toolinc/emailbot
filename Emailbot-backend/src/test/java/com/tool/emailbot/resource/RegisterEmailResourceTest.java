@@ -1,4 +1,4 @@
-// Copyright 2014 University of Detroit Mercy.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.resource;
 
@@ -36,13 +36,13 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
- * Test for {@link com.udm.identitymanager.resource.IdentityResource}.
+ * Test for {@link com.tool.emailbot.resource.RegisterEmailResource}.
  *
- * @author Oscar Rico (martinezr.oscar@gmail.com)
+ *  @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @RunAsClient
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class IdentityResourceTest extends PersistenceTest {
+public class RegisterEmailResourceTest extends PersistenceTest {
     private static final String RESOURCE_PREFIX = JaxRsActivator.class
             .getAnnotation(ApplicationPath.class).value().substring(1) + "/register/";
 
@@ -59,17 +59,19 @@ public class IdentityResourceTest extends PersistenceTest {
 
     @Test
     public void shouldRegisterPersonUser() throws Exception {
-        RegisterDependencia dependencia = new RegisterDependencia("DGTIC", "Direccion General de Telecomunicaciones y Computo");
-        RegisterInformacionContacto informacionContacto = new RegisterInformacionContacto("Jovanimtzrico@gmail.com",
-											  "571201109");
+        RegisterDependencia dependencia =
+                new RegisterDependencia("DGTIC",
+                        "Direccion General de Telecomunicaciones y Computo");
+        RegisterInformacionContacto informacionContacto = new RegisterInformacionContacto(
+                "Jovanimtzrico@gmail.com", "571201109");
 	RegisterPersona persona;
 	persona = new RegisterPersona("Jovani", "Martinez", "Rico",new Date(1990,07,26),
 		"ohm", "jov", informacionContacto.getInformacionContactoCommand());
-	RegisterTrabajador trabajador = new RegisterTrabajador(persona.getPersonaCommand(), dependencia.getDependenciaCommand(), "306204614",
-								       SituacionLaboralCommand.ACTIVO,
-								       true);
-	RegisterPeticion peticion = new RegisterPeticion(trabajador.getTrabajadorCommand(), EstatusCommand.CREADA, "jovanimtzrico@unam.mx",
-							 "Jovani", null);
+	RegisterTrabajador trabajador = new RegisterTrabajador(persona.getPersonaCommand(),
+            dependencia.getDependenciaCommand(), "306204614",
+            SituacionLaboralCommand.ACTIVO, true);
+	RegisterPeticion peticion = new RegisterPeticion(trabajador.getTrabajadorCommand(),
+            EstatusCommand.CREADA, "jovanimtzrico@unam.mx", "Jovani", null);
 	Response response = target.path("person")
                 .request()
                 .post(Entity.entity(peticion, mediaType), Response.class);
