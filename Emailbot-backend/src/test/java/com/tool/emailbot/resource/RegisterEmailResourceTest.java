@@ -65,8 +65,9 @@ public class RegisterEmailResourceTest extends PersistenceTest {
         RegisterInformacionContacto informacionContacto = new RegisterInformacionContacto(
                 "Jovanimtzrico@gmail.com", "571201109");
 	RegisterPersona persona;
-	persona = new RegisterPersona("Jovani", "Martinez", "Rico",new Date(1990,07,26),
-		"ohm", "jov", informacionContacto.getInformacionContactoCommand());
+	persona = new RegisterPersona("Jovani", "Martinez", "Rico",
+            new GregorianCalendar(1990,07,26).getTime(), "ohm", "jov",
+            informacionContacto.getInformacionContactoCommand());
 	RegisterTrabajador trabajador = new RegisterTrabajador(persona.getPersonaCommand(),
             dependencia.getDependenciaCommand(), "306204614",
             SituacionLaboralCommand.ACTIVO, true);
