@@ -2,11 +2,12 @@
 
 package com.tool.emailbot.adapter.jpa;
 
-import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
-import com.tool.emailbot.common.domain.repository.Repository;
-import com.tool.emailbot.domain.model.Peticion;
 import static com.tool.emailbot.domain.model.Peticion_.trabajador;
 
+import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
+import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.model.Estatus;
+import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.model.Peticion_;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.model.Trabajador_;
@@ -15,15 +16,14 @@ import com.tool.emailbot.domain.repository.PeticionRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
-import javax.persistence.NonUniqueResultException;
-import javax.persistence.criteria.JoinType;
 
 /**
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class JpaPeticionRepository implements PeticionRepository{
+public class JpaPeticionRepository implements PeticionRepository {
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final Repository<Peticion> repository;
 
@@ -49,12 +49,17 @@ public class JpaPeticionRepository implements PeticionRepository{
 
     @Override
     public Peticion findBy(String numeroTrabajador) {
-	Peticion peticion = null;
+        Peticion peticion = null;
         Trabajador t = null;
         QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
         qh.getRoot().fetch(trabajador);
-	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
-            .get(Trabajador_.numeroTrabajador), numeroTrabajador));
-	return peticion;
+        qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
+                .get(Trabajador_.numeroTrabajador), numeroTrabajador));
+        return peticion;
+    }
+
+    @Override
+    public List<Peticion> find(Estatus estatus, int size) {
+        return null;
     }
 }
