@@ -39,6 +39,8 @@ public abstract class PersistenceTest {
                 .addPackage("com.tool.emailbot.domain.model")
 		        .addPackage("com.tool.emailbot.domain.service")
                 .addPackage("com.tool.emailbot.domain.repository")
+                .addPackage("com.tool.emailbot.infraestructure.resource")
+                .addPackage("com.tool.emailbot.resource")
                 .addClass(EmailbotModuleTest.class)
                 .addAsLibraries(
                         DependencyResolvers.use(MavenDependencyResolver.class)

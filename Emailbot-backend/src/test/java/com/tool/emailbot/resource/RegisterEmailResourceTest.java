@@ -3,15 +3,10 @@
 package com.tool.emailbot.resource;
 
 import com.tool.emailbot.PersistenceTest;
-import com.tool.emailbot.application.command.EstatusCommand;
-import com.tool.emailbot.application.command.RegisterDependencia;
-import com.tool.emailbot.application.command.RegisterInformacionContacto;
-import com.tool.emailbot.application.command.RegisterPersona;
-import com.tool.emailbot.application.command.RegisterPeticion;
-import com.tool.emailbot.application.command.RegisterTrabajador;
-import com.tool.emailbot.application.command.SituacionLaboralCommand;
+import com.tool.emailbot.application.command.RegisterEmailCommand;
 import com.tool.emailbot.infraestructure.resource.GsonProvider;
 import com.tool.emailbot.infraestructure.resource.JaxRsActivator;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
@@ -24,7 +19,6 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.net.URL;
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import javax.ws.rs.ApplicationPath;
@@ -38,7 +32,7 @@ import javax.ws.rs.core.Response;
 /**
  * Test for {@link com.tool.emailbot.resource.RegisterEmailResource}.
  *
- *  @author Jovani Rico (jovanimtzrico@gmail.com)
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @RunAsClient
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -47,7 +41,8 @@ public class RegisterEmailResourceTest extends PersistenceTest {
             .getAnnotation(ApplicationPath.class).value().substring(1) + "/register/";
 
     private final String mediaType = MediaType.APPLICATION_JSON;
-    @ArquillianResource private URL deploymentUrl;
+    @ArquillianResource
+    private URL deploymentUrl;
     private Client client;
     private WebTarget target;
 
@@ -58,24 +53,15 @@ public class RegisterEmailResourceTest extends PersistenceTest {
     }
 
     @Test
-    public void shouldRegisterPersonUser() throws Exception {
-        RegisterDependencia dependencia =
-                new RegisterDependencia("DGTIC",
-                        "Direccion General de Telecomunicaciones y Computo");
-        RegisterInformacionContacto informacionContacto = new RegisterInformacionContacto(
-                "Jovanimtzrico@gmail.com", "571201109");
-	RegisterPersona persona;
-	persona = new RegisterPersona("Jovani", "Martinez", "Rico",
-            new GregorianCalendar(1990,07,26).getTime(), "ohm", "jov",
-            informacionContacto.getInformacionContactoCommand());
-	RegisterTrabajador trabajador = new RegisterTrabajador(persona.getPersonaCommand(),
-            dependencia.getDependenciaCommand(), "306204614",
-            SituacionLaboralCommand.ACTIVO, true);
-	RegisterPeticion peticion = new RegisterPeticion(trabajador.getTrabajadorCommand(),
-            EstatusCommand.CREADA, "jovanimtzrico@unam.mx", "Jovani", null);
-	Response response = target.path("person")
+    public void shouldRegisterWorker() throws Exception {
+        RegisterEmailCommand command = new RegisterEmailCommand("Jovani", "Martinez", "Rico",
+                new GregorianCalendar(1990, 07, 26).getTime(), "H46", "306204614",
+                "DGTIC", "Direccion General de Telecomunicaciones y Computo",
+                "jovanimtzrico@gmail.com", "571201109", "jovmtzrico");
+
+        Response response = target.path("worker")
                 .request()
-                .post(Entity.entity(peticion, mediaType), Response.class);
+                .post(Entity.entity(command, mediaType), Response.class);
         assertThat(response.getStatus(), is(200));
         assertTrue(response.readEntity(Boolean.class));
     }

@@ -2,9 +2,7 @@
 
 package com.tool.emailbot.domain.service;
 
-import com.tool.emailbot.adapter.jpa.JpaDependenciaRepository;
 import com.tool.emailbot.common.AssertionConcern;
-import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.Peticion;
@@ -14,6 +12,7 @@ import com.tool.emailbot.domain.repository.PeticionRepository;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
 
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 
 /**
  * The aim of the service is to register an email request from a worker.
@@ -48,6 +47,7 @@ public class RegisterEmailService extends AssertionConcern {
      * @param peticion the request that will be stored.
      * @throws EmailbotException if a request cannot be created
      */
+    @Transactional(Transactional.TxType.REQUIRED)
     public void registerEmailRequest(Peticion peticion)
             throws EmailbotException {
         Trabajador trabajador = trabajadorRepository.findBy(peticion.getTrabajador()

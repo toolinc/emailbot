@@ -3,7 +3,6 @@
 package com.tool.emailbot.application;
 
 import com.tool.emailbot.application.command.RegisterEmailCommand;
-import com.tool.emailbot.application.command.RegisterPeticion;
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Dependencia;
@@ -17,11 +16,11 @@ import javax.inject.Inject;
 
 /**
  * Provides all the features related to email robot.
- * 
+ *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 public class EmailApplicationService extends AssertionConcern {
-    
+
     private final RegisterEmailService registerEmailService;
 
     @Inject
@@ -36,29 +35,29 @@ public class EmailApplicationService extends AssertionConcern {
      * @param command the request that will be stored.
      * @throws EmailbotException if a request cannot be created
      */
-    public boolean registerEmailRequest(RegisterPeticion command) throws EmailbotException {
-	Peticion peticion = Peticion.Builder.newBuilder()
-		.setEmail(command.getPeticionComammand().getEmail())
-		.setUsername(command.getPeticionComammand().getUsername())
-		.setTrabajador(Trabajador.Builder.newBuilder()
-			.setNumeroTrabajador(command.getPeticionComammand().getTrabajador().getNumeroTrabajador())
-			.setDirector(true)
-			.setDependencia(new Dependencia.Builder()
-				.setNombre(command.getPeticionComammand().getTrabajador().getDependencia().getNombre())
-				.setAbreviacion(command.getPeticionComammand().getTrabajador().getDependencia().getAbreviacion())
-				.build())
-			.setPersona(Persona.Builder.newBuilder()
-				.setInformacionContacto(InformacionContacto.Builder.newBuilder()
-					.setEmail(command.getPeticionComammand().getTrabajador().getPersona().getInformacionContacto().getEmail()))
-				.setApellidoMaterno(command.getPeticionComammand().getTrabajador().getPersona().getApellidoMaterno())
-				.setApellidoPaterno(command.getPeticionComammand().getTrabajador().getPersona().getApellidoPaterno())
-				.setHomoclave(command.getPeticionComammand().getTrabajador().getPersona().getHomoclave())
-				.setNombre(command.getPeticionComammand().getTrabajador().getPersona().getNombrePersona())
-				.setFechaNacimiento(command.getPeticionComammand().getTrabajador().getPersona().getFechaNacimiento()))
-		.build())
-	.build();
+    public boolean registerEmailRequest(RegisterEmailCommand command) throws EmailbotException {
+        Peticion peticion = Peticion.Builder.newBuilder()
+                .setEmail(command.getEmail())
+                .setUsername(command.getUsername())
+                .setTrabajador(Trabajador.Builder.newBuilder()
+                        .setNumeroTrabajador(command.getWorkerNumber())
+                        .setDirector(true)
+                        .setDependencia(new Dependencia.Builder()
+                                .setNombre(command.getDependencyName())
+                                .setAbreviacion(command.getDependencyCode())
+                                .build())
+                        .setPersona(Persona.Builder.newBuilder()
+                                .setInformacionContacto(InformacionContacto.Builder.newBuilder()
+                                        .setEmail(command.getEmail()))
+                                .setApellidoMaterno(command.getMotherLastName())
+                                .setApellidoPaterno(command.getFatherLastName())
+                                .setHomoclave(command.getHomoclave())
+                                .setNombre(command.getName())
+                                .setFechaNacimiento(command.getDateOfBirth()))
+                        .build())
+                .build();
 
-	registerEmailService.registerEmailRequest(peticion);
-	return true;
+        registerEmailService.registerEmailRequest(peticion);
+        return true;
     }
 }

@@ -1,4 +1,4 @@
-    // Copyright 2014 Tool Inc.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.application.command;
 
@@ -16,22 +16,27 @@ public class RegisterEmailCommand implements Command {
     private String name;
     private String fatherLastName;
     private String motherLastName;
-    private Date fechaNacimiento;
+    private Date dateOfBirth;
     private String homoclave;
-    private String numeroTrabajador;
+    private String workerNumber;
     private String email;
     private String telephone;
     private String username;
+    private String dependencyCode;
+    private String dependencyName;
 
     public RegisterEmailCommand(String name, String fatherLastName, String motherLastName,
-            Date fechaNacimiento, String homoclave, String numeroTrabajador, String email,
-            String telephone, String username) {
+                                Date dateOfBirth, String homoclave, String workerNumber,
+                                String dependencyCode, String dependencyName, String email,
+                                String telephone, String username) {
         this.name = name;
         this.fatherLastName = fatherLastName;
         this.motherLastName = motherLastName;
-        this.fechaNacimiento = fechaNacimiento;
+        this.dateOfBirth = dateOfBirth;
         this.homoclave = homoclave;
-        this.numeroTrabajador = numeroTrabajador;
+        this.workerNumber = workerNumber;
+        this.dependencyCode = dependencyCode;
+        this.dependencyName =  dependencyName;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
@@ -61,12 +66,12 @@ public class RegisterEmailCommand implements Command {
         this.motherLastName = motherLastName;
     }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public String getHomoclave() {
@@ -77,12 +82,28 @@ public class RegisterEmailCommand implements Command {
         this.homoclave = homoclave;
     }
 
-    public String getNumeroTrabajador() {
-        return numeroTrabajador;
+    public String getWorkerNumber() {
+        return workerNumber;
     }
 
-    public void setNumeroTrabajador(String numeroTrabajador) {
-        this.numeroTrabajador = numeroTrabajador;
+    public void setWorkerNumber(String workerNumber) {
+        this.workerNumber = workerNumber;
+    }
+
+    public String getDependencyCode() {
+        return dependencyCode;
+    }
+
+    public void setDependencyCode(String dependencyCode) {
+        this.dependencyCode = dependencyCode;
+    }
+
+    public String getDependencyName() {
+        return dependencyName;
+    }
+
+    public void setDependencyName(String dependencyName) {
+        this.dependencyName = dependencyName;
     }
 
     public String getEmail() {

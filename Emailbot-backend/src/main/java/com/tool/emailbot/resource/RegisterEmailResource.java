@@ -3,9 +3,9 @@
 package com.tool.emailbot.resource;
 
 import com.tool.emailbot.application.EmailApplicationService;
+import com.tool.emailbot.application.command.RegisterEmailCommand;
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.domain.EmailbotException;
-import com.tool.emailbot.domain.service.RegisterEmailService;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 /**
- * Identity resource to interact with other SOA systems.
+ * Register resource to interact with other SOA systems.
  *
  *  @author Jovani Rico (jovanimtzrico@gmail.com)
  */
@@ -28,10 +28,9 @@ public class RegisterEmailResource extends AssertionConcern {
     private EmailApplicationService applicationService;
 
     @POST
-    @Path("/person")
-    public boolean registerUser(RegisterEmailService emailResource) throws
-            EmailbotException {
-                applicationService.registerEmailRequest(null);
+    @Path("/worker")
+    public boolean registerWorker(RegisterEmailCommand command) throws EmailbotException {
+        applicationService.registerEmailRequest(command);
         return true;
     }
 }
