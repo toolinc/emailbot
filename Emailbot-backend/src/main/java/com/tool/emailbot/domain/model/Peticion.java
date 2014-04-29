@@ -5,7 +5,6 @@ package com.tool.emailbot.domain.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
-
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.common.domain.validation.Email;
@@ -147,8 +146,8 @@ public class Peticion extends DomainObject {
         }
 
         public Builder setUsername(String username) {
-            checkState(!isNullOrEmpty(email));
-            this.email = email;
+            checkState(!isNullOrEmpty(username));
+            this.username = username;
             return this;
         }
 

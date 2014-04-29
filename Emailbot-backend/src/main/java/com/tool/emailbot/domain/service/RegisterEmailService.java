@@ -2,6 +2,7 @@
 
 package com.tool.emailbot.domain.service;
 
+import com.tool.emailbot.adapter.jpa.JpaDependenciaRepository;
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.EmailbotException;
@@ -57,7 +58,9 @@ public class RegisterEmailService extends AssertionConcern {
             Dependencia d = dependenciaRepository.findBy(dependenciaAbreviacion);
             if (d != null) {
                 peticion.getTrabajador().setDependencia(d);
-            }
+            } else {
+               dependenciaRepository.create(peticion.getTrabajador().getDependencia());
+           }
             peticionRepository.create(peticion);
         } else {
             throw EmailbotException.Builder.newBuilder()

@@ -230,6 +230,11 @@ public class Persona extends DomainObject {
 	    this.fechaNacimiento = newDate(year, month, dayOfMonth);
 	    return this;
 	}
+	
+	public Builder setFechaNacimiento(Date date) {
+	    this.fechaNacimiento = date;
+	    return this;
+	}
 
 	public Builder setHomoclave(String homoclave) {
 	    this.homoclave = Builder.validateHomoclave(homoclave);

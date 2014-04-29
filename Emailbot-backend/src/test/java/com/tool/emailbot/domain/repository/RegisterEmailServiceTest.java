@@ -32,6 +32,8 @@ public class RegisterEmailServiceTest extends PersistenceTest {
     private RegisterEmailService registerEmailService;
     @Inject
     private Repository<Dependencia> daoDependencia;
+    @Inject
+    private DependenciaRepository dependenciaRepository;
     
 
     private final Peticion.Builder builderPeticion = Peticion.Builder.newBuilder();
