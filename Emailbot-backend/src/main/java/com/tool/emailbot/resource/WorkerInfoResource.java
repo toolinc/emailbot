@@ -2,10 +2,6 @@
 
 package com.tool.emailbot.resource;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-
 import com.google.common.annotations.VisibleForTesting;
 import com.tool.emailbot.application.command.WorkerInformationCommand;
 import com.tool.emailbot.infraestructure.resource.GsonProvider;
