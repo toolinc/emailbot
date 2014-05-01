@@ -38,6 +38,10 @@ public class ValidateWorkerInfoJob extends AssertionConcern {
 	workerInfoService.validateWorkerInformation(peticion);
 	peticion.getTrabajador().getDependencia().setAbreviacion(workerInfoService.getCommand().getDependencyCode());
 	peticion.getTrabajador().getDependencia().setNombre(workerInfoService.getCommand().getGetDependencyName());
-	peticion.setEstatus(Estatus.PENDIENTE);
+	if(workerInfoService.getCommand().isStatus() == true){
+	    peticion.setEstatus(Estatus.PENDIENTE);
+	}else{
+	    peticion.setEstatus(Estatus.RECHAZADA);
+	}
     }
 }
