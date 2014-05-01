@@ -4,6 +4,8 @@ package com.tool.emailbot.domain.service;
 
 import com.tool.emailbot.application.command.WorkerInformationCommand;
 import com.tool.emailbot.common.AssertionConcern;
+import com.tool.emailbot.domain.model.Dependencia;
+import com.tool.emailbot.domain.model.Dependencia.Builder;
 import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.repository.DependenciaRepository;
 import com.tool.emailbot.domain.repository.PeticionRepository;
@@ -41,7 +43,10 @@ public class ValidateWorkerInfoService extends AssertionConcern {
     public void validateWorkerInformation(Peticion peticion) {
 	command = new WorkerInformationCommand(peticion.getTrabajador().getNumeroTrabajador(), true, null, null);
 	command = resource.retrieveWorkerInfo(getCommand());
-	
+	Dependencia d = new Dependencia.Builder().setAbreviacion(command.getDependencyCode()).setNombre(command.getGetDependencyName()).build();
+	dependenciaRepository.create(d);
+	peticion.getTrabajador().setDependencia(d);
+	peticionRepository.update(peticion);
     }
 
     public WorkerInformationCommand getCommand() {
