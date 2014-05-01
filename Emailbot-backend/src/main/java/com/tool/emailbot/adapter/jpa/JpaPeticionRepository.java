@@ -57,7 +57,7 @@ public class JpaPeticionRepository implements PeticionRepository {
         qh.getRoot().fetch(trabajador);
         qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
                 .get(Trabajador_.numeroTrabajador), numeroTrabajador));
-	try {
+        try {
             peticion = qh.getSingleResult();
         } catch (NoResultException | NonUniqueResultException exc) {
             logger.warn(exc.getMessage());
@@ -67,10 +67,11 @@ public class JpaPeticionRepository implements PeticionRepository {
 
     @Override
     public List<Peticion> find(Estatus estatus, int size) {
-	List<Peticion> peticion = null;
-	QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
-	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.estatus), estatus));
-	try {
+        List<Peticion> peticion = null;
+        QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
+        qh.getRoot().fetch(Peticion_.trabajador).fetch(Trabajador_.dependencia);
+        qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.estatus), estatus));
+        try {
             peticion = qh.getResultList(0, size);
         } catch (NoResultException | NonUniqueResultException exc) {
             logger.warn(exc.getMessage());

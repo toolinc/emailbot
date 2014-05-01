@@ -5,11 +5,12 @@ package com.tool.emailbot.domain.service;
 import com.tool.emailbot.application.command.WorkerInformationCommand;
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.domain.model.Dependencia;
-import com.tool.emailbot.domain.model.Dependencia.Builder;
-import com.tool.emailbot.domain.model.Peticion;
+import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.repository.DependenciaRepository;
-import com.tool.emailbot.domain.repository.PeticionRepository;
+import com.tool.emailbot.domain.repository.TrabajadorRepository;
 import com.tool.emailbot.resource.WorkerInfoResource;
+
+import javax.transaction.Transactional;
 
 /**
  * The aim of the service is to validate the worker information of a new request of email service.
@@ -19,18 +20,17 @@ import com.tool.emailbot.resource.WorkerInfoResource;
 public class ValidateWorkerInfoService extends AssertionConcern {
 
     private final WorkerInfoResource resource;
-    private final PeticionRepository peticionRepository;
+    private final TrabajadorRepository trabajadorRepository;
     private final DependenciaRepository dependenciaRepository;
-    private WorkerInformationCommand command;
 
     public ValidateWorkerInfoService(WorkerInfoResource resource,
-                                     PeticionRepository peticionRepository,
+                                     TrabajadorRepository trabajadorRepository,
                                      DependenciaRepository dependenciaRepository) {
         assertArgumentNotNull(resource, "The Worker Information client is null.");
-        assertArgumentNotNull(peticionRepository, "The Request repository is null.");
+        assertArgumentNotNull(trabajadorRepository, "The Trabajador repository is null.");
         assertArgumentNotNull(dependenciaRepository, "The Dependency repository is null.");
         this.resource = resource;
-        this.peticionRepository = peticionRepository;
+        this.trabajadorRepository = trabajadorRepository;
         this.dependenciaRepository = dependenciaRepository;
     }
 
@@ -38,18 +38,22 @@ public class ValidateWorkerInfoService extends AssertionConcern {
      * Validates the worker information on a request in
      * {@code com.tool.emailbot.domain.model.Estatus.SOLICITUD}.
      *
-     * @param peticion the request that will be validated
+     * @param worker the worker that will be validated
      */
-    public void validateWorkerInformation(Peticion peticion) {
-	command = new WorkerInformationCommand(peticion.getTrabajador().getNumeroTrabajador(), true, null, null);
-	command = resource.retrieveWorkerInfo(getCommand());
-	Dependencia d = new Dependencia.Builder().setAbreviacion(command.getDependencyCode()).setNombre(command.getGetDependencyName()).build();
-	dependenciaRepository.create(d);
-	peticion.getTrabajador().setDependencia(d);
-	peticionRepository.update(peticion);
-    }
-
-    public WorkerInformationCommand getCommand() {
-	return command;
+    @Transactional(Transactional.TxType.REQUIRED)
+    public void validateWorkerInformation(Trabajador worker) {
+        //TODO (jovani): Remove this
+        WorkerInformationCommand command;
+        command = new WorkerInformationCommand(worker.getNumeroTrabajador(),
+                worker.getSitucionLaboral().isActive(), worker.getDependencia().getAbreviacion(),
+                worker.getDependencia().getNombre());
+        command = resource.retrieveWorkerInfo(command);
+        Dependencia dependencia = new Dependencia.Builder()
+                .setAbreviacion(command.getDependencyCode())
+                .setNombre(command.getGetDependencyName())
+                .build();
+        dependenciaRepository.create(dependencia);
+        worker.setDependencia(dependencia);
+        trabajadorRepository.update(worker);
     }
 }

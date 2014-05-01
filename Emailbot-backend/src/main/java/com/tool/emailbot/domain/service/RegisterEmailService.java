@@ -38,7 +38,7 @@ public class RegisterEmailService extends AssertionConcern {
         assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
         this.trabajadorRepository = trabajadorRepository;
         this.peticionRepository = peticionRepository;
-	this.dependenciaRepository = dependenciaRepository;
+	    this.dependenciaRepository = dependenciaRepository;
     }
 
     /**
@@ -59,6 +59,7 @@ public class RegisterEmailService extends AssertionConcern {
             if (d != null) {
                 peticion.getTrabajador().setDependencia(d);
             } else {
+                //TODO (jovani): assign to a default dependency to the worker.
                dependenciaRepository.create(peticion.getTrabajador().getDependencia());
            }
             peticionRepository.create(peticion);

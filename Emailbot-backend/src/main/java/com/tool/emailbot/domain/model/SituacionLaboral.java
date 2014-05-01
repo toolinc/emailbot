@@ -12,9 +12,20 @@ public enum SituacionLaboral {
     /**
      * An active worker.
      */
-    ACTIVO,
+    ACTIVO(true),
+    
     /**
      * An inactive worker.
      */
-    INACTIVO
+    INACTIVO(false);
+
+    private final boolean active;
+
+    private SituacionLaboral(boolean active) {
+        this.active = active;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
 }

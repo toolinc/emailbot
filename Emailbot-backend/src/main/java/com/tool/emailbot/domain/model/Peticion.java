@@ -5,6 +5,7 @@ package com.tool.emailbot.domain.model;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.common.domain.validation.Email;
@@ -39,7 +40,7 @@ public class Peticion extends DomainObject {
     private UUID id;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY,cascade = {CascadeType.PERSIST})
+    @OneToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "idTrabajador", nullable = false, unique = true)
     private Trabajador trabajador;
 
@@ -123,6 +124,21 @@ public class Peticion extends DomainObject {
     }
 
     /**
+     * This method transition a request form SOLICITUD to the next state based on the worker status,
+     * If the worker is active it will transition to PENDIENTE status otherwise will transition to
+     * RECHAZADA.
+     */
+    public void transitionFromSolicitud() {
+        if (Estatus.SOLICITUD.equals(getEstatus())) {
+            if (getTrabajador().getSitucionLaboral().isActive()) {
+                setEstatus(Estatus.PENDIENTE);
+            } else {
+                setEstatus(Estatus.RECHAZADA);
+            }
+        }
+    }
+
+    /**
      * Builder of {@link Peticion} instances.
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
@@ -157,7 +173,7 @@ public class Peticion extends DomainObject {
          * characteristics on the
          * {@link Peticion.Builder}.
          *
-         * @return a new instance {@link Peticion}.
+         * @return a new instance {@link com.tool.emailbot.domain.model.Peticion}.
          */
         @Override
         public Peticion build() {
@@ -170,7 +186,7 @@ public class Peticion extends DomainObject {
          * Provides a new builder.
          *
          * @return a new instance of
-         * {@link com.tool.emailbot.persistence.domain.model.Trabajador.Builder}.
+         * {@link com.tool.emailbot.domain.model.Peticion.Builder}.
          */
         public static Builder newBuilder() {
             return new Builder();
