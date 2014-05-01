@@ -25,7 +25,7 @@ import javax.ws.rs.core.Response;
 public class WorkerInfoResource {
 
     private static final String RESOURCE_PREFIX = JaxRsActivator.class
-            .getAnnotation(ApplicationPath.class).value().substring(1) + "/changeme/";
+            .getAnnotation(ApplicationPath.class).value().substring(1) + "/DGIRE/";
     @VisibleForTesting
     public static URL deploymentUrl;
     private final String mediaType = MediaType.APPLICATION_JSON;
@@ -44,7 +44,7 @@ public class WorkerInfoResource {
      * @return the worker information
      */
     public WorkerInformationCommand retrieveWorkerInfo(WorkerInformationCommand command) {
-        Response response = target.path("changeme").request()
+        Response response = target.path("/findWorker").request()
                 .post(Entity.entity(command, mediaType), Response.class);
         if (response.getStatus() == 200) {
             command = response.readEntity(WorkerInformationCommand.class);

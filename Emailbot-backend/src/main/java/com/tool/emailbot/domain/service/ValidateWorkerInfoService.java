@@ -2,6 +2,7 @@
 
 package com.tool.emailbot.domain.service;
 
+import com.tool.emailbot.application.command.WorkerInformationCommand;
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.repository.DependenciaRepository;
@@ -18,6 +19,7 @@ public class ValidateWorkerInfoService extends AssertionConcern {
     private final WorkerInfoResource resource;
     private final PeticionRepository peticionRepository;
     private final DependenciaRepository dependenciaRepository;
+    private WorkerInformationCommand command;
 
     public ValidateWorkerInfoService(WorkerInfoResource resource,
                                      PeticionRepository peticionRepository,
@@ -31,11 +33,18 @@ public class ValidateWorkerInfoService extends AssertionConcern {
     }
 
     /**
-     * Validates the worker information o a request in
+     * Validates the worker information on a request in
      * {@code com.tool.emailbot.domain.model.Estatus.SOLICITUD}.
      *
      * @param peticion the request that will be validated
      */
     public void validateWorkerInformation(Peticion peticion) {
+	command = new WorkerInformationCommand(peticion.getTrabajador().getNumeroTrabajador(), true, null, null);
+	command = resource.retrieveWorkerInfo(getCommand());
+	
+    }
+
+    public WorkerInformationCommand getCommand() {
+	return command;
     }
 }

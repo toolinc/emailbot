@@ -19,6 +19,8 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 
 /**
  * @author Jovani Rico (jovanimtzrico@gmail.com)
@@ -55,11 +57,24 @@ public class JpaPeticionRepository implements PeticionRepository {
         qh.getRoot().fetch(trabajador);
         qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
                 .get(Trabajador_.numeroTrabajador), numeroTrabajador));
+	try {
+            peticion = qh.getSingleResult();
+        } catch (NoResultException | NonUniqueResultException exc) {
+            logger.warn(exc.getMessage());
+        }
         return peticion;
     }
 
     @Override
     public List<Peticion> find(Estatus estatus, int size) {
-        return null;
+	List<Peticion> peticion = null;
+	QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
+	qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.estatus), estatus));
+	try {
+            peticion = qh.getResultList(0, size);
+        } catch (NoResultException | NonUniqueResultException exc) {
+            logger.warn(exc.getMessage());
+        }
+        return peticion;
     }
 }
