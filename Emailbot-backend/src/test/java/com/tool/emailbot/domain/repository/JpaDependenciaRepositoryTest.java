@@ -3,8 +3,6 @@
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;
-import com.tool.emailbot.adapter.jpa.JpaDependenciaRepository;
-import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
 
 import org.junit.Assert;
@@ -23,42 +21,41 @@ public class JpaDependenciaRepositoryTest extends PersistenceTest {
 
     @Inject private EntityManager entityManager;
     @Inject private UserTransaction tx;
-    @Inject private Repository<Dependencia> daoDependencia;
-    //@Inject private JpaDependenciaRepository dependenciaRepository;
+    @Inject private DependenciaRepository dependenciaRepository;
     private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
 
-    //@Test
+    @Test
     public void shouldPersistDependencia() throws Exception {
         Dependencia dependencia = builder.setAbreviacion("daoDependencia")
                 .setNombre("Nueva Dependencia DAO")
                 .build();
         tx.begin();
         em.joinTransaction();
-        daoDependencia.create(dependencia);
+        dependenciaRepository.create(dependencia);
         tx.commit();
     }
-    
-    //@Test
+
+    @Test
     public void shouldPersistDefaultDependencia() throws Exception {
-	String abreviacion= "UNAM";
+        String abreviacion = "UNAM";
         Dependencia dependencia = builder.build();
         tx.begin();
         em.joinTransaction();
-        daoDependencia.create(dependencia);
+        dependenciaRepository.create(dependencia);
         tx.commit();
-	Assert.assertEquals(abreviacion, dependencia.getAbreviacion());
+        Assert.assertEquals(abreviacion, dependencia.getAbreviacion());
     }
-    
+
     @Test
     public void shouldFindDependencia() throws Exception {
-	String abreviacion= "ENP";
-	Dependencia d=null;
+        String abreviacion = "ENP";
+        Dependencia d = null;
         Dependencia dependencia = builder.setAbreviacion("ENP").setNombre("Escuela Nacional").build();
         tx.begin();
         em.joinTransaction();
-        daoDependencia.create(dependencia);
-	//d=dependenciaRepository.findBy(abreviacion);
+        dependenciaRepository.create(dependencia);
+        d = dependenciaRepository.findBy(abreviacion);
         tx.commit();
-	
+        Assert.assertNotNull(d);
     }
 }
