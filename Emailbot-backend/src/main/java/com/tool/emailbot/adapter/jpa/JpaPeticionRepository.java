@@ -52,9 +52,8 @@ public class JpaPeticionRepository implements PeticionRepository {
     @Override
     public Peticion findBy(String numeroTrabajador) {
         Peticion peticion = null;
-        Trabajador t = null;
         QueryHelper<Peticion, Peticion> qh = repository.newQueryHelper();
-        qh.getRoot().fetch(trabajador);
+        qh.getRoot().fetch(Peticion_.trabajador);
         qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Peticion_.trabajador)
                 .get(Trabajador_.numeroTrabajador), numeroTrabajador));
         try {

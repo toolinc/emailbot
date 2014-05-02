@@ -90,17 +90,15 @@ public class Dependencia extends DomainObject {
     public static class Builder implements DomainObjectBuilder<Dependencia> {
 
         private UUID id;
-        private String nombre;
-        private String abreviacion;
+        private String nombre = "Universidad Nacional Autonoma de Mexico";
+        private String abreviacion = "UNAM";
 
         public Builder setNombre(String nombre) {
-            checkState(!isNullOrEmpty(nombre));
             this.nombre = nombre.toUpperCase();
             return this;
         }
 
         public Builder setAbreviacion(String abreviacion) {
-            checkState(!isNullOrEmpty(abreviacion));
             this.abreviacion = abreviacion.toUpperCase();
             return this;
         }

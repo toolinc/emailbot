@@ -22,21 +22,17 @@ public class RegisterEmailCommand implements Command {
     private String email;
     private String telephone;
     private String username;
-    private String dependencyCode;
-    private String dependencyName;
+    
 
     public RegisterEmailCommand(String name, String fatherLastName, String motherLastName,
                                 Date dateOfBirth, String homoclave, String workerNumber,
-                                String dependencyCode, String dependencyName, String email,
-                                String telephone, String username) {
+				String email,String telephone, String username) {
         this.name = name;
         this.fatherLastName = fatherLastName;
         this.motherLastName = motherLastName;
         this.dateOfBirth = dateOfBirth;
         this.homoclave = homoclave;
         this.workerNumber = workerNumber;
-        this.dependencyCode = dependencyCode;
-        this.dependencyName =  dependencyName;
         this.email = email;
         this.telephone = telephone;
         this.username = username;
@@ -88,22 +84,6 @@ public class RegisterEmailCommand implements Command {
 
     public void setWorkerNumber(String workerNumber) {
         this.workerNumber = workerNumber;
-    }
-
-    public String getDependencyCode() {
-        return dependencyCode;
-    }
-
-    public void setDependencyCode(String dependencyCode) {
-        this.dependencyCode = dependencyCode;
-    }
-
-    public String getDependencyName() {
-        return dependencyName;
-    }
-
-    public void setDependencyName(String dependencyName) {
-        this.dependencyName = dependencyName;
     }
 
     public String getEmail() {

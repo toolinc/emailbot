@@ -56,7 +56,6 @@ public class RegisterEmailResourceTest extends PersistenceTest {
     public void shouldRegisterWorker() throws Exception {
         RegisterEmailCommand command = new RegisterEmailCommand("Jovani", "Martinez", "Rico",
                 new GregorianCalendar(1990, 07, 26).getTime(), "H46", "306204614",
-                "DGTIC", "Direccion General de Telecomunicaciones y Computo",
                 "jovanimtzrico@gmail.com", "571201109", "jovmtzrico");
 
         Response response = target.path("worker")

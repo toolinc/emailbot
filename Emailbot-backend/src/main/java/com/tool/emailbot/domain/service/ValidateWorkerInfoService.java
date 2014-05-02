@@ -42,17 +42,17 @@ public class ValidateWorkerInfoService extends AssertionConcern {
      */
     @Transactional(Transactional.TxType.REQUIRED)
     public void validateWorkerInformation(Trabajador worker) {
-        //TODO (jovani): Remove this
         WorkerInformationCommand command;
         command = new WorkerInformationCommand(worker.getNumeroTrabajador(),
                 worker.getSitucionLaboral().isActive(), worker.getDependencia().getAbreviacion(),
                 worker.getDependencia().getNombre());
         command = resource.retrieveWorkerInfo(command);
+	//si ya existe un dependencia, 
         Dependencia dependencia = new Dependencia.Builder()
                 .setAbreviacion(command.getDependencyCode())
                 .setNombre(command.getGetDependencyName())
                 .build();
-        dependenciaRepository.create(dependencia);
+        dependenciaRepository.update(dependencia);
         worker.setDependencia(dependencia);
         trabajadorRepository.update(worker);
     }

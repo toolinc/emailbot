@@ -3,9 +3,11 @@
 package com.tool.emailbot.domain.repository;
 
 import com.tool.emailbot.PersistenceTest;
+import com.tool.emailbot.adapter.jpa.JpaDependenciaRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -22,9 +24,10 @@ public class JpaDependenciaRepositoryTest extends PersistenceTest {
     @Inject private EntityManager entityManager;
     @Inject private UserTransaction tx;
     @Inject private Repository<Dependencia> daoDependencia;
+    //@Inject private JpaDependenciaRepository dependenciaRepository;
     private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
 
-    @Test
+    //@Test
     public void shouldPersistDependencia() throws Exception {
         Dependencia dependencia = builder.setAbreviacion("daoDependencia")
                 .setNombre("Nueva Dependencia DAO")
@@ -33,5 +36,29 @@ public class JpaDependenciaRepositoryTest extends PersistenceTest {
         em.joinTransaction();
         daoDependencia.create(dependencia);
         tx.commit();
+    }
+    
+    //@Test
+    public void shouldPersistDefaultDependencia() throws Exception {
+	String abreviacion= "UNAM";
+        Dependencia dependencia = builder.build();
+        tx.begin();
+        em.joinTransaction();
+        daoDependencia.create(dependencia);
+        tx.commit();
+	Assert.assertEquals(abreviacion, dependencia.getAbreviacion());
+    }
+    
+    @Test
+    public void shouldFindDependencia() throws Exception {
+	String abreviacion= "ENP";
+	Dependencia d=null;
+        Dependencia dependencia = builder.setAbreviacion("ENP").setNombre("Escuela Nacional").build();
+        tx.begin();
+        em.joinTransaction();
+        daoDependencia.create(dependencia);
+	//d=dependenciaRepository.findBy(abreviacion);
+        tx.commit();
+	
     }
 }
