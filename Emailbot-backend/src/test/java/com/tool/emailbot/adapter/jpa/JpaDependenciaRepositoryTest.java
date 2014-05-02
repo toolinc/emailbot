@@ -1,12 +1,13 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.domain.repository;
+package com.tool.emailbot.adapter.jpa;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.tool.emailbot.PersistenceTest;
 import com.tool.emailbot.domain.model.Dependencia;
+import com.tool.emailbot.domain.repository.DependenciaRepository;
 
 import org.junit.Test;
 

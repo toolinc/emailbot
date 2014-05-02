@@ -6,6 +6,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static com.google.common.base.Strings.isNullOrEmpty;
 
+import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.common.domain.model.DomainObject;
 import com.tool.emailbot.common.domain.model.DomainObjectBuilder;
 import com.tool.emailbot.common.domain.validation.UniqueKey;
@@ -87,18 +88,20 @@ public class Dependencia extends DomainObject {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder implements DomainObjectBuilder<Dependencia> {
+    public static class Builder extends AssertionConcern implements DomainObjectBuilder<Dependencia> {
 
         private UUID id;
         private String nombre = "Universidad Nacional Autonoma de Mexico";
         private String abreviacion = "UNAM";
 
         public Builder setNombre(String nombre) {
+            assertArgumentNotEmpty(nombre, "Nombre cannot be null or empty.");
             this.nombre = nombre.toUpperCase();
             return this;
         }
 
         public Builder setAbreviacion(String abreviacion) {
+            assertArgumentNotEmpty(abreviacion, "Abreviacion cannot be null or empty.");
             this.abreviacion = abreviacion.toUpperCase();
             return this;
         }

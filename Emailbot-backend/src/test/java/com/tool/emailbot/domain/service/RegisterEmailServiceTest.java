@@ -1,9 +1,8 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.domain.repository;
+package com.tool.emailbot.domain.service;
 
 import com.tool.emailbot.PersistenceTest;
-import com.tool.emailbot.adapter.jpa.JpaPeticionRepository;
 import com.tool.emailbot.adapter.jpa.JpaTrabajadorRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
@@ -11,7 +10,7 @@ import com.tool.emailbot.domain.model.InformacionContacto;
 import com.tool.emailbot.domain.model.Persona;
 import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.model.Trabajador;
-import com.tool.emailbot.domain.service.RegisterEmailService;
+import com.tool.emailbot.domain.repository.DependenciaRepository;
 
 import org.junit.Test;
 

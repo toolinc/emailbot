@@ -1,11 +1,9 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.domain.repository;
+package com.tool.emailbot.adapter.jpa;
 
 import com.tool.emailbot.PersistenceTest;
-import com.tool.emailbot.adapter.jpa.JpaTrabajadorRepository;
 import com.tool.emailbot.common.domain.repository.Repository;
-import com.tool.emailbot.domain.EmailbotException;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.InformacionContacto;
 import com.tool.emailbot.domain.model.Persona;
@@ -29,7 +27,7 @@ public class JpaTrabajadorRepositoryTest extends PersistenceTest {
     private Repository<Dependencia> daoDependencia;
     @Inject
     private JpaTrabajadorRepository daoTrabajador;
-    
+
     private final Dependencia.Builder buiderDependencia = Dependencia.Builder.newBuilder();
     private final InformacionContacto.Builder iBuider = InformacionContacto.Builder.newBuilder();
     private final Persona.Builder buiderPersona = Persona.Builder.newBuilder();
@@ -37,18 +35,18 @@ public class JpaTrabajadorRepositoryTest extends PersistenceTest {
 
     @Test
     public void shouldPersistTrabajador() throws Exception {
-	Dependencia dependencia = buiderDependencia.setAbreviacion("DGTIC").setNombre(
-		"Direccion General").build();
-	iBuider.setEmail("jovanimtzrico@gmail.com");
-	buiderPersona.setNombre("Jovani").setApellidoMaterno("Rico").
-		setApellidoPaterno("Martinez").setFechaNacimiento(1990, 07, 26).setHomoclave("ohm").
-		setInformacionContacto(iBuider);
-	Trabajador trabajador = builder.setDependencia(dependencia).setDirector(true).
-		setNumeroTrabajador("303204614").setPersona(buiderPersona).build();
-	tx.begin();
-	em.joinTransaction();
-	daoDependencia.create(dependencia);
-	daoTrabajador.create(trabajador);
-	tx.commit();
+        Dependencia dependencia = buiderDependencia.setAbreviacion("DGTIC").setNombre(
+                "Direccion General").build();
+        iBuider.setEmail("jovanimtzrico@gmail.com");
+        buiderPersona.setNombre("Jovani").setApellidoMaterno("Rico").
+                setApellidoPaterno("Martinez").setFechaNacimiento(1990, 07, 26).setHomoclave("ohm").
+                setInformacionContacto(iBuider);
+        Trabajador trabajador = builder.setDependencia(dependencia).setDirector(true).
+                setNumeroTrabajador("303204614").setPersona(buiderPersona).build();
+        tx.begin();
+        em.joinTransaction();
+        daoDependencia.create(dependencia);
+        daoTrabajador.create(trabajador);
+        tx.commit();
     }
 }
