@@ -2,10 +2,12 @@
 
 package com.tool.emailbot.domain.repository;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import com.tool.emailbot.PersistenceTest;
 import com.tool.emailbot.domain.model.Dependencia;
 
-import org.junit.Assert;
 import org.junit.Test;
 
 import javax.inject.Inject;
@@ -19,20 +21,23 @@ import javax.transaction.UserTransaction;
  */
 public class JpaDependenciaRepositoryTest extends PersistenceTest {
 
+    private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
     @Inject private EntityManager entityManager;
     @Inject private UserTransaction tx;
     @Inject private DependenciaRepository dependenciaRepository;
-    private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
 
     @Test
     public void shouldPersistDependencia() throws Exception {
-        Dependencia dependencia = builder.setAbreviacion("daoDependencia")
-                .setNombre("Nueva Dependencia DAO")
-                .build();
+        String abreviacion = "daoDependencia".toUpperCase();
+        String nombre = "Nueva Dependencia DAO".toUpperCase();
+        Dependencia dependencia = builder.setAbreviacion(abreviacion).setNombre(nombre).build();
         tx.begin();
         em.joinTransaction();
         dependenciaRepository.create(dependencia);
         tx.commit();
+        assertNotNull(dependencia.getId());
+        assertEquals(abreviacion, dependencia.getAbreviacion());
+        assertEquals(nombre, dependencia.getNombre());
     }
 
     @Test
@@ -43,19 +48,24 @@ public class JpaDependenciaRepositoryTest extends PersistenceTest {
         em.joinTransaction();
         dependenciaRepository.create(dependencia);
         tx.commit();
-        Assert.assertEquals(abreviacion, dependencia.getAbreviacion());
+        assertNotNull(dependencia.getId());
+        assertEquals(abreviacion, dependencia.getAbreviacion());
     }
 
     @Test
     public void shouldFindDependencia() throws Exception {
-        String abreviacion = "ENP";
+        String abreviacion = "enp".toUpperCase();
+        String nombre = "Escuela Nacional".toUpperCase();
         Dependencia d = null;
-        Dependencia dependencia = builder.setAbreviacion("ENP").setNombre("Escuela Nacional").build();
+        Dependencia dependencia = builder.setAbreviacion(abreviacion).setNombre(nombre).build();
         tx.begin();
         em.joinTransaction();
         dependenciaRepository.create(dependencia);
         d = dependenciaRepository.findBy(abreviacion);
         tx.commit();
-        Assert.assertNotNull(d);
+        assertNotNull(d);
+        assertEquals(dependencia, d);
+        assertEquals(abreviacion, d.getAbreviacion());
+        assertEquals(nombre, d.getNombre());
     }
 }
