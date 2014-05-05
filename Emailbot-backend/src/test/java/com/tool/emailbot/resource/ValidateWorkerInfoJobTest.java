@@ -38,19 +38,14 @@ import javax.ws.rs.core.Response;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class ValidateWorkerInfoJobTest extends PersistenceTest{
     
-    private static final String RESOURCE_PREFIX = JaxRsActivator.class
-            .getAnnotation(ApplicationPath.class).value().substring(1) + "/register/";
-
-    private final String mediaType = MediaType.APPLICATION_JSON;
-    @ArquillianResource
+   @ArquillianResource
     private URL deploymentUrl;
-    private Client client;
-    private WebTarget target;
+    private WorkerInfoResource resource;
 
     @Before
-    public void initClient() {
-        client = ClientBuilder.newClient().register(GsonProvider.class);
-        target = this.client.target(deploymentUrl.toString() + RESOURCE_PREFIX);
+    public void init() {
+        WorkerInfoResource.deploymentUrl = deploymentUrl;
+	this.resource = new WorkerInfoResource();
     }
     
     @Test
@@ -58,11 +53,7 @@ public class ValidateWorkerInfoJobTest extends PersistenceTest{
         RegisterEmailCommand command = new RegisterEmailCommand("Jovani", "Martinez", "Rico",
                 new GregorianCalendar(1990, 07, 26).getTime(), "H46", "306204614",
                 "jovanimtzrico@gmail.com", "571201109", "jovmtzrico");
-
-        Response response = target.path("worker")
-                .request()
-                .post(Entity.entity(command, mediaType), Response.class);
-        assertThat(response.getStatus(), is(200));
-        assertTrue(response.readEntity(Boolean.class));
+	
+       
     }
 }
