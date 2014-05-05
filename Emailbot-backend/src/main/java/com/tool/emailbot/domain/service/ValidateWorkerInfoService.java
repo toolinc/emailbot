@@ -10,6 +10,7 @@ import com.tool.emailbot.domain.repository.DependenciaRepository;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
 import com.tool.emailbot.resource.WorkerInfoResource;
 
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 /**
@@ -23,6 +24,7 @@ public class ValidateWorkerInfoService extends AssertionConcern {
     private final TrabajadorRepository trabajadorRepository;
     private final DependenciaRepository dependenciaRepository;
 
+    @Inject
     public ValidateWorkerInfoService(WorkerInfoResource resource,
                                      TrabajadorRepository trabajadorRepository,
                                      DependenciaRepository dependenciaRepository) {
@@ -44,14 +46,21 @@ public class ValidateWorkerInfoService extends AssertionConcern {
     public void validateWorkerInformation(Trabajador worker) {
         WorkerInformationCommand command;
         command = new WorkerInformationCommand(worker.getNumeroTrabajador(),
-                worker.getSitucionLaboral().isActive(), worker.getDependencia().getAbreviacion(),
+                worker.getSitucionLaboral().isActive(), 
+                worker.getDependencia().getAbreviacion(),
                 worker.getDependencia().getNombre());
         command = resource.retrieveWorkerInfo(command);
-        Dependencia dependencia = new Dependencia.Builder()
-                .setAbreviacion(command.getDependencyCode())
-                .setNombre(command.getGetDependencyName())
-                .build();
-        dependenciaRepository.update(dependencia);
+        Dependencia dependencia = dependenciaRepository.findBy(command.getDependencyCode());
+        if (dependencia == null) {
+            dependencia = Dependencia.Builder.newBuilder()
+                    .setAbreviacion(command.getDependencyCode())
+                    .setNombre(command.getGetDependencyName())
+                    .build();
+            dependenciaRepository.create(dependencia);
+        } else {
+            dependencia.setNombre(command.getGetDependencyName());
+            dependenciaRepository.update(dependencia);
+        }
         worker.setDependencia(dependencia);
         trabajadorRepository.update(worker);
     }

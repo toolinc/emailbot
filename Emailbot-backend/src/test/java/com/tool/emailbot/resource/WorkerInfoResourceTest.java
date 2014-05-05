@@ -4,6 +4,7 @@ package com.tool.emailbot.resource;
 
 import com.tool.emailbot.PersistenceTest;
 import com.tool.emailbot.application.command.WorkerInformationCommand;
+import com.tool.emailbot.infrastructure.cdi.WorkerInfoResourceImpl;
 import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -28,8 +29,8 @@ public class WorkerInfoResourceTest extends PersistenceTest {
 
     @Before
     public void init() {
-        WorkerInfoResource.deploymentUrl = deploymentUrl;
-	this.resource = new WorkerInfoResource();
+        WorkerInfoResourceImpl.deploymentUrl = deploymentUrl;
+	this.resource = new WorkerInfoResourceImpl();
     }
 
     @Test

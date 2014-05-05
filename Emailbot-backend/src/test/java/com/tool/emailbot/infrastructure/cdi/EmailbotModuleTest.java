@@ -9,7 +9,6 @@ import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.model.Trabajador;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,12 +29,6 @@ public class EmailbotModuleTest {
     @Produces
     public EntityManager produceEntityManager() {
         return entityManager;
-    }
-
-    public void closeEntityManager(@Disposes EntityManager entityManager) {
-        if (entityManager.isOpen()) {
-            entityManager.close();
-        }
     }
 
     @Produces

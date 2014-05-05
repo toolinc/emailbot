@@ -16,10 +16,10 @@ public class WorkerInformationCommand implements Command {
 
     public WorkerInformationCommand(String workerNumber, boolean status, String dependencyCode,
                                     String getDependencyName) {
-        this.workerNumber = workerNumber;
+        this.workerNumber = workerNumber.toUpperCase();
         this.status = status;
-        this.dependencyCode = dependencyCode;
-        this.getDependencyName = getDependencyName;
+        this.dependencyCode = dependencyCode.toUpperCase();
+        this.getDependencyName = getDependencyName.toUpperCase();
     }
 
     public String getWorkerNumber() {

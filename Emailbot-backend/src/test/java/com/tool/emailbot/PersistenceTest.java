@@ -3,6 +3,7 @@
 package com.tool.emailbot;
 
 import com.tool.emailbot.infrastructure.cdi.EmailbotModuleTest;
+import com.tool.emailbot.infrastructure.cdi.WorkerInfoResourceDummy;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -37,11 +38,12 @@ public abstract class PersistenceTest {
                 .addPackage("com.tool.emailbot.application.command")
                 .addPackage("com.tool.emailbot.domain")
                 .addPackage("com.tool.emailbot.domain.model")
-		        .addPackage("com.tool.emailbot.domain.service")
                 .addPackage("com.tool.emailbot.domain.repository")
+                .addPackage("com.tool.emailbot.domain.service")
                 .addPackage("com.tool.emailbot.infraestructure.resource")
                 .addPackage("com.tool.emailbot.resource")
                 .addClass(EmailbotModuleTest.class)
+                .addClass(WorkerInfoResourceDummy.class)
                 .addAsLibraries(
                         DependencyResolvers.use(MavenDependencyResolver.class)
                                 .goOffline()
