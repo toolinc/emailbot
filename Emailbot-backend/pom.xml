@@ -28,6 +28,18 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.jboss.arquillian.test</groupId>
+            <artifactId>arquillian-test-api</artifactId>
+            <version>1.1.2.Final</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian</groupId>
+            <artifactId>arquillian-api</artifactId>
+            <version>1.0.0.Alpha5</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-api</artifactId>
             <version>7.0</version>
@@ -112,6 +124,16 @@
         <dependency>
             <groupId>org.wildfly</groupId>
             <artifactId>wildfly-embedded</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.test</groupId>
+            <artifactId>arquillian-test-api</artifactId>
+            <version>1.1.2.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.test</groupId>
+            <artifactId>arquillian-test-impl-base</artifactId>
+            <version>1.1.2.Final</version>
         </dependency>
     </dependencies>
 

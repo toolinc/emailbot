@@ -6,7 +6,6 @@ import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.Dependencia_;
-import com.tool.emailbot.domain.model.Peticion;
 import com.tool.emailbot.domain.repository.DependenciaRepository;
 
 import org.slf4j.Logger;

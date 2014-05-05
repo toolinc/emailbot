@@ -7,6 +7,7 @@ import com.tool.emailbot.application.command.WorkerInformationCommand;
 import com.tool.emailbot.infraestructure.resource.GsonProvider;
 import com.tool.emailbot.infraestructure.resource.JaxRsActivator;
 
+import org.jboss.arquillian.test.api.ArquillianResource;
 import java.net.URL;
 
 import javax.ws.rs.ApplicationPath;
@@ -26,7 +27,9 @@ public class WorkerInfoResource {
 
     private static final String RESOURCE_PREFIX = JaxRsActivator.class
             .getAnnotation(ApplicationPath.class).value().substring(1) + "/DGIRE/";
+    
     @VisibleForTesting
+    @ArquillianResource
     public static URL deploymentUrl;
     private final String mediaType = MediaType.APPLICATION_JSON;
     private Client client;

@@ -44,13 +44,12 @@ public class RegisterEmailServiceTest extends PersistenceTest {
 
     @Test
     public void shouldRegisterEmail() throws Exception {
-	Dependencia dependencia = buiderDependencia.setAbreviacion("DGTIC").setNombre(
-		"Direccion General").build();
+
 	iBuider.setEmail("jovanimtzrico@gmail.com");
 	buiderPersona.setNombre("Jovani").setApellidoMaterno("Rico").
 		setApellidoPaterno("Martinez").setFechaNacimiento(1990, 07, 26).setHomoclave("ohm").
 		setInformacionContacto(iBuider);
-	Trabajador trabajador = builderTrabajador.setDependencia(dependencia).setDirector(true).
+	Trabajador trabajador = builderTrabajador.setDependencia(new Dependencia.Builder().build()).setDirector(true).
 		setNumeroTrabajador("303204614").setPersona(buiderPersona).build();
 	Peticion peticion = builderPeticion.setEmail("jovani@unam.mx").setUsername("jovani").
 		setTrabajador(trabajador).build();

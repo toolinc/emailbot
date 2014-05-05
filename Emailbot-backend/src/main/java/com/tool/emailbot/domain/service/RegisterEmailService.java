@@ -1,5 +1,4 @@
 // Copyright 2014 Tool Inc.
-
 package com.tool.emailbot.domain.service;
 
 import com.tool.emailbot.common.AssertionConcern;
@@ -26,19 +25,19 @@ public class RegisterEmailService extends AssertionConcern {
     private final DependenciaRepository dependenciaRepository;
 
     private static final String USER_NAME_EXIST
-            = "com.tool.emailbot.domain.service.RegisterEmailService.exist";
+	    = "com.tool.emailbot.domain.service.RegisterEmailService.exist";
     private static final String USER_NAME_NOT_EXIST
-            = "com.tool.emailbot.domain.service.RegisterEmailService.notExist";
+	    = "com.tool.emailbot.domain.service.RegisterEmailService.notExist";
 
     @Inject
     public RegisterEmailService(TrabajadorRepository trabajadorRepository,
-                                PeticionRepository peticionRepository,
-                                DependenciaRepository dependenciaRepository) {
-        assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
-        assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
-        this.trabajadorRepository = trabajadorRepository;
-        this.peticionRepository = peticionRepository;
-	    this.dependenciaRepository = dependenciaRepository;
+	    PeticionRepository peticionRepository,
+	    DependenciaRepository dependenciaRepository) {
+	assertArgumentNotNull(trabajadorRepository, "The Worker Repository is null.");
+	assertArgumentNotNull(trabajadorRepository, "The Request Repository is null.");
+	this.trabajadorRepository = trabajadorRepository;
+	this.peticionRepository = peticionRepository;
+	this.dependenciaRepository = dependenciaRepository;
     }
 
     /**
@@ -49,24 +48,18 @@ public class RegisterEmailService extends AssertionConcern {
      */
     @Transactional(Transactional.TxType.REQUIRED)
     public void registerEmailRequest(Peticion peticion)
-            throws EmailbotException {
-        Trabajador trabajador = trabajadorRepository.findBy(peticion.getTrabajador()
-                .getNumeroTrabajador());
-        if (trabajador == null) {
-            String dependenciaAbreviacion = peticion.getTrabajador()
-                    .getDependencia().getAbreviacion();
-            Dependencia d = dependenciaRepository.findBy(dependenciaAbreviacion);
-            if (d != null) {
-                peticion.getTrabajador().setDependencia(d);
-            } else {
-                //TODO (jovani): assign to a default dependency to the worker.
-               dependenciaRepository.create(peticion.getTrabajador().getDependencia());
-           }
-            peticionRepository.create(peticion);
-        } else {
-            throw EmailbotException.Builder.newBuilder()
-                    .setMessage(USER_NAME_EXIST, peticion.getTrabajador().getNumeroTrabajador())
-                    .build();
-        }
+	    throws EmailbotException {
+	Trabajador trabajador = trabajadorRepository.findBy(peticion.getTrabajador()
+		.getNumeroTrabajador());
+	if (trabajador == null) {
+	    Dependencia dependencia = new Dependencia.Builder().build();
+	    peticion.getTrabajador().setDependencia(dependencia);
+	    dependenciaRepository.create(dependencia);
+	    peticionRepository.create(peticion);
+	} else {
+	    throw EmailbotException.Builder.newBuilder()
+		    .setMessage(USER_NAME_EXIST, peticion.getTrabajador().getNumeroTrabajador())
+		    .build();
+	}
     }
 }

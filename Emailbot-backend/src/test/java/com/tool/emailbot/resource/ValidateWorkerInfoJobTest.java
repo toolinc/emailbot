@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Copyright 2014 Tool Inc.
+
 package com.tool.emailbot.resource;
 
 import com.tool.emailbot.PersistenceTest;
-import com.tool.emailbot.adapter.scheduler.ValidateWorkerInfoJob;
 import com.tool.emailbot.application.command.RegisterEmailCommand;
 import com.tool.emailbot.infraestructure.resource.GsonProvider;
 import com.tool.emailbot.infraestructure.resource.JaxRsActivator;
@@ -14,13 +10,11 @@ import com.tool.emailbot.infraestructure.resource.JaxRsActivator;
 import static org.hamcrest.core.Is.is;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
-import org.junit.After;
-import org.junit.AfterClass;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.FixMethodOrder;
+import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.net.URL;
@@ -35,8 +29,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
+ * Test for {@link com.tool.emailbot.resource.ValidateWorkerInfoJob}.
  *
- * @author edgar
+ * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 
 @RunAsClient
@@ -59,7 +54,7 @@ public class ValidateWorkerInfoJobTest extends PersistenceTest{
     }
     
     @Test
-    public void shouldRegisterWorker() throws Exception {
+    public void retrieveWorker() throws Exception {
         RegisterEmailCommand command = new RegisterEmailCommand("Jovani", "Martinez", "Rico",
                 new GregorianCalendar(1990, 07, 26).getTime(), "H46", "306204614",
                 "jovanimtzrico@gmail.com", "571201109", "jovmtzrico");
@@ -70,10 +65,4 @@ public class ValidateWorkerInfoJobTest extends PersistenceTest{
         assertThat(response.getStatus(), is(200));
         assertTrue(response.readEntity(Boolean.class));
     }
-    
-    @Test
-    public void retrieveWorker() throws Exception{
-	
-    }
-   
 }

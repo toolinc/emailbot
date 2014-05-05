@@ -47,7 +47,6 @@ public class ValidateWorkerInfoService extends AssertionConcern {
                 worker.getSitucionLaboral().isActive(), worker.getDependencia().getAbreviacion(),
                 worker.getDependencia().getNombre());
         command = resource.retrieveWorkerInfo(command);
-	//si ya existe un dependencia, 
         Dependencia dependencia = new Dependencia.Builder()
                 .setAbreviacion(command.getDependencyCode())
                 .setNombre(command.getGetDependencyName())
