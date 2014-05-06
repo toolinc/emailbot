@@ -144,7 +144,7 @@ public class Trabajador extends DomainObject {
         }
 
         public Builder setDependencia(Dependencia dependencia) {
-	    this.dependecia = checkNotNull(dependencia);
+            this.dependecia = checkNotNull(dependencia);
             return this;
         }
 

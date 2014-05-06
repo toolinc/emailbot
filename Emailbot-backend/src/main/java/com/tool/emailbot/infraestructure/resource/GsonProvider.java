@@ -32,14 +32,14 @@ import javax.ws.rs.ext.Provider;
 @Consumes({MediaType.APPLICATION_JSON, "text/json"})
 @Produces({MediaType.APPLICATION_JSON, "text/json"})
 public class GsonProvider extends ObjectJsonSerializer implements MessageBodyReader<Object>,
-	MessageBodyWriter<Object> {
+        MessageBodyWriter<Object> {
 
     private static final String UTF_8 = "UTF-8";
 
     public GsonProvider() {
         super(false, false);
     }
-    
+
     @Override
     public boolean isReadable(Class<?> type, Type genericType, Annotation[] annotations,
                               MediaType mediaType) {

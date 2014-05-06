@@ -22,11 +22,10 @@ public class RegisterEmailCommand implements Command {
     private String email;
     private String telephone;
     private String username;
-    
 
     public RegisterEmailCommand(String name, String fatherLastName, String motherLastName,
                                 Date dateOfBirth, String homoclave, String workerNumber,
-				String email,String telephone, String username) {
+                                String email, String telephone, String username) {
         this.name = name;
         this.fatherLastName = fatherLastName;
         this.motherLastName = motherLastName;

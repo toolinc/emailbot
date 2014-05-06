@@ -8,7 +8,7 @@ import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.model.Trabajador_;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
 
-import org.slf4j.Logger;//cascade peticion 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;

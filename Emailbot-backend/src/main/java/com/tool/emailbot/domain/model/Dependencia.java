@@ -88,7 +88,8 @@ public class Dependencia extends DomainObject {
      *
      * @author Jovani Rico (jovanimtzrico@gmail.com)
      */
-    public static class Builder extends AssertionConcern implements DomainObjectBuilder<Dependencia> {
+    public static class Builder extends AssertionConcern implements
+            DomainObjectBuilder<Dependencia> {
 
         private UUID id;
         private String nombre = "Universidad Nacional Autonoma de Mexico";

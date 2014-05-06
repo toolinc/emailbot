@@ -15,11 +15,10 @@ import javax.ws.rs.ext.Provider;
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @Provider
-public class EmailbotExceptionMapper implements
-	ExceptionMapper<EmailbotException> {
+public class EmailbotExceptionMapper implements ExceptionMapper<EmailbotException> {
 
     @Override
     public Response toResponse(EmailbotException e) {
-	return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
+        return Response.status(Response.Status.BAD_REQUEST).entity(e.getMessage()).build();
     }
 }

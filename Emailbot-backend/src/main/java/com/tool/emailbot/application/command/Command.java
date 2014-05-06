@@ -1,6 +1,7 @@
-//Copyright 2014 Tool Inc.
+// Copyright 2014 Tool Inc.
 
 package com.tool.emailbot.application.command;
+
 import java.io.Serializable;
 
 /**

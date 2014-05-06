@@ -30,7 +30,8 @@ public class EmailApplicationService extends AssertionConcern {
     }
 
     /**
-     * Registers a new {@link com.tool.emailbot.application.command.RegisterEmailCommand} on the system.
+     * Registers a new {@link com.tool.emailbot.application.command.RegisterEmailCommand} on the
+     * system.
      *
      * @param command the request that will be stored.
      * @throws EmailbotException if a request cannot be created
