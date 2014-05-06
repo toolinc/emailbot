@@ -22,7 +22,7 @@ public class ChangeRequestToPendingJob extends AssertionConcern {
     /**
      * Specifies the task that will be performed as part of a Job.
      */
-    @Schedule(minute = "*/30", hour = "*", persistent = false)
+    @Schedule(second = "*", minute = "*", hour = "*", persistent = false)
     public void run() {
         task.task();
     }
