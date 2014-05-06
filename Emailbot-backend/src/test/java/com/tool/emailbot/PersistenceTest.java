@@ -34,6 +34,8 @@ public abstract class PersistenceTest {
                 .addPackage("com.tool.emailbot")
                 .addPackage("com.tool.emailbot.adapter")
                 .addPackage("com.tool.emailbot.adapter.jpa")
+                .addPackage("com.tool.emailbot.adapter.scheduler")
+                .addPackage("com.tool.emailbot.adapter.scheduler.task")
                 .addPackage("com.tool.emailbot.application")
                 .addPackage("com.tool.emailbot.application.command")
                 .addPackage("com.tool.emailbot.domain")

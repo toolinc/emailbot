@@ -1,6 +1,6 @@
 // Copyright 2014 Tool Inc.
 
-package com.tool.emailbot.adapter.scheduler;
+package com.tool.emailbot.adapter.scheduler.task;
 
 import com.tool.emailbot.common.AssertionConcern;
 import com.tool.emailbot.domain.model.Estatus;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-import javax.ejb.Schedule;
+import javax.inject.Inject;
 import javax.transaction.Transactional;
 
 /**
@@ -21,40 +21,45 @@ import javax.transaction.Transactional;
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
-public class ValidateWorkerInfoJob extends AssertionConcern {
+public class ChangeRequestToPendingTask extends AssertionConcern implements Task {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final PeticionRepository repository;
     private final ValidateWorkerInfoService workerInfoService;
     private final Integer fetchSize = 10;
 
-    public ValidateWorkerInfoJob(PeticionRepository repository,
-                                 ValidateWorkerInfoService workerInfoService) {
+    @Inject
+    public ChangeRequestToPendingTask(PeticionRepository repository,
+                                      ValidateWorkerInfoService workerInfoService) {
         assertArgumentNotNull(repository, "The Request repository is null.");
         assertArgumentNotNull(workerInfoService, "The Worker Info Service  is null.");
         this.repository = repository;
         this.workerInfoService = workerInfoService;
     }
 
-    /**
-     * Specifies the task that will be performed as part of a Job.
-     */
-    @Schedule(minute = "*/30", hour = "*")
-    public void run() {
+    @Override
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public void task() {
         List<Peticion> peticiones = repository.find(Estatus.SOLICITUD, fetchSize);
+        logger.debug(String.format("Peticiones [%d].", peticiones.size()));
         for (Peticion peticion : peticiones) {
             try {
-                processPeticion(peticion);
+                processRequest(peticion);
             } catch (Exception exc) {
                 logger.warn(String.format("The peticion [%s] was not process successfully.",
-                        peticion.getId()));
+                        peticion.getId()), exc);
             }
         }
     }
 
-    @Transactional(Transactional.TxType.REQUIRED)
-    private void processPeticion(Peticion peticion) {
+    /**
+     * Specifies the task that will be performed as part of a Job.
+     */
+    @Transactional(Transactional.TxType.REQUIRES_NEW)
+    public void processRequest(Peticion peticion) {
         workerInfoService.validateWorkerInformation(peticion.getTrabajador());
         peticion.transitionFromSolicitud();
+        repository.update(peticion);
+        logger.debug(String.format("Estatus [%s].", peticion.getEstatus()));
     }
 }
