@@ -13,17 +13,15 @@ import javax.transaction.RollbackException;
 import javax.transaction.UserTransaction;
 
 /**
- * Test for the class {@link com.tool.emailbot.persistence.domain.model.Trabajador}.
+ * Test for the class {@link com.tool.emailbot.domain.model.Dependencia}.
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class DependenciaTest extends PersistenceTest {
 
-    @Inject
-    private UserTransaction tx;
-
     private final Dependencia.Builder builder = Dependencia.Builder.newBuilder();
+    @Inject private UserTransaction tx;
 
     @Test
     public void shouldCreateDependencia() throws Exception {
