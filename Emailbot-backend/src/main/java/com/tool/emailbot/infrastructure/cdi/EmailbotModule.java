@@ -11,6 +11,7 @@ import com.tool.emailbot.domain.model.Trabajador;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -54,5 +55,11 @@ public class EmailbotModule {
     public Repository<Peticion> producePeticionRepository(EntityManager entityManager) {
         return new JpaRepository<Peticion>(entityManager) {
         };
+    }
+
+    @Produces
+    @Named("fetchSize")
+    public int produceFetchSize() {
+        return 10;
     }
 }

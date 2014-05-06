@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.transaction.Transactional;
 
 /**
@@ -26,17 +27,24 @@ public class ChangeRequestToPendingTask extends AssertionConcern implements Task
     private final Logger logger = LoggerFactory.getLogger(getClass());
     private final PeticionRepository repository;
     private final ValidateWorkerInfoService workerInfoService;
-    private final Integer fetchSize = 10;
+    private final Integer fetchSize;
 
     @Inject
     public ChangeRequestToPendingTask(PeticionRepository repository,
-                                      ValidateWorkerInfoService workerInfoService) {
+                                      ValidateWorkerInfoService workerInfoService,
+                                      @Named("fetchSize") int fetchSize) {
         assertArgumentNotNull(repository, "The Request repository is null.");
         assertArgumentNotNull(workerInfoService, "The Worker Info Service  is null.");
+        assertArgumentTrue(fetchSize > 0,
+                "The number of elements to fetch should be bigger than zero.");
         this.repository = repository;
         this.workerInfoService = workerInfoService;
+        this.fetchSize = fetchSize;
     }
 
+    /**
+     * Specifies the task that will be performed as part of a Job.
+     */
     @Override
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void task() {
@@ -53,7 +61,7 @@ public class ChangeRequestToPendingTask extends AssertionConcern implements Task
     }
 
     /**
-     * Specifies the task that will be performed as part of a Job.
+     * Process a single request at the time.
      */
     @Transactional(Transactional.TxType.REQUIRES_NEW)
     public void processRequest(Peticion peticion) {

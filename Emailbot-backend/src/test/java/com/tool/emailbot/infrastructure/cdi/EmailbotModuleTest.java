@@ -10,6 +10,7 @@ import com.tool.emailbot.domain.model.Trabajador;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -47,5 +48,11 @@ public class EmailbotModuleTest {
     public Repository<Peticion> producePeticionRepository(EntityManager entityManager) {
         return new JpaRepository<Peticion>(entityManager) {
         };
+    }
+
+    @Produces
+    @Named("fetchSize")
+    public int produceFetchSize() {
+        return 10;
     }
 }
