@@ -2,6 +2,7 @@
 
 package com.tool.emailbot.domain.repository;
 
+import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.Trabajador;
 
 /**
@@ -17,4 +18,6 @@ public interface TrabajadorRepository {
     void delete(Trabajador trabajador);
 
     public Trabajador findBy(String numeroTrabajador);
+    
+    public String findBy(Dependencia dependencia);
 }

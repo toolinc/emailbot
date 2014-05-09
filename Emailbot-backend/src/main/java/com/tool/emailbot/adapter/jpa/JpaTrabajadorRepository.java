@@ -4,6 +4,8 @@ package com.tool.emailbot.adapter.jpa;
 
 import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
+import com.tool.emailbot.domain.model.Dependencia;
+import com.tool.emailbot.domain.model.Dependencia_;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.model.Trabajador_;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
@@ -14,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.JoinType;
 
 /**
  * @author Jovani Rico (jovanimtzrico@gmail.com)
@@ -55,5 +59,20 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
             logger.warn(exc.getMessage());
         }
         return t;
+    }
+
+    @Override
+    public String findBy(Dependencia dependencia) {
+	String email = null;
+        QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
+	qh.getRoot().join(Trabajador_.dependencia, JoinType.INNER);
+        qh.getQuery().where(qh.getBuilder().equal(
+                qh.getRoot().get(Trabajador_.director), true));
+        try {
+            email = qh.getSingleResult().getPersona().getInformacionContacto().getEmail();
+        } catch (NoResultException | NonUniqueResultException exc) {
+            logger.warn(exc.getMessage());
+        }
+        return email;
     }
 }
