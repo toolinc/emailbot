@@ -19,6 +19,8 @@ import javax.transaction.UserTransaction;
  *
  * @author Jovani Rico (jovanimtzrico@gmail.com)
  */
+//TODO(jovanimtzrico): Missing the test for the method findBy(Dependencia dependencia)
+// how do I know it actually works?
 public class JpaTrabajadorRepositoryTest extends PersistenceTest {
 
     @Inject

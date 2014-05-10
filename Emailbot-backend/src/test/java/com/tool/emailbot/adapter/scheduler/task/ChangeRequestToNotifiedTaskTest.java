@@ -7,7 +7,6 @@ import static org.junit.Assert.assertEquals;
 import com.tool.emailbot.PersistenceTest;
 import com.tool.emailbot.adapter.jpa.JpaPeticionRepository;
 import com.tool.emailbot.adapter.jpa.JpaTrabajadorRepository;
-import com.tool.emailbot.adapter.scheduler.ChangeRequestToNotifiedTask;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
 import com.tool.emailbot.domain.model.Estatus;
@@ -40,6 +39,7 @@ public class ChangeRequestToNotifiedTaskTest extends PersistenceTest{
     @Inject private ChangeRequestToNotifiedTask instance;
 
     @Test
+    //TODO(jovanimtzrico): The test is incorrect because the logic is wrongly implemented
     public void shouldPersistPeticion() throws Exception {
         Dependencia dependencia = bDependencia.setAbreviacion("DGTIC")
                 .setNombre("Direccion General")
@@ -60,7 +60,6 @@ public class ChangeRequestToNotifiedTaskTest extends PersistenceTest{
                 .setEmail("jovanimtzrico@gmail.com")
                 .setUsername("Jovani")
                 .build();
-
 
         bInfo.setEmail("jovaniRico@gmail.com");
         bPersona.setNombre("Edgar")
