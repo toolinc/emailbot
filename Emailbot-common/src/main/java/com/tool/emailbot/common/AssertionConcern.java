@@ -20,11 +20,13 @@ public class AssertionConcern {
         super();
     }
 
-    protected void assertArgumentEquals(Object anObject1, Object anObject2, String aMessage) {
+    protected void assertArgumentEquals(Object anObject1, Object anObject2, 
+            String aMessage) {
         checkState(anObject1.equals(anObject2), aMessage);
     }
 
-    protected void assertArgumentNotEquals(Object anObject1, Object anObject2, String aMessage) {
+    protected void assertArgumentNotEquals(Object anObject1, Object anObject2, 
+            String aMessage) {
         checkState(!anObject1.equals(anObject2), aMessage);
     }
 
@@ -44,8 +46,8 @@ public class AssertionConcern {
         checkState(!isNullOrEmpty(aString), aMessage);
     }
 
-    protected void assertArgumentLength(String aString, int aMinimum, int aMaximum,
-                                        String aMessage) {
+    protected void assertArgumentLength(String aString, int aMinimum, 
+            int aMaximum, String aMessage) {
         int length = aString.trim().length();
         if (length < aMinimum || length > aMaximum) {
             throw new IllegalArgumentException(aMessage);
@@ -62,7 +64,8 @@ public class AssertionConcern {
     }
 
     protected static Date newDate(int year, int month, int dayOfMonth) {
-        GregorianCalendar calendar = new GregorianCalendar(year, month - 1, dayOfMonth);
+        GregorianCalendar calendar 
+                = new GregorianCalendar(year, month - 1, dayOfMonth);
         return calendar.getTime();
     }
 }

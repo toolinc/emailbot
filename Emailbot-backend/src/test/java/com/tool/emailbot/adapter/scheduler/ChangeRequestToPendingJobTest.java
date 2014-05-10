@@ -28,7 +28,6 @@ import javax.transaction.UserTransaction;
  */
 public class ChangeRequestToPendingJobTest extends PersistenceTest {
 
-   
     private final Dependencia.Builder bDependencia = Dependencia.Builder.newBuilder();
     private final InformacionContacto.Builder bInfo = InformacionContacto.Builder.newBuilder();
     private final Persona.Builder bPersona = Persona.Builder.newBuilder();
