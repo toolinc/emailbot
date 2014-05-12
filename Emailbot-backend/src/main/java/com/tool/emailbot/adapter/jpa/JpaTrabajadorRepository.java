@@ -65,7 +65,9 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
         String email = null;
         QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
         qh.getRoot().join(Trabajador_.dependencia, JoinType.INNER);
-        qh.getQuery().where(qh.getBuilder().equal(qh.getRoot().get(Trabajador_.director), true));
+        qh.getQuery().where(qh.getBuilder().and(
+                qh.getBuilder().equal(qh.getRoot().get(Trabajador_.dependencia), dependencia),
+                qh.getBuilder().equal(qh.getRoot().get(Trabajador_.director), true)));
         try {
             email = qh.getSingleResult().getPersona().getInformacionContacto().getEmail();
         } catch (NoResultException | NonUniqueResultException exc) {
