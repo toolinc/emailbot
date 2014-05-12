@@ -5,6 +5,7 @@ package com.tool.emailbot.adapter.jpa;
 import com.tool.emailbot.common.adapter.jpa.repository.QueryHelper;
 import com.tool.emailbot.common.domain.repository.Repository;
 import com.tool.emailbot.domain.model.Dependencia;
+import com.tool.emailbot.domain.model.Persona_;
 import com.tool.emailbot.domain.model.Trabajador;
 import com.tool.emailbot.domain.model.Trabajador_;
 import com.tool.emailbot.domain.repository.TrabajadorRepository;
@@ -64,7 +65,9 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
     public String findBy(Dependencia dependencia) {
         String email = null;
         QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
-        qh.getRoot().join(Trabajador_.dependencia, JoinType.INNER);
+        qh.getRoot().fetch(Trabajador_.dependencia, JoinType.INNER);
+        qh.getRoot().fetch(Trabajador_.persona, JoinType.INNER)
+                    .fetch(Persona_.informacionContacto, JoinType.INNER);
         qh.getQuery().where(qh.getBuilder().and(
                 qh.getBuilder().equal(qh.getRoot().get(Trabajador_.dependencia), dependencia),
                 qh.getBuilder().equal(qh.getRoot().get(Trabajador_.director), true)));
