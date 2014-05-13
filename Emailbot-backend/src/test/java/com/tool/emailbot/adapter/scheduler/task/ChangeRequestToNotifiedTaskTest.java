@@ -17,6 +17,8 @@ import com.tool.emailbot.domain.model.Trabajador;
 
 import org.junit.Test;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 import javax.transaction.UserTransaction;
 
@@ -37,6 +39,7 @@ public class ChangeRequestToNotifiedTaskTest extends PersistenceTest{
     @Inject private JpaPeticionRepository daoPeticion;
     @Inject private UserTransaction tx;
     @Inject private ChangeRequestToNotifiedTask instance;
+    @Inject private ChangeRequestToPendingTask pendingTask;
 
     @Test
     //TODO(jovanimtzrico): The test is incorrect because the logic is wrongly implemented
@@ -80,6 +83,8 @@ public class ChangeRequestToNotifiedTaskTest extends PersistenceTest{
         daoTrabajador.create(director);
         daoPeticion.create(peticion);
         tx.commit();
+        pendingTask.task();
+        Thread.sleep(TimeUnit.SECONDS.toMillis(3));
         instance.task();
         peticion = daoPeticion.findBy(trabajador.getNumeroTrabajador());
         assertEquals(Estatus.NOTIFICADO, peticion.getEstatus());

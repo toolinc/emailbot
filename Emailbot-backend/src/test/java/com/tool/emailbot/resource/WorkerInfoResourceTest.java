@@ -9,6 +9,7 @@ import java.net.URL;
 
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.test.api.ArquillianResource;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -40,5 +41,6 @@ public class WorkerInfoResourceTest extends PersistenceTest {
                 "Direccion General de Telecomunicaciones e Inforatica");
 	WorkerInformationCommand informationCommand = resource
                 .retrieveWorkerInfo(command);
+	Assert.assertEquals(informationCommand,command);
     }
 }

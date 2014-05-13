@@ -61,7 +61,6 @@ public class JpaTrabajadorRepository implements TrabajadorRepository {
     }
 
     @Override
-    //TODO(jovanimtzrico): The query seems to be wrong the argument is not being used
     public String findBy(Dependencia dependencia) {
         String email = null;
         QueryHelper<Trabajador, Trabajador> qh = repository.newQueryHelper();
