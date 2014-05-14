@@ -155,7 +155,7 @@ public class Peticion extends DomainObject {
 
         private UUID id;
         private Trabajador trabajador;
-        private Estatus estatus = Estatus.PENDIENTE;
+        private Estatus estatus = Estatus.SOLICITUD;
         private String email;
         private String username;
 

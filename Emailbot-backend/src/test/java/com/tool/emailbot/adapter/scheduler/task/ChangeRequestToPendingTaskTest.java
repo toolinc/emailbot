@@ -13,7 +13,9 @@ import com.tool.emailbot.domain.model.Estatus;
 import com.tool.emailbot.domain.model.InformacionContacto;
 import com.tool.emailbot.domain.model.Persona;
 import com.tool.emailbot.domain.model.Peticion;
+import com.tool.emailbot.domain.model.SituacionLaboral;
 import com.tool.emailbot.domain.model.Trabajador;
+import com.tool.emailbot.domain.model.Trabajador_;
 
 import org.junit.Test;
 
@@ -39,7 +41,7 @@ public class ChangeRequestToPendingTaskTest extends PersistenceTest {
     @Inject private UserTransaction tx;
     @Inject private ChangeRequestToPendingTask instance;
 
-    @Test
+    //@Test
     public void shouldPersistPeticion() throws Exception {
         Dependencia dependencia = bDependencia.setAbreviacion("DGTIC")
                 .setNombre("Direccion General")
@@ -69,5 +71,40 @@ public class ChangeRequestToPendingTaskTest extends PersistenceTest {
         instance.task();
         peticion = daoPeticion.findBy(trabajador.getNumeroTrabajador());
         assertEquals(Estatus.PENDIENTE, peticion.getEstatus());
+    }
+
+    @Test
+    public void shouldRejectPeticion() throws Exception {
+        Dependencia dependencia = bDependencia.setAbreviacion("DGTIC")
+                .setNombre("Direccion General")
+                .build();
+        bInfo.setEmail("jovanimtzrico@gmail.com");
+        bPersona.setNombre("Jovani")
+                .setApellidoMaterno("Rico")
+                .setApellidoPaterno("Martinez")
+                .setFechaNacimiento(1990, 07, 26)
+                .setHomoclave("ohm")
+                .setInformacionContacto(bInfo);
+        Trabajador trabajador = bTrabajador.setDependencia(dependencia)
+                .setDirector(true)
+                .setNumeroTrabajador("3032046145")
+                .setPersona(bPersona)
+                .build();
+        trabajador.setSitucionLaboral(SituacionLaboral.INACTIVO);
+
+        peticion = bPeticion.setTrabajador(trabajador)
+                .setEmail("jovanimtzrico@gmail.com")
+                .setUsername("Jovani")
+                .build();
+        tx.begin();
+        em.joinTransaction();
+        daoDependencia.create(dependencia);
+        daoTrabajador.create(trabajador);
+        daoPeticion.create(peticion);
+        tx.commit();
+        instance.task();
+        peticion = daoPeticion.findBy("3032046145");
+        assertEquals(peticion.getTrabajador().getSitucionLaboral(),SituacionLaboral.INACTIVO);
+        assertEquals("NOT EQUALS",Estatus.RECHAZADA, peticion.getEstatus());
     }
 }

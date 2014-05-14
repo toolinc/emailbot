@@ -84,7 +84,6 @@ public class ChangeRequestToNotifiedTaskTest extends PersistenceTest{
         daoPeticion.create(peticion);
         tx.commit();
         pendingTask.task();
-        Thread.sleep(TimeUnit.SECONDS.toMillis(3));
         instance.task();
         peticion = daoPeticion.findBy(trabajador.getNumeroTrabajador());
         assertEquals(Estatus.NOTIFICADO, peticion.getEstatus());

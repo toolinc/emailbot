@@ -42,7 +42,7 @@ public class RegisterNotificationServiceTest extends PersistenceTest {
     @Inject private RegisterEmailService registerEmailService;
     @Inject private Repository<Dependencia> daoDependencia;
     @Inject private DependenciaRepository dependenciaRepository;
-    private boolean thrown = false;
+
 
     @Test
     //TODO(jovanimtzrico): The test seems to be incorrect it does not proof or validate any state
