@@ -145,7 +145,33 @@ public class Peticion extends DomainObject {
             setEstatus(Estatus.NOTIFICADO);
         }
     }
+    
+     /**
+     * This method transition a request form NOTIFICADO to the next state based on the worker status.
+     */
+    public void transitionFromNotificado() {
+        if (Estatus.NOTIFICADO.equals(getEstatus())) {
+            setEstatus(Estatus.APROVADA);
+        }
+    }
 
+    /**
+     * This method transition a request form CREADA to the next state based on the worker status.
+     */
+    public void transitionFromCreada() {
+        if (Estatus.APROVADA.equals(getEstatus())) {
+            setEstatus(Estatus.CREADA);
+        }
+    }
+    /**
+     * This method transition a request form CREADA to the next state based on the worker status.
+     */
+    public void transitionFromExitosa() {
+        if (Estatus.CREADA.equals(getEstatus()) || Estatus.RECHAZADA.equals(getEstatus())) {
+            setEstatus(Estatus.EXITOSA);
+        }
+    }
+    
     /**
      * Builder of {@link Peticion} instances.
      *
